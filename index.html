@@ -1089,3 +1089,775 @@ initApp();
 </script>
 </body>
 </html>
+<!-- ==================== VAIDYAOS V4.0 NCISM SYLLABUS & SOFT VOICE UPGRADE ==================== -->
+<style>
+  body { font-size: 16px !important; line-height: 1.65 !important; }
+  .font-devanagari { font-size: 1.2rem !important; line-height: 1.9 !important; }
+  .glass-card {
+    background: linear-gradient(160deg, #141e33 0%, #0b111e 100%) !important;
+    border: 1.5px solid rgba(255, 255, 255, 0.12) !important;
+    box-shadow: 0 12px 28px -6px rgba(0, 0, 0, 0.55) !important;
+  }
+  select, input, textarea { font-size: 14px !important; }
+</style>
+
+<script>
+// ==================== 1. NCISM OFFICIAL SYLLABUS TREE (YEAR -> SUBJECT -> CHAPTER -> TOPIC) ====================
+const NCISM_TREE = {
+  "1": {
+    "Padartha Vijnanam (AyUG-PV)": {
+      "Paper I - Part A (Basic Principles & Dravya)": [
+        "1.1 Ayurveda Nirupana (Lakshana of Ayu & Siddhanta)",
+        "1.2 Padartha & Darshana Nirupana (6 Padartha & 9 Darshana)",
+        "1.3 Dravya Vijnaneeyam (Panchamahabhuta, Kala, Dik, Atma, Manas)"
+      ],
+      "Paper I - Part B (Guna, Karma, Samanya-Vishesha)": [
+        "1.4 Guna Vijnaneeyam (41 Gunas: Gurvadi, Paradi, Adhyatma)",
+        "1.5 Karma, Samanya & Vishesha Vijnaneeyam",
+        "1.6 Samavaya & Abhava Vijnaneeyam"
+      ],
+      "Paper II - Part A (Pramana & Karya-Karana)": [
+        "2.1 Pariksha & Aptopadesha Pramana",
+        "2.2 Pratyaksha & Anumana Pramana",
+        "2.3 Yukti, Upamana & Karya-Karana Siddhanta"
+      ]
+    },
+    "Samskritam & Itihas (AyUG-SN & AI)": {
+      "Paper I - Sanskrit Vyakarana": [
+        "1.1 Varna, Uccharana Sthana & Sangya Prakaranam",
+        "1.2 Sandhi Prakaranam (Svara, Vyanjana, Visarga)",
+        "1.3 Samasa, Karaka, Shabdarupa & Dhaturupa"
+      ],
+      "Paper II - Part A (Samhita Anvaya & Nirukti)": [
+        "2.1 Nirukti & Paryaya Padani (Ayu, Dosha, Dhatu, Mala)",
+        "2.2 Paribhasha Padani (Ama, Shatkriyakala, Pathya-Apathya)",
+        "2.3 Ashtanga Hridaya Sutrasthana (Anvayalekhanam)",
+        "2.4 Vaidyakiya Subhashita Sahityam (Ch 1-20)"
+      ],
+      "Paper II - Part B (Ayurved Itihas)": [
+        "2.5 Samhita, Sangraha Kala & Modern Acharyas"
+      ]
+    },
+    "Kriya Sharira (AyUG-KS)": {
+      "Paper I - Part A (Dosha, Prakriti, Agni, Ahara)": [
+        "1.1 Sharir & Basic Principles (Dosha-Dhatu-Mala Mulam)",
+        "1.2 Tridosha & Biological Rhythms (Ritu-Day-Night-Age)",
+        "1.3 Vata Dosha & 5 Subtypes (Prana-Udana-Samana-Vyana-Apana)",
+        "1.4 Pitta & Kapha Dosha (5 Subtypes Each)",
+        "1.5 Dosha Vriddhi-Kshaya & Shatkriyakala",
+        "1.6 Prakriti (Deha & Manasa Prakriti)",
+        "1.7 Ahara, Agni & Aharapaka (Avasthapaka & Koshtha)"
+      ],
+      "Paper II - Part A (Sapta Dhatu, Ojas, Mala)": [
+        "2.1 Dhatuposhana Nyaya, Rasa & Rakta Dhatu",
+        "2.2 Mamsa, Meda, Asthi, Majja & Shukra Dhatu",
+        "2.3 Ashraya-Ashrayi Bhava, Ojas & Vyadhikshamatva",
+        "2.4 Upadhatu, Trimala, Indriya, Manas & Nidra"
+      ]
+    },
+    "Rachana Sharira (AyUG-RS)": {
+      "Paper I - Part A (Ayurvedic Anatomy)": [
+        "1.1 Shariropakramaniya & Paribhasha Sharira",
+        "1.2 Garbha Sharira (Shukra-Artava & Masanumasika Vriddhi)",
+        "1.3 Asthi, Sandhi, Snayu & Peshi Sharira"
+      ],
+      "Paper II - Part A (Srotas, Kala, Marma)": [
+        "2.1 Pramana, Koshtha & Ashaya Sharira",
+        "2.2 Sira, Dhamani & Srotas Sharira",
+        "2.3 Kalaa, Indriya & Twacha Sharira",
+        "2.4 Marma Sharira (107 Marmas & Trimarma)"
+      ]
+    },
+    "Samhita Adhyayan (Ashtanga & Charaka)": {
+      "Ashtanga Hridaya Sutrasthana (Ch 1-15)": [
+        "Ch 1: Ayushkamiya Adhyaya",
+        "Ch 2: Dinacharya Adhyaya",
+        "Ch 3: Ritucharya Adhyaya",
+        "Ch 4: Roganutpadaniya Adhyaya",
+        "Ch 11-14: Doshadi, Doshabhediya & Upakramaniya"
+      ],
+      "Charaka Samhita Sutrasthana (Ch 1-12)": [
+        "Ch 1: Dirghanjivitiya Adhyaya",
+        "Ch 5-6: Matrashitiya & Tasyashitiya"
+      ]
+    }
+  },
+  "2": {
+    "Dravyaguna Vigyan (AyUG-DG)": {
+      "Paper I - Padartha & Rasa Panchaka": ["Rasa, Guna, Virya, Vipaka & Prabhava", "Mishraka Gana & Karma"],
+      "Paper II - Medicinal Plants": ["Shodhana & Nighantu Shlokas"]
+    },
+    "Rasashastra & Bhaishajya Kalpana": {
+      "Paper I & II": ["Panchavidha Kashaya Kalpana", "Parada & Maharasa Shodhana"]
+    },
+    "Roga Nidan & Vikriti Vigyan": {
+      "Paper I & II": ["Nidana Panchaka", "Srotodushti & Vyadhi Samprapti"]
+    },
+    "Swasthavritta & Yoga": {
+      "Paper I & II": ["Trayopastambha & Dinacharya", "Ashtanga Yoga & Naturopathy"]
+    },
+    "Agadtantra & Vidhi Vaidyaka": {
+      "Paper I": ["Visha Lakshana & Chikitsa"]
+    }
+  },
+  "3": {
+    "Kayachikitsa": {
+      "Paper I & II": ["Chikitsa Chatushpada", "Jwara, Raktapitta & Prameha Chikitsa"]
+    },
+    "Shalya Tantra": {
+      "Paper I & II": ["Shalya & Vaidya Guna", "Vrana & Ashtavidha Shastrakarma"]
+    },
+    "Shalakya Tantra": {
+      "Paper I & II": ["Netra, Karna, Nasa & Mukha Roga"]
+    },
+    "Prasuti Tantra & Stri Roga": {
+      "Paper I & II": ["Garbhini Paricharya", "Sutika & Yonivyapad"]
+    },
+    "Kaumarabhritya": {
+      "Paper I": ["Navajata Shishu & Swarnaprashana"]
+    },
+    "Panchakarma": {
+      "Paper I": ["Shodhana vs Shamana", "Vamana, Virechana & Basti"]
+    }
+  }
+};
+
+// ==================== 2. NCISM TOPIC-TAGGED MASTER SHLOKA BANK ====================
+const NCISM_SHLOKAS_BANK = [
+  {
+    id: "nc_pv_1", prof: "1", subject: "Padartha Vijnanam (AyUG-PV)",
+    chapter: "Paper I - Part A (Basic Principles & Dravya)",
+    topic: "1.1 Ayurveda Nirupana (Lakshana of Ayu & Siddhanta)",
+    publication: "Chaukhamba (Charaka Sutrasthana 1/42)",
+    sanskrit: "शरीरेन्द्रियसत्त्वात्मसंयोगो धारि जीवितम्। नित्यगश्चानुबन्धश्च पर्यायैरायुरुच्यते॥",
+    translit: "Śarīrendriyasattvātmasaṁyogo dhāri jīvitam | Nityagaścānubandhaśca paryāyairāyurucyate ||",
+    breakdown: "शरीर-इन्द्रिय-सत्त्व-आत्म-संयोगः [Body, Senses, Mind aur Soul ka union] + धारि [sharir ko dharan karne wala] + जीवितम् + नित्यगः + अनुबन्धः = Ayu ke 4 paryay",
+    hindi: "शरीर, इन्द्रिय, मन (सत्त्व) और आत्मा के संयोग को 'आयु' कहते हैं। धारि, जीवित, नित्यग और अनुबन्ध—ये आयु के चार पर्यायवाची नाम हैं।",
+    english: "Ayu (life) is the continuous union of Body (Sharira), Senses (Indriya), Mind (Sattva), and Soul (Atma). Its four synonyms are Dhari, Jivita, Nityaga, and Anubandha.",
+    mastered: false, reps: 0
+  },
+  {
+    id: "nc_pv_2", prof: "1", subject: "Padartha Vijnanam (AyUG-PV)",
+    chapter: "Paper II - Part A (Pramana & Karya-Karana)",
+    topic: "2.1 Pariksha & Aptopadesha Pramana",
+    publication: "Chaukhamba (Charaka Sutrasthana 11/17)",
+    sanskrit: "द्विविधमेव खलु सर्वं सच्चासच्च; तस्य चतुर्विधा परीक्षा—आप्तोपदेशः, प्रत्यक्षम्, अनुमानं, युक्तिश्चेति॥",
+    translit: "Dvividhaṁeva khalu sarvaṁ saccāsacca; tasya caturvidhā parīkṣā—āptopadeśaḥ, pratyakṣam, anumānaṁ, yuktiśceti ||",
+    breakdown: "सत् च असत् च [Satya aur Asatya] + चतुर्विधा परीक्षा [4 diagnostic methods] = आप्तोपदेशः [Authoritative text], प्रत्यक्षम् [Direct perception], अनुमानम् [Inference], युक्तिः [Clinical reasoning]",
+    hindi: "संसार में सब कुछ दो प्रकार का है—सत् (सत्य) और असत् (असत्य)। उसकी परीक्षा के चार प्रमाण हैं—आप्तोपदेश, प्रत्यक्ष, अनुमान और युक्ति।",
+    english: "Everything in existence is twofold: Sat (true/real) and Asat (untrue/unreal). Its examination is fourfold: Aptopadesha (scriptural authority), Pratyaksha (direct observation), Anumana (inference), and Yukti (rational logic).",
+    mastered: false, reps: 0
+  },
+  {
+    id: "nc_sn_1", prof: "1", subject: "Samskritam & Itihas (AyUG-SN & AI)",
+    chapter: "Paper II - Part A (Samhita Anvaya & Nirukti)",
+    topic: "2.4 Vaidyakiya Subhashita Sahityam (Ch 1-20)",
+    publication: "Chaukhamba (Dr. B.G. Ghanekar)",
+    sanskrit: "वैद्यराज नमस्तुभ्यं यमराजसहोदर। यमस्तु हरति प्राणान् वैद्यः प्राणान् धनानि च॥",
+    translit: "Vaidyarāja namastubhyaṁ yamarājasahodara | Yamastu harati prāṇān vaidyaḥ prāṇān dhanāni ca ||",
+    breakdown: "वैद्यराज [O King of Doctors] + यमराज-सहोदर [Yamaraj ke sage bhai] + यमः तु हरति प्राणान् [Yam sirf pran leta hai] + वैद्यः प्राणान् धनानि च [Vaidya pran aur paisa dono!]",
+    hindi: "हे यमराज के सगे भाई वैद्यराज, तुम्हें नमस्कार है! यमराज तो केवल प्राण हरते हैं, परन्तु (कुवैद्य/लालची) वैद्य प्राण और धन दोनों हर लेता है।",
+    english: "O King of Physicians, brother of Yamaraja, salutations to you! Yama takes away only life, whereas an unskilled/greedy physician takes away both life and wealth.",
+    mastered: false, reps: 0
+  },
+  {
+    id: "nc_ks_1", prof: "1", subject: "Kriya Sharira (AyUG-KS)",
+    chapter: "Paper I - Part A (Dosha, Prakriti, Agni, Ahara)",
+    topic: "1.1 Sharir & Basic Principles (Dosha-Dhatu-Mala Mulam)",
+    publication: "Sushruta Samhita Sutrasthana 15/3",
+    sanskrit: "दोषधातुमलमूलं हि शरीरम्। तस्मादेतेषां सदा प्रकृत्यानुवर्तनं कर्तव्यम्॥",
+    translit: "Doṣadhātumalamūlaṁ hi śarīram | Tasmādeteṣāṁ sadā prakṛtyānuvartanaṁ kartavyam ||",
+    breakdown: "दोष [Vata-Pitta-Kapha] + धातु [7 Tissues] + मल [Purisha-Mutra-Sveda] + मूलम् हि शरीरम् [sharir ki jad/foundation hain]",
+    hindi: "दोष, धातु और मल ही इस शरीर के मूल (आधार) हैं, इसलिए इनका सदैव प्राकृत (संतुलित) अवस्था में पालन करना चाहिए।",
+    english: "Doshas, Dhatus, and Malas are the very roots (structural & functional foundation) of the human body; therefore, maintaining their equilibrium is essential.",
+    mastered: false, reps: 0
+  },
+  {
+    id: "nc_ks_2", prof: "1", subject: "Kriya Sharira (AyUG-KS)",
+    chapter: "Paper I - Part A (Dosha, Prakriti, Agni, Ahara)",
+    topic: "1.3 Vata Dosha & 5 Subtypes (Prana-Udana-Samana-Vyana-Apana)",
+    publication: "Ashtanga Hridaya Sutrasthana 1/11",
+    sanskrit: "तत्र रूक्षो लघुः शीतः खरः सूक्ष्मश्चलोऽनिलः।",
+    translit: "Tatra rūkṣo laghuḥ śītaḥ kharaḥ sūkṣmaścalo'nilaḥ |",
+    breakdown: "रूक्षः [Dry] + लघुः [Light] + शीतः [Cold] + खरः [Rough] + सूक्ष्मः [Subtle/Minute] + चलः [Mobile] + अनिलः [Vata Dosha ke 6 Gunas]",
+    hindi: "उन तीनों दोषों में वायु (वात) के छह गुण होते हैं—रूक्ष (सूखा), लघु (हल्का), शीत (ठंडा), खर (खुरदरा), सूक्ष्म और चल (गतिशील)।",
+    english: "Among the Doshas, Vata possesses six primary attributes: Ruksha (dry), Laghu (light), Shita (cold), Khara (rough), Sukshma (subtle), and Chala (mobile).",
+    mastered: false, reps: 0
+  },
+  {
+    id: "nc_ks_3", prof: "1", subject: "Kriya Sharira (AyUG-KS)",
+    chapter: "Paper I - Part A (Dosha, Prakriti, Agni, Ahara)",
+    topic: "1.5 Dosha Vriddhi-Kshaya & Shatkriyakala",
+    publication: "Sushruta Sutrasthana 21/36",
+    sanskrit: "सञ्चयं च प्रकोपं च प्रसरं स्थानसंश्रयम्। व्यक्तिं भेदं च यो वेत्ति दोषाणां स भवेद्भिषक्॥",
+    translit: "Sañcayaṁ ca prakopaṁ ca prasaraṁ sthānasaṁśrayam | Vyaktiṁ bhedaṁ ca yo vetti doṣāṇāṁ sa bhavedbhiṣak ||",
+    breakdown: "सञ्चय [Accumulation] + प्रकोप [Aggravation] + प्रसर [Spread] + स्थानसंश्रय [Localization] + व्यक्ति [Manifestation] + भेद [Complication] = 6 Shatkriyakala",
+    hindi: "जो वैद्य दोषों के संचय, प्रकोप, प्रसर, स्थानसंश्रय, व्यक्ति और भेद—इन छह क्रियाकालों को जानता है, वही सच्चा चिकित्सक कहलाने योग्य है।",
+    english: "Only that physician who understands the six stages of disease pathogenesis (Shatkriyakala)—Sanchaya, Prakopa, Prasara, Sthanasamshraya, Vyakti, and Bheda—truly deserves to be called a doctor.",
+    mastered: false, reps: 0
+  },
+  {
+    id: "nc_rs_1", prof: "1", subject: "Rachana Sharira (AyUG-RS)",
+    chapter: "Paper I - Part A (Ayurvedic Anatomy)",
+    topic: "1.1 Shariropakramaniya & Paribhasha Sharira",
+    publication: "Sushruta Sharirasthana 4/3",
+    sanskrit: "तत्र षडङ्गं शरीरम्—शाखाश्चतस्रो, मध्यं पञ्चमं, षष्ठं शिर इति॥",
+    translit: "Tatra ṣaḍaṅgaṁ śarīram—śākhāścatastro, madhyaṁ pañcamaṁ, ṣaṣṭhaṁ śira iti ||",
+    breakdown: "षडङ्गं शरीरम् [6 anatomical regions] = शाखाः चतस्रः [4 Limbs: 2 arms + 2 legs] + मध्यं पञ्चमम् [5th Trunk/Antaradhi] + षष्ठं शिरः [6th Head & Neck]",
+    hindi: "शरीर के छह मुख्य अंग (षडंग) होते हैं—चार शाखाएं (दो हाथ और दो पैर), पाँचवाँ मध्य भाग (धड़) और छठा शिर (सिर एवं ग्रीवा)।",
+    english: "The human body is divided into six primary anatomical regions (Shadanga): the four extremities (two upper and two lower limbs), the fifth trunk (Madhya), and the sixth head-neck region (Shiras).",
+    mastered: false, reps: 0
+  },
+  {
+    id: "nc_rs_2", prof: "1", subject: "Rachana Sharira (AyUG-RS)",
+    chapter: "Paper II - Part A (Srotas, Kala, Marma)",
+    topic: "2.4 Marma Sharira (107 Marmas & Trimarma)",
+    publication: "Sushruta Sharirasthana 6/3",
+    sanskrit: "सप्तोत्तरं मर्मशतम्। तानि मर्माणि पञ्चात्मकानि भवन्ति—मांसमर्माणि, सिरामर्माणि, स्नायुमर्माणि, अस्थिमर्माणि, सन्धिमर्माणि चेति॥",
+    translit: "Saptottaraṁ marmaśatam | Tāni marmāṇi pañcātmakāni bhavanti—māṁsamarmāṇi, sirāmarmāṇi, snāyumarmāṇi, asthimarmāṇi, sandhimarmāṇi ceti ||",
+    breakdown: "सप्तोत्तरं मर्मशतम् [100 + 7 = 107 Marmas] | 5 Rachana types = मांस [11], सिरा [41], स्नायु [27], अस्थि [8], सन्धि [20]",
+    hindi: "शरीर में कुल १०७ मर्म स्थान होते हैं। रचना के अनुसार ये पाँच प्रकार के हैं—मांस मर्म, सिरा मर्म, स्नायु मर्म, अस्थि मर्म और संधि मर्म।",
+    english: "There are 107 vital points (Marmas) in the body, classified structurally into five types: Mamsa (muscular), Sira (vascular), Snayu (ligamentous), Asthi (osseous), and Sandhi (articular) Marmas.",
+    mastered: false, reps: 0
+  }
+];
+    </script>
+    <!-- SOFT VOICE STUDIO BAR (FLOATING PILL ABOVE BOTTOM NAV) -->
+<div id="softVoiceBar" class="fixed bottom-[64px] inset-x-0 z-30 px-3 pointer-events-none">
+  <div class="max-w-2xl mx-auto pointer-events-auto bg-[#0e1628]/95 backdrop-blur-md border border-emerald-500/30 rounded-2xl px-3 py-2 flex items-center justify-between gap-2 shadow-2xl">
+    <div class="flex items-center gap-1.5">
+      <span class="text-sm">🌸</span>
+      <select id="voiceSpeedMode" onchange="updateSoftVoiceSettings()" class="bg-bg border border-gray-700 text-xs font-bold text-emerald-300 rounded-lg px-2 py-1">
+        <option value="soft">Soft Chant (0.82x)</option>
+        <option value="slow">Syllable Slow (0.62x)</option>
+        <option value="normal">Normal (1.0x)</option>
+      </select>
+    </div>
+    <select id="voiceProfileSelect" onchange="savePreferredVoice()" class="bg-bg border border-gray-700 text-xs text-gray-200 rounded-lg px-2 py-1 max-w-[135px] truncate">
+      <option value="">Auto Soft Voice</option>
+    </select>
+    <div class="flex items-center gap-1.5">
+      <button id="loopChantBtn" onclick="toggleChantLoop()" class="bg-gray-800 text-gray-300 text-xs font-bold px-2.5 py-1 rounded-lg border border-gray-700" title="Repeat Shloka">🔁 Off</button>
+      <button onclick="stopSpeaking()" class="bg-red-500/20 text-red-300 text-xs font-bold px-2 py-1 rounded-lg">⏹️</button>
+    </div>
+  </div>
+</div>
+
+<!-- UNIVERSAL EDIT / ADD SHLOKA MODAL (WITH NCISM 4-LEVEL TAGS) -->
+<div id="ncismShlokaModal" class="hidden fixed inset-0 z-50 bg-black/85 backdrop-blur-sm flex items-end sm:items-center justify-center p-3">
+  <div class="bg-card border border-gray-700 rounded-3xl w-full max-w-lg max-h-[90vh] overflow-y-auto p-5 space-y-3">
+    <div class="flex items-center justify-between border-b border-gray-800 pb-2.5">
+      <h3 class="text-base font-extrabold text-white" id="ncModalTitle">✏️ Edit / Add NCISM Shloka</h3>
+      <button onclick="closeModal('ncismShlokaModal')" class="text-gray-400 hover:text-white text-lg font-bold">✕</button>
+    </div>
+    <input type="hidden" id="ncEditId" />
+
+    <!-- Photo & Voice Quick Fill (Visible when adding new) -->
+    <div id="ncQuickAiBox" class="grid grid-cols-2 gap-2">
+      <label class="bg-amber-500/20 border border-amber-500/40 text-amber-300 text-xs font-bold py-2.5 px-3 rounded-xl text-center cursor-pointer">
+        📷 Scan Photo
+        <input type="file" accept="image/*" capture="environment" onchange="ncScanPhoto(event)" class="hidden" />
+      </label>
+      <button type="button" onclick="ncVoiceFill()" id="ncVoiceBtn" class="bg-emerald-500/20 border border-emerald-500/40 text-emerald-300 text-xs font-bold py-2.5 px-3 rounded-xl">
+        🎙️ Bol Kar Bharo
+      </button>
+    </div>
+    <div id="ncAiStatus" class="hidden text-xs text-amber-300 font-bold animate-pulse">⏳ AI shloka aur NCISM topic set kar raha hai...</div>
+
+    <div class="grid grid-cols-2 gap-2">
+      <div>
+        <label class="text-[11px] text-gray-400">1. Prof Year</label>
+        <select id="ncProf" onchange="syncModalDropdowns()" class="w-full bg-bg border border-gray-700 rounded-xl p-2 text-white">
+          <option value="1">1st Prof (NCISM)</option>
+          <option value="2">2nd Prof</option>
+          <option value="3">3rd / Final Prof</option>
+        </select>
+      </div>
+      <div>
+        <label class="text-[11px] text-gray-400">2. Subject</label>
+        <input type="text" id="ncSubject" list="ncSubjectList" placeholder="Subject..." class="w-full bg-bg border border-gray-700 rounded-xl p-2 text-white" />
+        <datalist id="ncSubjectList"></datalist>
+      </div>
+    </div>
+
+    <div class="grid grid-cols-2 gap-2">
+      <div>
+        <label class="text-[11px] text-gray-400">3. Paper / Chapter</label>
+        <input type="text" id="ncChapter" placeholder="e.g., Paper I - Part A" class="w-full bg-bg border border-gray-700 rounded-xl p-2 text-white" />
+      </div>
+      <div>
+        <label class="text-[11px] text-gray-400">4. Sub-Subject / Topic</label>
+        <input type="text" id="ncTopic" placeholder="e.g., 1.3 Vata Dosha" class="w-full bg-bg border border-gray-700 rounded-xl p-2 text-white" />
+      </div>
+    </div>
+
+    <input type="text" id="ncPub" placeholder="Book / Commentary (e.g., Chaukhamba / Brahmanand Tripathi)" class="w-full bg-bg border border-gray-700 rounded-xl p-2 text-white" />
+    <textarea id="ncSanskrit" rows="2" placeholder="संस्कृत श्लोक (Devanagari)..." class="w-full bg-bg border border-gray-700 rounded-xl p-2.5 text-white font-devanagari"></textarea>
+    <textarea id="ncBreakdown" rows="2" placeholder="Sandhi, Visarga (ः), Halant (्) & Matra Breakdown..." class="w-full bg-bg border border-gray-700 rounded-xl p-2 text-white"></textarea>
+    <textarea id="ncHindi" rows="2" placeholder="हिंदी भावार्थ (Hindi Meaning)..." class="w-full bg-bg border border-gray-700 rounded-xl p-2 text-white font-devanagari"></textarea>
+    <textarea id="ncEnglish" rows="2" placeholder="English Clinical & Exam Meaning..." class="w-full bg-bg border border-gray-700 rounded-xl p-2 text-white"></textarea>
+
+    <div class="flex gap-2">
+      <button type="button" onclick="ncAiCompleteCurrent()" class="bg-indigo-600 text-white font-bold text-xs px-3.5 py-3 rounded-xl">✨ AI Auto-Fill</button>
+      <button type="button" onclick="saveNcismShloka()" class="flex-1 bg-emerald-500 text-black font-extrabold py-3 rounded-xl text-sm">💾 Save Shloka</button>
+    </div>
+  </div>
+</div>
+
+<!-- AI LOAD FULL NCISM TOPIC MODAL -->
+<div id="aiTopicModal" class="hidden fixed inset-0 z-50 bg-black/85 backdrop-blur-sm flex items-center justify-center p-4">
+  <div class="bg-card border border-amber-500/40 rounded-3xl w-full max-w-md p-5 space-y-3.5">
+    <div class="flex items-center justify-between">
+      <h3 class="text-base font-extrabold text-amber-300">📚 AI NCISM Topic Shloka Loader</h3>
+      <button onclick="closeModal('aiTopicModal')" class="text-gray-400 hover:text-white font-bold">✕</button>
+    </div>
+    <p class="text-xs text-gray-300">NCISM syllabus ka Year, Subject, Chapter aur Topic select karo—AI us topic ke <b>saare standard shlokas</b> (Sanskrit + Matra Breakdown + Hindi + English) Vault mein bhar dega!</p>
+    <select id="loadProf" onchange="populateLoadModalSubjects()" class="w-full bg-bg border border-gray-700 rounded-xl p-2.5 text-white">
+      <option value="1">1st Prof (NCISM Syllabus)</option>
+      <option value="2">2nd Prof</option>
+      <option value="3">3rd / Final Prof</option>
+    </select>
+    <select id="loadSubject" onchange="populateLoadModalChapters()" class="w-full bg-bg border border-gray-700 rounded-xl p-2.5 text-white"></select>
+    <select id="loadChapter" onchange="populateLoadModalTopics()" class="w-full bg-bg border border-gray-700 rounded-xl p-2.5 text-white"></select>
+    <input type="text" id="loadTopicInput" list="loadTopicList" placeholder="Select or type Topic..." class="w-full bg-bg border border-gray-700 rounded-xl p-2.5 text-white" />
+    <datalist id="loadTopicList"></datalist>
+    <div id="aiTopicStatus" class="hidden text-xs text-emerald-400 font-bold animate-pulse">⏳ AI NCISM syllabus ke saare shlokas nikal raha hai...</div>
+    <button onclick="executeAiTopicLoad()" class="w-full bg-gradient-to-r from-amber-500 to-orange-500 text-black font-extrabold py-3 rounded-xl text-sm shadow-lg">✨ Load All Shlokas of This Topic</button>
+  </div>
+</div>
+<script>
+// ==================== 3. SOFT & CALM VOICE ENGINE ====================
+let voiceSettings = { mode: 'soft', voiceURI: '', loop: false };
+let lastSpokenArgs = null;
+
+function loadAvailableVoices() {
+  if (!('speechSynthesis' in window)) return;
+  const voices = window.speechSynthesis.getVoices();
+  if (!voices.length) return;
+
+  const sel = document.getElementById('voiceProfileSelect');
+  // Prioritize soft Indian / Hindi / Female / Natural voices
+  const sorted = [...voices].sort((a, b) => {
+    const score = v => {
+      let s = 0;
+      if (v.lang.includes('hi') || v.lang.includes('sa') || v.lang.includes('IN')) s += 10;
+      if (/google|swara|lekha|natural|female|heera|kalpana/i.test(v.name)) s += 5;
+      return s;
+    };
+    return score(b) - score(a);
+  });
+
+  sel.innerHTML = '<option value="">🌸 Auto Soft Voice</option>' +
+    sorted.slice(0, 12).map(v => `<option value="${v.voiceURI}">${v.name.replace('Microsoft ', '').replace('Google ', '')} (${v.lang})</option>`).join('');
+
+  if (voiceSettings.voiceURI) sel.value = voiceSettings.voiceURI;
+}
+
+if ('speechSynthesis' in window) {
+  window.speechSynthesis.onvoiceschanged = loadAvailableVoices;
+  setTimeout(loadAvailableVoices, 400);
+}
+
+function updateSoftVoiceSettings() {
+  voiceSettings.mode = document.getElementById('voiceSpeedMode').value;
+}
+function savePreferredVoice() {
+  voiceSettings.voiceURI = document.getElementById('voiceProfileSelect').value;
+}
+function toggleChantLoop() {
+  voiceSettings.loop = !voiceSettings.loop;
+  const btn = document.getElementById('loopChantBtn');
+  btn.textContent = voiceSettings.loop ? '🔁 Loop ON' : '🔁 Off';
+  btn.className = voiceSettings.loop
+    ? 'bg-emerald-500/25 text-emerald-300 text-xs font-bold px-2.5 py-1 rounded-lg border border-emerald-500/40'
+    : 'bg-gray-800 text-gray-300 text-xs font-bold px-2.5 py-1 rounded-lg border border-gray-700';
+}
+function stopSpeaking() {
+  voiceSettings.loop = false;
+  document.getElementById('loopChantBtn').textContent = '🔁 Off';
+  if ('speechSynthesis' in window) window.speechSynthesis.cancel();
+}
+
+// Override global speakText with Soft, Calm Chanting Engine
+speakText = function(text, langCode = 'sa', customRate = null) {
+  if (!('speechSynthesis' in window)) return;
+  window.speechSynthesis.cancel();
+  lastSpokenArgs = { text, langCode, customRate };
+
+  const utter = new SpeechSynthesisUtterance(text);
+  const voices = window.speechSynthesis.getVoices();
+
+  // Pick user-selected voice or best soft Hindi/Indian voice
+  let chosen = voices.find(v => v.voiceURI === voiceSettings.voiceURI);
+  if (!chosen) {
+    if (langCode === 'en') {
+      chosen = voices.find(v => /en-IN|en-GB/i.test(v.lang) && /female|google|heera|natural/i.test(v.name)) || voices.find(v => v.lang.includes('en'));
+    } else {
+      chosen = voices.find(v => /hi-IN|sa-IN/i.test(v.lang) && /google|swara|lekha|kalpana|female/i.test(v.name)) || voices.find(v => v.lang.includes('hi'));
+    }
+  }
+  if (chosen) utter.voice = chosen;
+  utter.lang = langCode === 'en' ? 'en-IN' : 'hi-IN';
+
+  // Soft & soothing rate + pitch tuning
+  if (customRate && customRate < 0.75) {
+    utter.rate = 0.62;
+    utter.pitch = 0.96;
+  } else if (voiceSettings.mode === 'slow') {
+    utter.rate = 0.62;
+    utter.pitch = 0.96;
+  } else if (voiceSettings.mode === 'normal') {
+    utter.rate = 0.98;
+    utter.pitch = 0.98;
+  } else {
+    // Default 'soft' chanting mode: unhurried, gentle, warm pitch
+    utter.rate = 0.82;
+    utter.pitch = 0.95;
+  }
+
+  utter.onend = () => {
+    if (voiceSettings.loop && lastSpokenArgs) {
+      setTimeout(() => {
+        if (voiceSettings.loop) speakText(lastSpokenArgs.text, lastSpokenArgs.langCode, lastSpokenArgs.customRate);
+      }, 900);
+    }
+  };
+  window.speechSynthesis.speak(utter);
+};
+
+// ==================== 4. MERGE NCISM SHLOKAS & BUILD 4-LEVEL CASCADING FILTERS ====================
+(function initNcismUpgrade() {
+  const existingIds = new Set(state.shlokas.map(s => s.id));
+  NCISM_SHLOKAS_BANK.forEach(item => { if (!existingIds.has(item.id)) state.shlokas.push(item); });
+
+  // Normalize older shlokas so every shloka has chapter & topic
+  state.shlokas.forEach(s => {
+    if (!s.chapter) s.chapter = "Paper I - Core Sutras";
+    if (!s.topic) s.topic = s.chapter;
+    if (s.subject === "Ashtanga Hridaya" || s.subject === "Charaka Samhita") s.subject = "Samhita Adhyayan (Ashtanga & Charaka)";
+    if (s.subject === "Padarth Vigyan") s.subject = "Padartha Vijnanam (AyUG-PV)";
+    if (s.subject === "Sanskrit & Itihas") s.subject = "Samskritam & Itihas (AyUG-SN & AI)";
+    if (s.subject === "Kriya Sharir") s.subject = "Kriya Sharira (AyUG-KS)";
+    if (s.subject === "Rachana Sharir") s.subject = "Rachana Sharira (AyUG-RS)";
+  });
+
+  // Wire "+ Add Shloka" button to new NCISM Modal & add "AI Load Topic" button
+  const shlokaTop = document.querySelector('#tab-shlokas > div:first-child');
+  if (shlokaTop) {
+    shlokaTop.innerHTML = `
+      <div class="flex bg-card border border-gray-800 rounded-xl p-1">
+        <button id="viewListBtn" onclick="setShlokaView('list')" class="px-3 py-1.5 rounded-lg text-xs font-bold bg-emerald-600 text-white">📚 Vault</button>
+        <button id="viewFlashBtn" onclick="setShlokaView('flashcard')" class="px-3 py-1.5 rounded-lg text-xs font-bold text-gray-400">🗂️ Cards</button>
+      </div>
+      <div class="flex items-center gap-1.5">
+        <button onclick="openAiTopicModal()" class="bg-indigo-600/30 border border-indigo-500/50 text-indigo-200 font-bold text-xs px-2.5 py-2 rounded-xl">✨ AI Topic</button>
+        <button onclick="openAddNcismModal()" class="bg-gradient-to-r from-amber-500 to-orange-500 text-black font-extrabold text-xs px-3 py-2 rounded-xl shadow-lg">+ Add</button>
+      </div>`;
+  }
+
+  // Replace filter area with 4-Level NCISM Hierarchy (Year -> Subject -> Chapter -> Topic)
+  const filterContainer = document.querySelector('#tab-shlokas > div:nth-child(2)');
+  if (filterContainer) {
+    filterContainer.innerHTML = `
+      <div class="flex gap-1.5 overflow-x-auto no-scrollbar pb-1">
+        <button onclick="setNcProf('all', this)" class="nc-prof-btn px-3 py-1.5 rounded-xl text-xs font-bold bg-emerald-500/20 text-emerald-300 border border-emerald-500/40 whitespace-nowrap">All Years</button>
+        <button onclick="setNcProf('1', this)" class="nc-prof-btn px-3 py-1.5 rounded-xl text-xs font-semibold bg-card text-gray-400 border border-gray-800 whitespace-nowrap">1st Prof (NCISM)</button>
+        <button onclick="setNcProf('2', this)" class="nc-prof-btn px-3 py-1.5 rounded-xl text-xs font-semibold bg-card text-gray-400 border border-gray-800 whitespace-nowrap">2nd Prof</button>
+        <button onclick="setNcProf('3', this)" class="nc-prof-btn px-3 py-1.5 rounded-xl text-xs font-semibold bg-card text-gray-400 border border-gray-800 whitespace-nowrap">3rd / Final</button>
+      </div>
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-2">
+        <select id="ncFilterSubject" onchange="onNcSubjectChange()" class="w-full bg-card border border-gray-800 text-xs text-gray-100 rounded-xl p-2.5"></select>
+        <select id="ncFilterChapter" onchange="onNcChapterChange()" class="w-full bg-card border border-gray-800 text-xs text-amber-300 rounded-xl p-2.5"></select>
+      </div>
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-2">
+        <select id="ncFilterTopic" onchange="renderShlokas()" class="w-full bg-card border border-gray-800 text-xs text-emerald-300 rounded-xl p-2.5"></select>
+        <input type="text" id="shlokaSearch" oninput="renderShlokas()" placeholder="🔍 Search shloka, word, book..." class="w-full bg-card border border-gray-800 text-xs text-white rounded-xl p-2.5" />
+      </div>`;
+  }
+
+  saveState();
+  rebuildNcismFilters();
+  renderAll();
+})();
+
+function setNcProf(prof, btnEl) {
+  state.currentProfFilter = prof;
+  document.querySelectorAll('.nc-prof-btn').forEach(b => b.className = 'nc-prof-btn px-3 py-1.5 rounded-xl text-xs font-semibold bg-card text-gray-400 border border-gray-800 whitespace-nowrap');
+  if (btnEl) btnEl.className = 'nc-prof-btn px-3 py-1.5 rounded-xl text-xs font-bold bg-emerald-500/20 text-emerald-300 border border-emerald-500/40 whitespace-nowrap';
+  state.fcIndex = 0;
+  rebuildNcismFilters();
+  renderShlokas();
+}
+
+function rebuildNcismFilters() {
+  const subSel = document.getElementById('ncFilterSubject');
+  if (!subSel) return;
+  const prof = state.currentProfFilter;
+  let treeSubs = [];
+  if (prof === 'all') {
+    Object.values(NCISM_TREE).forEach(pObj => treeSubs.push(...Object.keys(pObj)));
+  } else if (NCISM_TREE[prof]) {
+    treeSubs = Object.keys(NCISM_TREE[prof]);
+  }
+  const customSubs = state.shlokas.filter(s => prof === 'all' || s.prof === prof).map(s => s.subject);
+  const allSubs = [...new Set([...treeSubs, ...customSubs])];
+  subSel.innerHTML = '<option value="all">📘 All NCISM Subjects</option>' + allSubs.map(s => `<option value="${s}">${s}</option>`).join('');
+  onNcSubjectChange();
+}
+
+function onNcSubjectChange() {
+  const chapSel = document.getElementById('ncFilterChapter');
+  const sub = document.getElementById('ncFilterSubject').value;
+  const prof = state.currentProfFilter;
+  let chapters = [];
+
+  Object.entries(NCISM_TREE).forEach(([pKey, pObj]) => {
+    if (prof !== 'all' && pKey !== prof) return;
+    Object.entries(pObj).forEach(([sKey, cObj]) => {
+      if (sub !== 'all' && sKey !== sub) return;
+      chapters.push(...Object.keys(cObj));
+    });
+  });
+
+  const savedChaps = state.shlokas.filter(s => (prof === 'all' || s.prof === prof) && (sub === 'all' || s.subject === sub)).map(s => s.chapter);
+  const allChaps = [...new Set([...chapters, ...savedChaps])];
+  chapSel.innerHTML = '<option value="all">📑 All Papers / Chapters</option>' + allChaps.map(c => `<option value="${c}">${c}</option>`).join('');
+  onNcChapterChange();
+}
+
+function onNcChapterChange() {
+  const topSel = document.getElementById('ncFilterTopic');
+  const prof = state.currentProfFilter;
+  const sub = document.getElementById('ncFilterSubject').value;
+  const chap = document.getElementById('ncFilterChapter').value;
+  let topics = [];
+
+  Object.entries(NCISM_TREE).forEach(([pKey, pObj]) => {
+    if (prof !== 'all' && pKey !== prof) return;
+    Object.entries(pObj).forEach(([sKey, cObj]) => {
+      if (sub !== 'all' && sKey !== sub) return;
+      Object.entries(cObj).forEach(([cKey, tArr]) => {
+        if (chap !== 'all' && cKey !== chap) return;
+        topics.push(...tArr);
+      });
+    });
+  });
+
+  const savedTopics = state.shlokas.filter(s => (prof === 'all' || s.prof === prof) && (sub === 'all' || s.subject === sub) && (chap === 'all' || s.chapter === chap)).map(s => s.topic);
+  const allTopics = [...new Set([...topics, ...savedTopics])];
+  topSel.innerHTML = '<option value="all">🎯 All Sub-Subjects / Topics</option>' + allTopics.map(t => `<option value="${t}">${t}</option>`).join('');
+  state.fcIndex = 0;
+  renderShlokas();
+}
+
+getFilteredShlokas = function() {
+  const prof = state.currentProfFilter;
+  const sub = document.getElementById('ncFilterSubject') ? document.getElementById('ncFilterSubject').value : 'all';
+  const chap = document.getElementById('ncFilterChapter') ? document.getElementById('ncFilterChapter').value : 'all';
+  const top = document.getElementById('ncFilterTopic') ? document.getElementById('ncFilterTopic').value : 'all';
+  const q = document.getElementById('shlokaSearch') ? document.getElementById('shlokaSearch').value.toLowerCase().trim() : '';
+
+  return state.shlokas.filter(s =>
+    (prof === 'all' || s.prof === prof) &&
+    (sub === 'all' || s.subject === sub) &&
+    (chap === 'all' || s.chapter === chap) &&
+    (top === 'all' || s.topic === top) &&
+    (!q || s.sanskrit.toLowerCase().includes(q) || s.hindi.toLowerCase().includes(q) || s.english.toLowerCase().includes(q) || (s.topic || '').toLowerCase().includes(q))
+  );
+};
+
+// ==================== 5. RENDER CARDS, FLASHCARDS & FULL EDIT/ADD/DELETE ====================
+renderShlokas = function() {
+  const list = getFilteredShlokas();
+  const listView = document.getElementById('shlokaListView');
+  const flashView = document.getElementById('shlokaFlashcardView');
+
+  if (state.shlokaView === 'list') {
+    listView.classList.remove('hidden'); flashView.classList.add('hidden');
+    if (!list.length) {
+      listView.innerHTML = `
+        <div class="glass-card rounded-3xl p-6 text-center space-y-3">
+          <p class="text-sm text-gray-300">Is NCISM Topic mein abhi shlokas load nahi hue hain.</p>
+          <div class="flex justify-center gap-2">
+            <button onclick="openAiTopicModal()" class="bg-amber-500 text-black font-extrabold text-xs px-4 py-2.5 rounded-xl">✨ AI Se Topic Shlokas Load Karo</button>
+            <button onclick="openAddNcismModal()" class="bg-gray-800 text-white font-bold text-xs px-4 py-2.5 rounded-xl">+ Khud Add Karo</button>
+          </div>
+        </div>`;
+      return;
+    }
+
+    listView.innerHTML = list.map(s => `
+      <div class="glass-card rounded-3xl p-4 sm:p-5 space-y-3">
+        <div class="flex items-center justify-between gap-2 flex-wrap">
+          <span class="text-xs font-extrabold bg-indigo-500/25 text-indigo-200 px-3 py-1 rounded-full">Prof ${s.prof} • ${s.subject}</span>
+          <div class="flex items-center gap-1.5">
+            <button onclick="openEditNcismModal('${s.id}')" class="bg-gray-800 hover:bg-gray-700 text-amber-300 text-xs font-bold px-2.5 py-1 rounded-lg">✏️ Edit</button>
+            <button onclick="deleteNcShloka('${s.id}')" class="bg-gray-800 hover:bg-red-900/50 text-red-400 text-xs font-bold px-2.5 py-1 rounded-lg">🗑️</button>
+            <button onclick="toggleMastered('${s.id}')" class="text-xs font-bold px-2.5 py-1 rounded-lg ${s.mastered ? 'bg-emerald-500/25 text-emerald-300' : 'bg-gray-800 text-gray-300'}">${s.mastered ? '✓ Mastered' : '🔄 Deck'}</button>
+          </div>
+        </div>
+        <div class="text-xs space-y-0.5">
+          <p class="text-amber-400 font-bold">📑 ${s.chapter}</p>
+          <p class="text-emerald-400 font-semibold">🎯 ${s.topic} <span class="text-gray-500 font-normal">• ${s.publication}</span></p>
+        </div>
+        <p class="font-devanagari text-lg sm:text-xl font-bold text-amber-200 leading-loose bg-black/30 p-3.5 rounded-2xl border border-amber-500/20">${s.sanskrit}</p>
+        <div class="bg-emerald-950/35 border border-emerald-500/20 p-3 rounded-2xl text-xs sm:text-sm text-emerald-200 leading-relaxed"><b class="text-emerald-400">🔍 Sandhi & Matra:</b> ${s.breakdown}</div>
+        <p class="font-devanagari text-sm sm:text-base text-gray-100 leading-relaxed"><b class="text-amber-400">हिंदी:</b> ${s.hindi}</p>
+        <p class="text-sm text-gray-300 leading-relaxed"><b class="text-indigo-400">English:</b> ${s.english}</p>
+        <div class="flex flex-wrap items-center gap-2 pt-2 border-t border-gray-800">
+          <button onclick="speakShlokaById('${s.id}', 'sa', null)" class="bg-amber-500/25 text-amber-200 text-xs font-bold px-3 py-2 rounded-xl">🌸 Soft संस्कृत</button>
+          <button onclick="speakShlokaById('${s.id}', 'sa', 0.62)" class="bg-gray-800 text-gray-200 text-xs font-semibold px-3 py-2 rounded-xl">🐢 Slow</button>
+          <button onclick="speakShlokaById('${s.id}', 'hi', null)" class="bg-emerald-500/25 text-emerald-200 text-xs font-bold px-3 py-2 rounded-xl">🔊 हिंदी</button>
+          <button onclick="speakShlokaById('${s.id}', 'en', null)" class="bg-indigo-500/25 text-indigo-200 text-xs font-bold px-3 py-2 rounded-xl">🔊 English</button>
+          <button onclick="goToPractice('${s.id}')" class="ml-auto bg-emerald-500 text-black text-xs font-extrabold px-3.5 py-2 rounded-xl">🎙️ Chant</button>
+        </div>
+      </div>`).join('');
+  } else {
+    listView.classList.add('hidden'); flashView.classList.remove('hidden'); renderFlashcard(list);
+  }
+};
+
+function openAddNcismModal() {
+  document.getElementById('ncModalTitle').textContent = '+ Add New NCISM Shloka';
+  document.getElementById('ncEditId').value = '';
+  document.getElementById('ncQuickAiBox').classList.remove('hidden');
+  document.getElementById('ncProf').value = state.currentProfFilter === 'all' ? '1' : state.currentProfFilter;
+  const sub = document.getElementById('ncFilterSubject')?.value;
+  const chap = document.getElementById('ncFilterChapter')?.value;
+  const top = document.getElementById('ncFilterTopic')?.value;
+  document.getElementById('ncSubject').value = (sub && sub !== 'all') ? sub : 'Samhita Adhyayan (Ashtanga & Charaka)';
+  document.getElementById('ncChapter').value = (chap && chap !== 'all') ? chap : 'Ashtanga Hridaya Sutrasthana (Ch 1-15)';
+  document.getElementById('ncTopic').value = (top && top !== 'all') ? top : 'Ch 1: Ayushkamiya Adhyaya';
+  document.getElementById('ncPub').value = 'Chaukhamba Sanskrit Sansthan';
+  ['ncSanskrit', 'ncBreakdown', 'ncHindi', 'ncEnglish'].forEach(id => document.getElementById(id).value = '');
+  syncModalDropdowns();
+  openModal('ncismShlokaModal');
+}
+
+function openEditNcismModal(id) {
+  const s = state.shlokas.find(i => i.id === id);
+  if (!s) return;
+  document.getElementById('ncModalTitle').textContent = '✏️ Edit Shloka & NCISM Topic';
+  document.getElementById('ncEditId').value = s.id;
+  document.getElementById('ncQuickAiBox').classList.add('hidden');
+  document.getElementById('ncProf').value = s.prof;
+  document.getElementById('ncSubject').value = s.subject;
+  document.getElementById('ncChapter').value = s.chapter || '';
+  document.getElementById('ncTopic').value = s.topic || '';
+  document.getElementById('ncPub').value = s.publication || '';
+  document.getElementById('ncSanskrit').value = s.sanskrit;
+  document.getElementById('ncBreakdown').value = s.breakdown;
+  document.getElementById('ncHindi').value = s.hindi;
+  document.getElementById('ncEnglish').value = s.english;
+  openModal('ncismShlokaModal');
+}
+
+function syncModalDropdowns() {
+  const prof = document.getElementById('ncProf').value;
+  const dl = document.getElementById('ncSubjectList');
+  if (dl && NCISM_TREE[prof]) {
+    dl.innerHTML = Object.keys(NCISM_TREE[prof]).map(s => `<option value="${s}">`).join('');
+  }
+}
+
+function saveNcismShloka() {
+  const id = document.getElementById('ncEditId').value;
+  const sanskrit = document.getElementById('ncSanskrit').value.trim();
+  if (!sanskrit) return alert('Sanskrit shloka likhna zaroori hai!');
+
+  const payload = {
+    prof: document.getElementById('ncProf').value,
+    subject: document.getElementById('ncSubject').value.trim() || 'Samhita Adhyayan (Ashtanga & Charaka)',
+    chapter: document.getElementById('ncChapter').value.trim() || 'Paper I - Core',
+    topic: document.getElementById('ncTopic').value.trim() || 'General Topic',
+    publication: document.getElementById('ncPub').value.trim() || 'Chaukhamba Standard Text',
+    sanskrit,
+    breakdown: document.getElementById('ncBreakdown').value.trim() || sanskrit,
+    hindi: document.getElementById('ncHindi').value.trim() || 'हिंदी भावार्थ',
+    english: document.getElementById('ncEnglish').value.trim() || 'English meaning'
+  };
+if (d.publication) document.getElementById('ncPub').value = d.publication;
+  } catch (e) { alert('AI decode fail—API key check karo.'); } finally { st.classList.add('hidden'); }
+}
+
+function ncScanPhoto(ev) {
+  const file = ev.target.files[0]; if (!file) return;
+  if (!state.apiKey) return openModal('apiModal');
+  const st = document.getElementById('ncAiStatus'); st.classList.remove('hidden');
+  const r = new FileReader();
+  r.onload = async () => {
+    try {
+      const d = await callGeminiJSON([
+        { text: `Extract main Sanskrit BAMS shloka from image. Return ONLY JSON: {"sanskrit":"exact Devanagari","breakdown":"Hinglish sandhi/visarga/halant/matra breakdown","hindi":"Hindi meaning","english":"English meaning","publication":"book name"}` },
+        { inline_data: { mime_type: file.type, data: r.result.split(',')[1] } }
+      ]);
+      document.getElementById('ncSanskrit').value = d.sanskrit || '';
+      document.getElementById('ncBreakdown').value = d.breakdown || '';
+      document.getElementById('ncHindi').value = d.hindi || '';
+      document.getElementById('ncEnglish').value = d.english || '';
+      if (d.publication) document.getElementById('ncPub').value = d.publication;
+    } catch (e) { alert('Photo scan fail—clear photo lo.'); } finally { st.classList.add('hidden'); }
+  };
+  r.readAsDataURL(file);
+}
+
+// ==================== 6. AI FULL NCISM TOPIC SHLOKA LOADER ====================
+function openAiTopicModal() {
+  populateLoadModalSubjects();
+  openModal('aiTopicModal');
+}
+function populateLoadModalSubjects() {
+  const prof = document.getElementById('loadProf').value;
+  const subSel = document.getElementById('loadSubject');
+  subSel.innerHTML = Object.keys(NCISM_TREE[prof] || {}).map(s => `<option value="${s}">${s}</option>`).join('');
+  populateLoadModalChapters();
+}
+function populateLoadModalChapters() {
+  const prof = document.getElementById('loadProf').value;
+  const sub = document.getElementById('loadSubject').value;
+  const chapSel = document.getElementById('loadChapter');
+  chapSel.innerHTML = Object.keys((NCISM_TREE[prof] && NCISM_TREE[prof][sub]) || {}).map(c => `<option value="${c}">${c}</option>`).join('');
+  populateLoadModalTopics();
+}
+function populateLoadModalTopics() {
+  const prof = document.getElementById('loadProf').value;
+  const sub = document.getElementById('loadSubject').value;
+  const chap = document.getElementById('loadChapter').value;
+  const topics = (NCISM_TREE[prof]?.[sub]?.[chap]) || [];
+  document.getElementById('loadTopicList').innerHTML = topics.map(t => `<option value="${t}">`).join('');
+  document.getElementById('loadTopicInput').value = topics[0] || '';
+}
+
+async function executeAiTopicLoad() {
+  if (!state.apiKey) return openModal('apiModal');
+  const prof = document.getElementById('loadProf').value;
+  const subject = document.getElementById('loadSubject').value;
+  const chapter = document.getElementById('loadChapter').value;
+  const topic = document.getElementById('loadTopicInput').value.trim();
+  if (!topic) return alert('Topic select ya type karo!');
+
+  const st = document.getElementById('aiTopicStatus'); st.classList.remove('hidden');
+  try {
+    const prompt = `You are a senior BAMS NCISM examiner. Provide 8 to 10 essential exam & clinical Sanskrit shlokas for Prof ${prof}, Subject "${subject}", Chapter "${chapter}", Topic "${topic}" from standard BAMS textbooks (Chaukhamba / Brihattrayee / Laghutrayee).
+Return ONLY a valid JSON array of objects:
+[{"sanskrit":"exact Devanagari","breakdown":"Hinglish sandhi, visarga (ः), halant (्), matra breakdown","hindi":"accurate Hindi meaning","english":"accurate English clinical meaning","publication":"exact Samhita & chapter reference"}]`;
+    const arr = await callGeminiJSON([{ text: prompt }]);
+    arr.forEach((item, idx) => {
+      state.shlokas.unshift({
+        id: 'nct_' + Date.now() + '_' + idx,
+        prof, subject, chapter, topic,
+        publication: item.publication || 'NCISM Standard Text',
+        sanskrit: item.sanskrit, translit: '',
+        breakdown: item.breakdown, hindi: item.hindi, english: item.english,
+        mastered: false, reps: 0
+      });
+    });
+    saveState(); rebuildNcismFilters(); populatePracticeDropdown(); closeModal('aiTopicModal'); renderAll();
+    alert(`✅ ${arr.length} NCISM shlokas "${topic}" ke liye load ho gaye!`);
+  } catch (e) {
+    alert('AI Topic load fail—API key ya network check karo.');
+  } finally {
+    st.classList.add('hidden');
+  }
+}
+</script>
