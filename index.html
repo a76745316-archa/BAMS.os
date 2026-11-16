@@ -3,1861 +3,529 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-  <title>VaidyaOS — 5.5 Yr BAMS & All-Rounder OS</title>
+  <title>VaidyaOS - Minimalist</title>
   <script src="https://cdn.tailwindcss.com"></script>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Noto+Sans+Devanagari:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Noto+Sans+Devanagari:wght@400;500;600;700&display=swap" rel="stylesheet">
   <script>
     tailwind.config = {
       darkMode: 'class',
       theme: {
         extend: {
-          fontFamily: {
-            sans: ['Inter', 'Noto Sans Devanagari', 'sans-serif'],
-            devanagari: ['Noto Sans Devanagari', 'sans-serif'],
-          },
-          colors: {
-            bg: '#070b14',
-            card: '#101726',
-            card2: '#172033',
-            accent: '#10b981',
-            gold: '#f59e0b'
-          }
+          fontFamily: { sans: ['Inter', 'sans-serif'], devanagari: ['Noto Sans Devanagari', 'sans-serif'] },
+          colors: { bg: '#0f172a', card: '#1e293b', accent: '#10b981', textmain: '#f8fafc', textmuted: '#94a3b8' }
         }
       }
     }
   </script>
   <style>
-    body {
-      background-color: #070b14;
-      background-image: radial-gradient(circle at 85% 10%, rgba(16, 185, 129, 0.08), transparent 35%),
-                        radial-gradient(circle at 15% 40%, rgba(245, 158, 11, 0.06), transparent 40%);
-      color: #f3f4f6;
-      font-family: 'Inter', 'Noto Sans Devanagari', sans-serif;
-      -webkit-tap-highlight-color: transparent;
-      padding-bottom: 92px;
-    }
+    body { background-color: #0f172a; color: #f8fafc; font-family: 'Inter', sans-serif; padding-bottom: 90px; -webkit-tap-highlight-color: transparent; }
     .no-scrollbar::-webkit-scrollbar { display: none; }
     .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
-    .glass-card {
-      background: linear-gradient(145deg, rgba(23, 32, 51, 0.85), rgba(16, 23, 38, 0.95));
-      backdrop-filter: blur(12px);
-      border: 1px solid rgba(255, 255, 255, 0.07);
-    }
-    .perspective { perspective: 1200px; }
-    .preserve-3d { transform-style: preserve-3d; transition: transform 0.55s cubic-bezier(0.4, 0.2, 0.2, 1); }
-    .rotate-y-180 { transform: rotateY(180deg); }
-    .backface-hidden { backface-visibility: hidden; -webkit-backface-visibility: hidden; }
-    @keyframes pulseRing {
-      0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(239, 68, 68, 0.7); }
-      70% { transform: scale(1); box-shadow: 0 0 0 14px rgba(239, 68, 68, 0); }
-      100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(239, 68, 68, 0); }
-    }
-    .recording-pulse { animation: pulseRing 1.5s infinite; }
-    @keyframes slowSpin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
-    .mandala-spin { animation: slowSpin 45s linear infinite; }
+    .clean-card { background: #1e293b; border: 1px solid #334155; border-radius: 20px; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1); }
+    .btn-primary { background: #10b981; color: #022c22; font-weight: 700; border-radius: 12px; padding: 10px 16px; transition: opacity 0.2s; }
+    .btn-primary:active { opacity: 0.8; }
+    .btn-secondary { background: #334155; color: #f8fafc; font-weight: 600; border-radius: 12px; padding: 10px 16px; }
   </style>
 </head>
 <body class="min-h-screen select-none">
-
-  <!-- TOP STICKY HEADER -->
-  <header class="sticky top-0 z-30 bg-[#070b14]/90 backdrop-blur-md border-b border-gray-800/80 px-4 py-3">
+    <!-- TOP HEADER -->
+  <header class="sticky top-0 z-30 bg-[#0f172a]/90 backdrop-blur-md border-b border-slate-800 px-5 py-4">
     <div class="max-w-2xl mx-auto flex items-center justify-between">
-      <div class="flex items-center gap-2.5">
-        <!-- Custom Ayurveda Lotus & Serpent Graphic -->
-        <div class="w-10 h-10 rounded-2xl bg-gradient-to-br from-emerald-500/20 to-amber-500/20 border border-emerald-500/40 flex items-center justify-center shadow-lg">
-          <svg class="w-6 h-6 text-emerald-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
-            <path stroke-linecap="round" stroke-linejoin="round" d="M12 3c-2.5 3.5-2.5 7.5 0 11 2.5-3.5 2.5-7.5 0-11z" fill="rgba(16,185,129,0.25)"/>
-            <path stroke-linecap="round" stroke-linejoin="round" d="M12 14c-4-1-7-4-8-8 4 0 7 2 8 8zm0 0c4-1 7-4 8-8-4 0-7 2-8 8z"/>
-            <path stroke-linecap="round" stroke-linejoin="round" d="M5 18c2.5 1.5 5 2 7 2s4.5-.5 7-2" stroke="#f59e0b"/>
-          </svg>
-        </div>
-        <div>
-          <h1 class="text-base font-extrabold tracking-tight text-white leading-none">Vaidya<span class="text-emerald-400">OS</span></h1>
-          <p class="text-[11px] text-gray-400 mt-1">All-Rounder BAMS • Streak: <span id="streakCount" class="text-amber-400 font-bold">1</span>🔥</p>
-        </div>
+      <div>
+        <h1 class="text-xl font-bold tracking-tight text-white">Vaidya<span class="text-emerald-400">OS</span></h1>
+        <p class="text-xs text-slate-400 font-medium">Clear Mind. Sharp Focus.</p>
       </div>
-
-      <div class="flex items-center gap-2">
-        <select id="globalModeSelect" onchange="changeMode(this.value)" class="bg-card2 text-xs font-bold text-emerald-300 border border-gray-700 rounded-xl px-2.5 py-1.5 focus:outline-none">
-          <option value="normal">⚡ Normal Day</option>
-          <option value="exam">🎯 Exam Mode</option>
-          <option value="file">📁 File Load</option>
-          <option value="trip">🏔️ Trip / Sick</option>
-        </select>
-        <button onclick="openModal('apiModal')" class="bg-card2 hover:bg-gray-800 border border-gray-700 text-gray-300 p-2 rounded-xl text-xs" title="Gemini AI Settings">⚙️</button>
-      </div>
+      <button onclick="openModal('apiModal')" class="bg-slate-800 text-slate-300 p-2.5 rounded-xl text-sm border border-slate-700">⚙️ AI Settings</button>
     </div>
   </header>
 
-  <main class="max-w-2xl mx-auto px-4 pt-4 space-y-5">
+  <!-- MAIN CONTAINER -->
+  <main class="max-w-2xl mx-auto px-4 pt-5 space-y-6" id="app-main"></main>
 
-    <!-- ==================== TAB 1: HOME DASHBOARD ==================== -->
-    <section id="tab-home" class="space-y-4">
-      <!-- Illustrated Hero Banner with Live SVG Ring -->
-      <div class="relative overflow-hidden rounded-3xl bg-gradient-to-br from-[#0f2922] via-[#131d31] to-[#1e1b2e] border border-emerald-500/30 p-4 shadow-xl">
-        <!-- Decorative Mandala SVG -->
-        <svg class="mandala-spin absolute -right-10 -top-10 w-44 h-44 text-amber-400/10 pointer-events-none" viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="1">
-          <circle cx="50" cy="50" r="45"/><circle cx="50" cy="50" r="32"/><circle cx="50" cy="50" r="18"/>
-          <path d="M50 5 L50 95 M5 50 L95 50 M18 18 L82 82 M82 18 L18 82"/>
-        </svg>
-
-        <div class="relative z-10 flex items-center justify-between gap-4">
-          <div class="space-y-1.5">
-            <span class="inline-block text-[10px] font-bold uppercase tracking-wider bg-amber-500/20 text-amber-300 px-2.5 py-0.5 rounded-full border border-amber-500/30">
-              Ayurveda + Physique + Freedom
-            </span>
-            <h2 class="text-lg font-extrabold text-white leading-snug">Aaj Ka Bare Minimum Floor</h2>
-            <p class="text-xs text-gray-300" id="homePillarsDone">0/5 Pillars Completed Today</p>
-            <button onclick="switchTab('todo')" class="mt-1 inline-flex items-center gap-1 bg-emerald-500 text-black font-extrabold text-xs px-3.5 py-1.5 rounded-xl shadow-lg shadow-emerald-500/20">
-              Tick Today's Targets →
-            </button>
-          </div>
-
-          <!-- Circular SVG Progress Ring -->
-          <div class="relative w-24 h-24 flex-shrink-0 flex items-center justify-center">
-            <svg class="w-24 h-24 -rotate-90" viewBox="0 0 100 100">
-              <circle cx="50" cy="50" r="40" stroke="rgba(255,255,255,0.1)" stroke-width="9" fill="none"/>
-              <circle id="homeProgressRing" cx="50" cy="50" r="40" stroke="#10b981" stroke-width="9" stroke-linecap="round" fill="none" stroke-dasharray="251.2" stroke-dashoffset="251.2" class="transition-all duration-700"/>
-            </svg>
-            <div class="absolute text-center">
-              <span id="homeDisciplinePct" class="text-lg font-extrabold text-white block leading-none">0%</span>
-              <span class="text-[9px] text-emerald-300 font-semibold">DONE</span>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- Visual Stats Cards -->
-      <div class="grid grid-cols-2 gap-3">
-        <div class="glass-card rounded-2xl p-3.5 flex items-center gap-3">
-          <div class="w-10 h-10 rounded-xl bg-amber-500/15 border border-amber-500/30 flex items-center justify-center text-lg">📜</div>
-          <div>
-            <p class="text-[11px] text-gray-400">Shlokas Mastered</p>
-            <p class="text-lg font-extrabold text-amber-400 leading-tight"><span id="homeMasteredCount">0</span> <span class="text-xs text-gray-500 font-normal" id="homeTotalShlokas">/ 0</span></p>
-          </div>
-        </div>
-        <div class="glass-card rounded-2xl p-3.5 flex items-center gap-3">
-          <div class="w-10 h-10 rounded-xl bg-indigo-500/15 border border-indigo-500/30 flex items-center justify-center text-lg">🎙️</div>
-          <div>
-            <p class="text-[11px] text-gray-400">AI Voice Score</p>
-            <p class="text-lg font-extrabold text-indigo-400 leading-tight"><span id="homeAvgAccuracy">--%</span> <span class="text-xs text-gray-500 font-normal" id="homePracticeReps">(0)</span></p>
-          </div>
-        </div>
-      </div>
-
-      <!-- 20-Shloka Rolling Deck Card -->
-      <div class="glass-card rounded-2xl p-4">
-        <div class="flex items-center justify-between mb-2">
-          <div>
-            <h3 class="text-sm font-bold text-white">🔄 20-Shloka Rolling Revision Deck</h3>
-            <p class="text-[11px] text-gray-400" id="rollingDeckLabel">Roz 1-2 naye + 5 purane revise = Zero exam stress</p>
-          </div>
-          <button onclick="switchTab('practice')" class="bg-amber-500/20 text-amber-300 border border-amber-500/30 text-xs font-bold px-3 py-1.5 rounded-xl">Chant →</button>
-        </div>
-        <div class="w-full bg-gray-800/90 h-2.5 rounded-full overflow-hidden mt-2">
-          <div id="rollingDeckBar" class="bg-gradient-to-r from-amber-500 via-emerald-400 to-teal-400 h-full transition-all duration-500" style="width: 20%"></div>
-        </div>
-      </div>
-
-      <!-- Aaj Ke Main Shlokas -->
-      <div class="space-y-2.5">
-        <div class="flex items-center justify-between">
-          <h3 class="text-sm font-bold text-gray-200">✨ Aaj Ke Main Shlokas (3-Language)</h3>
-          <button onclick="refreshFeaturedShlokas()" class="text-xs text-emerald-400 font-semibold">↻ New Pair</button>
-        </div>
-        <div id="featuredShlokasContainer" class="space-y-3"></div>
-      </div>
-
-      <!-- 5 Pillars Quick Overview -->
-      <div class="glass-card rounded-2xl p-4 space-y-2.5">
-        <h3 class="text-sm font-bold text-white">🏛️ 5 Bare Minimum Pillars Status</h3>
-        <div id="homePillarsSummary" class="space-y-2"></div>
-      </div>
-    </section>
-        <!-- ==================== TAB 2: SHLOKAS VAULT & 3D FLASHCARDS ==================== -->
-    <section id="tab-shlokas" class="hidden space-y-4">
-      <div class="flex items-center justify-between gap-2">
-        <div class="flex bg-card border border-gray-800 rounded-xl p-1">
-          <button id="viewListBtn" onclick="setShlokaView('list')" class="px-3 py-1.5 rounded-lg text-xs font-bold bg-emerald-600 text-white">📚 Vault</button>
-          <button id="viewFlashBtn" onclick="setShlokaView('flashcard')" class="px-3 py-1.5 rounded-lg text-xs font-bold text-gray-400">🗂️ Flashcards</button>
-        </div>
-        <button onclick="openModal('addShlokaModal')" class="bg-gradient-to-r from-amber-500 to-orange-500 text-black font-extrabold text-xs px-3.5 py-2 rounded-xl shadow-lg shadow-amber-500/20 flex items-center gap-1.5">
-          <span>+ Add Shloka</span>
-          <span class="text-[10px] bg-black/20 px-1.5 py-0.5 rounded">📷/🎙️</span>
-        </button>
-      </div>
-
-      <!-- Prof & Subject Filters -->
-      <div class="space-y-2">
-        <div class="flex gap-1.5 overflow-x-auto no-scrollbar pb-1">
-          <button onclick="filterProf('all')" class="prof-chip px-3 py-1.5 rounded-xl text-xs font-bold bg-emerald-500/20 text-emerald-300 border border-emerald-500/40 whitespace-nowrap">All 3 Profs</button>
-          <button onclick="filterProf('1')" class="prof-chip px-3 py-1.5 rounded-xl text-xs font-semibold bg-card text-gray-400 border border-gray-800 whitespace-nowrap">1st Prof</button>
-          <button onclick="filterProf('2')" class="prof-chip px-3 py-1.5 rounded-xl text-xs font-semibold bg-card text-gray-400 border border-gray-800 whitespace-nowrap">2nd Prof</button>
-          <button onclick="filterProf('3')" class="prof-chip px-3 py-1.5 rounded-xl text-xs font-semibold bg-card text-gray-400 border border-gray-800 whitespace-nowrap">3rd / Final</button>
-        </div>
-
-        <div class="flex gap-2">
-          <select id="subjectFilter" onchange="renderShlokas()" class="flex-1 bg-card border border-gray-800 text-xs text-gray-200 rounded-xl px-3 py-2 focus:outline-none">
-            <option value="all">All BAMS Subjects</option>
-          </select>
-          <input type="text" id="shlokaSearch" oninput="renderShlokas()" placeholder="Search shloka/book..." class="w-36 sm:w-48 bg-card border border-gray-800 text-xs text-white rounded-xl px-3 py-2 focus:outline-none" />
-        </div>
-      </div>
-
-      <!-- LIST VIEW -->
-      <div id="shlokaListView" class="space-y-3"></div>
-
-      <!-- 3D FLASHCARD VIEW -->
-      <div id="shlokaFlashcardView" class="hidden space-y-4">
-        <div class="flex items-center justify-between text-xs text-gray-400">
-          <span id="flashCounter">Card 1 of 10</span>
-          <span class="text-emerald-400">Tap card to flip • 3 Languages</span>
-        </div>
-
-        <div class="perspective w-full h-[390px] cursor-pointer" onclick="flipFlashcard()">
-          <div id="flashcardInner" class="preserve-3d relative w-full h-full">
-            <!-- FRONT: Sanskrit + Breakdown -->
-            <div class="backface-hidden absolute inset-0 bg-gradient-to-br from-[#162238] via-[#101829] to-[#1a1829] border border-amber-500/30 rounded-3xl p-5 flex flex-col justify-between shadow-2xl">
-              <div class="flex items-center justify-between">
-                <span id="fcBadge" class="text-[10px] font-bold uppercase bg-emerald-500/20 text-emerald-300 px-2.5 py-1 rounded-full">1st Prof</span>
-                <span id="fcMasteredTag" class="text-xs font-semibold text-amber-300">🔄 In Deck</span>
-              </div>
-              <div class="my-auto text-center space-y-3 overflow-y-auto no-scrollbar py-2">
-                <p id="fcSanskrit" class="font-devanagari text-lg sm:text-xl font-bold text-amber-300 leading-relaxed"></p>
-                <p id="fcTranslit" class="text-xs text-gray-400 italic"></p>
-                <div id="fcBreakdown" class="text-[11px] text-emerald-200 bg-black/40 p-3 rounded-2xl text-left leading-relaxed border border-white/5"></div>
-              </div>
-              <div class="flex items-center justify-center gap-2 pt-2 border-t border-gray-800" onclick="event.stopPropagation()">
-                <button onclick="speakCurrentFlashcard('sa', 1)" class="bg-amber-500/20 text-amber-300 border border-amber-500/30 text-xs font-bold px-3 py-1.5 rounded-xl">🔊 संस्कृत</button>
-                <button onclick="speakCurrentFlashcard('sa', 0.65)" class="bg-gray-800 text-gray-300 text-xs font-semibold px-2.5 py-1.5 rounded-xl">🐢 Slow</button>
-                <span class="text-[11px] text-gray-400 ml-auto">Flip for अर्थ ↻</span>
-              </div>
-            </div>
-
-            <!-- BACK: Hindi & English Meaning -->
-            <div class="backface-hidden rotate-y-180 absolute inset-0 bg-gradient-to-br from-[#0f2922] via-[#101829] to-[#152036] border border-emerald-500/40 rounded-3xl p-5 flex flex-col justify-between shadow-2xl">
-              <div class="flex items-center justify-between">
-                <span id="fcPub" class="text-[10px] font-semibold text-teal-300 bg-teal-500/15 px-2.5 py-1 rounded-full truncate max-w-[210px]">Publication</span>
-                <span class="text-[11px] text-gray-400">Flip back ↺</span>
-              </div>
-              <div class="my-auto space-y-3 overflow-y-auto no-scrollbar py-2">
-                <div class="bg-black/35 p-3 rounded-2xl border-l-4 border-amber-400">
-                  <p class="text-[10px] font-bold text-amber-400 uppercase mb-1">हिंदी भावार्थ</p>
-                  <p id="fcHindi" class="font-devanagari text-sm text-gray-100 leading-relaxed"></p>
-                </div>
-                <div class="bg-black/35 p-3 rounded-2xl border-l-4 border-indigo-400">
-                  <p class="text-[10px] font-bold text-indigo-400 uppercase mb-1">English Clinical Meaning</p>
-                  <p id="fcEnglish" class="text-xs sm:text-sm text-gray-200 leading-relaxed"></p>
-                </div>
-              </div>
-              <div class="flex items-center justify-center gap-2 pt-2 border-t border-gray-800" onclick="event.stopPropagation()">
-                <button onclick="speakCurrentFlashcard('hi', 1)" class="bg-amber-500/20 text-amber-300 text-xs font-bold px-3.5 py-1.5 rounded-xl">🔊 हिंदी</button>
-                <button onclick="speakCurrentFlashcard('en', 1)" class="bg-indigo-500/20 text-indigo-300 text-xs font-bold px-3.5 py-1.5 rounded-xl">🔊 English</button>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div class="grid grid-cols-3 gap-2">
-          <button onclick="prevFlashcard()" class="glass-card py-2.5 rounded-xl text-xs font-bold text-gray-300">← Prev</button>
-          <button onclick="toggleMasteredCurrent()" id="fcMasterBtn" class="bg-emerald-600/25 border border-emerald-500/40 py-2.5 rounded-xl text-xs font-bold text-emerald-300">✓ Mastered</button>
-          <button onclick="nextFlashcard()" class="glass-card py-2.5 rounded-xl text-xs font-bold text-gray-300">Next →</button>
-        </div>
-      </div>
-    </section>
-
-    <!-- ==================== TAB 3: PRACTICE & AI PRONUNCIATION LAB ==================== -->
-    <section id="tab-practice" class="hidden space-y-4">
-      <div class="glass-card rounded-3xl p-4 space-y-3.5">
-        <div class="flex items-center justify-between gap-2">
-          <div>
-            <h2 class="text-sm font-bold text-white">🎙️ AI Chanting & Pronunciation Lab</h2>
-            <p class="text-[11px] text-gray-400">3-Language Audio + Apni Voice Record & AI Check</p>
-          </div>
-          <select id="practiceShlokaSelect" onchange="loadPracticeShloka()" class="bg-card2 border border-gray-700 text-xs text-amber-300 rounded-xl px-2.5 py-1.5 max-w-[155px]"></select>
-        </div>
-
-        <div class="bg-black/40 border border-gray-800 rounded-2xl p-3.5 space-y-2.5">
-          <p id="pracSanskrit" class="font-devanagari text-base sm:text-lg font-bold text-amber-300 leading-relaxed"></p>
-          <p id="pracBreakdown" class="text-xs text-emerald-300/90 leading-relaxed"></p>
-          <div class="grid grid-cols-1 sm:grid-cols-2 gap-2 text-xs">
-            <div class="bg-card/90 p-2.5 rounded-xl text-gray-300"><b class="text-amber-400">हिं:</b> <span id="pracHindi"></span></div>
-            <div class="bg-card/90 p-2.5 rounded-xl text-gray-300"><b class="text-indigo-400">EN:</b> <span id="pracEnglish"></span></div>
-          </div>
-
-          <div class="flex flex-wrap gap-1.5 pt-2 border-t border-gray-800/80">
-            <button onclick="speakPractice('sa', 1)" class="bg-amber-500/20 text-amber-300 border border-amber-500/30 text-xs font-bold px-3 py-1.5 rounded-xl">🔊 संस्कृत</button>
-            <button onclick="speakPractice('sa', 0.65)" class="bg-gray-800 text-gray-300 text-xs font-semibold px-2.5 py-1.5 rounded-xl">🐢 0.65x</button>
-            <button onclick="speakPractice('hi', 1)" class="bg-emerald-500/20 text-emerald-300 border border-emerald-500/30 text-xs font-bold px-3 py-1.5 rounded-xl">🔊 हिंदी</button>
-            <button onclick="speakPractice('en', 1)" class="bg-indigo-500/20 text-indigo-300 border border-indigo-500/30 text-xs font-bold px-3 py-1.5 rounded-xl">🔊 English</button>
-          </div>
-        </div>
-
-        <!-- Soundwave & Mic Recorder -->
-        <div class="bg-gradient-to-b from-card2 to-bg border border-gray-700/80 rounded-2xl p-4 text-center space-y-3">
-          <svg class="w-32 h-6 mx-auto text-emerald-400/50" viewBox="0 0 120 24" fill="none" stroke="currentColor" stroke-width="2">
-            <path d="M2 12h10l4-8 6 16 6-12 5 8 5-14 6 18 6-10 5 6 5-12 6 14 5-8h39" stroke-linecap="round" stroke-linejoin="round"/>
-          </svg>
-          <p class="text-xs text-gray-300" id="recStatusText">Mic daba kar shloka chant karo (Visarga 'ः' aur Halant '्' clear bolna)</p>
-          <button id="recordBtn" onclick="toggleRecording()" class="w-16 h-16 mx-auto rounded-full bg-gradient-to-tr from-red-600 to-rose-500 text-white font-bold flex items-center justify-center text-2xl shadow-xl shadow-red-600/30 transition">
-            🎙️
-          </button>
-          <div id="audioPlaybackBox" class="hidden space-y-2.5 pt-2">
-            <audio id="userAudioPlayer" controls class="w-full h-9 rounded-xl"></audio>
-            <button onclick="evaluatePronunciationWithAI()" id="evalAiBtn" class="w-full bg-gradient-to-r from-emerald-500 to-teal-500 text-black font-extrabold text-xs py-3 rounded-xl shadow-lg">
-              ✨ Check Pronunciation with Gemini AI
-            </button>
-          </div>
-        </div>
-
-        <div id="aiFeedbackBox" class="hidden bg-[#0c211c] border border-emerald-500/40 rounded-2xl p-3.5 space-y-2">
-          <div class="flex items-center justify-between">
-            <span class="text-xs font-bold text-emerald-400">AI Ucharan Report</span>
-            <span id="aiScoreBadge" class="text-sm font-extrabold bg-emerald-500 text-black px-2.5 py-0.5 rounded-full">90%</span>
-          </div>
-          <p id="aiFeedbackText" class="text-xs text-gray-200 leading-relaxed whitespace-pre-line"></p>
-        </div>
-      </div>
-
-      <div class="glass-card rounded-2xl p-4 space-y-2.5">
-        <h3 class="text-xs font-bold text-gray-300 uppercase tracking-wider">📈 Recent Chanting Log</h3>
-        <div id="practiceHistoryList" class="space-y-2 text-xs text-gray-400">Abhi tak koi recording check nahi hui hai.</div>
-      </div>
-    </section>
-        <!-- ==================== TAB 4: BARE MINIMUM TO-DO LIST ==================== -->
-    <section id="tab-todo" class="hidden space-y-4">
-      <div class="glass-card rounded-3xl p-4">
-        <div class="flex items-center justify-between mb-1">
-          <h2 class="text-sm font-bold text-white">✅ Daily Bare Minimum (5 Pillars)</h2>
-          <button onclick="resetTodayTodos()" class="text-[11px] text-gray-400 hover:text-white underline">Reset Today</button>
-        </div>
-        <p class="text-xs text-emerald-300/90 mb-3" id="modeGuidanceText"></p>
-        <div id="pillarsContainer" class="space-y-3"></div>
-      </div>
-
-      <div class="glass-card rounded-2xl p-4 space-y-3">
-        <h3 class="text-sm font-bold text-white">📝 Extra College / CR / Personal Tasks</h3>
-        <div class="flex gap-2">
-          <input type="text" id="newTaskInput" placeholder="e.g., Anatomy file sign, Gunjan se timetable..." class="flex-1 bg-card2 border border-gray-700 rounded-xl px-3 py-2 text-xs text-white focus:outline-none" />
-          <button onclick="addCustomTask()" class="bg-emerald-500 text-black font-extrabold text-xs px-4 py-2 rounded-xl">+ Add</button>
-        </div>
-        <div id="customTasksList" class="space-y-2"></div>
-      </div>
-    </section>
-  </main>
-
-  <!-- ==================== ADD SHLOKA MODAL (PHOTO & VOICE) ==================== -->
-  <div id="addShlokaModal" class="hidden fixed inset-0 z-50 bg-black/85 backdrop-blur-sm flex items-end sm:items-center justify-center p-3">
-    <div class="bg-card border border-gray-700 rounded-3xl w-full max-w-lg max-h-[90vh] overflow-y-auto p-5 space-y-4">
-      <div class="flex items-center justify-between border-b border-gray-800 pb-3">
-        <h3 class="text-base font-extrabold text-white">+ Add New Shloka (Zero Typing)</h3>
-        <button onclick="closeModal('addShlokaModal')" class="text-gray-400 hover:text-white text-lg font-bold">✕</button>
-      </div>
-
-      <div class="bg-card2 border border-amber-500/30 rounded-2xl p-3.5 space-y-2">
-        <p class="text-xs font-bold text-amber-400">📷 Option 1: Book / Board Ki Photo Kheecho</p>
-        <input type="file" id="shlokaImageInput" accept="image/*" capture="environment" onchange="processImageToShloka(event)" class="block w-full text-xs text-gray-300 file:mr-3 file:py-2 file:px-3 file:rounded-xl file:border-0 file:text-xs file:font-bold file:bg-amber-500 file:text-black" />
-      </div>
-
-      <div class="bg-card2 border border-emerald-500/30 rounded-2xl p-3.5 space-y-2">
-        <p class="text-xs font-bold text-emerald-400">🎙️ Option 2: Toota-Phoota Bol Kar Batao</p>
-        <div class="flex gap-2">
-          <button type="button" onclick="startVoiceDictation()" id="dictateBtn" class="flex-1 bg-emerald-600/20 border border-emerald-500/40 text-emerald-300 font-bold text-xs py-2.5 rounded-xl">🎙️ Tap & Speak</button>
-          <button type="button" onclick="aiAutoCompleteFromText()" class="bg-indigo-600 text-white font-bold text-xs px-3.5 py-2.5 rounded-xl">✨ AI Fill All 3</button>
-        </div>
-      </div>
-
-      <div class="space-y-2.5 text-xs">
-        <div id="aiAddStatus" class="hidden text-amber-300 font-semibold animate-pulse">⏳ AI shloka decode aur 3 languages mein translate kar raha hai...</div>
-        <div class="grid grid-cols-2 gap-2">
-          <select id="addProf" class="w-full bg-bg border border-gray-700 rounded-xl p-2 text-white">
-            <option value="1">1st Prof</option>
-            <option value="2">2nd Prof</option>
-            <option value="3">3rd / Final Prof</option>
-          </select>
-          <input type="text" id="addSubject" placeholder="Subject (e.g., Ashtanga)" class="w-full bg-bg border border-gray-700 rounded-xl p-2 text-white" />
-        </div>
-        <input type="text" id="addPub" placeholder="Publication (e.g., Chaukhamba)" class="w-full bg-bg border border-gray-700 rounded-xl p-2 text-white" />
-        <textarea id="addSanskrit" rows="2" placeholder="1. संस्कृत श्लोक (Sanskrit)..." class="w-full bg-bg border border-gray-700 rounded-xl p-2 text-white font-devanagari"></textarea>
-        <textarea id="addBreakdown" rows="2" placeholder="Word-by-Word Matra / Visarga Breakdown..." class="w-full bg-bg border border-gray-700 rounded-xl p-2 text-white"></textarea>
-        <textarea id="addHindi" rows="2" placeholder="2. हिंदी अर्थ (Hindi)..." class="w-full bg-bg border border-gray-700 rounded-xl p-2 text-white font-devanagari"></textarea>
-        <textarea id="addEnglish" rows="2" placeholder="3. English Meaning..." class="w-full bg-bg border border-gray-700 rounded-xl p-2 text-white"></textarea>
-        <button onclick="saveNewShloka()" class="w-full bg-emerald-500 text-black font-extrabold py-3 rounded-xl text-sm shadow-lg">💾 Save to Vault & Flashcards</button>
-      </div>
-    </div>
-  </div>
-
-  <!-- ==================== GEMINI API KEY MODAL ==================== -->
-  <div id="apiModal" class="hidden fixed inset-0 z-50 bg-black/85 backdrop-blur-sm flex items-center justify-center p-4">
-    <div class="bg-card border border-gray-700 rounded-3xl w-full max-w-md p-5 space-y-4">
+  <!-- API KEY MODAL -->
+  <div id="apiModal" class="hidden fixed inset-0 z-50 bg-black/80 backdrop-blur-sm flex items-center justify-center p-4">
+    <div class="clean-card w-full max-w-md p-6 space-y-4">
       <div class="flex items-center justify-between">
-        <h3 class="text-base font-bold text-white">⚙️ Free Gemini AI Key Setup</h3>
-        <button onclick="closeModal('apiModal')" class="text-gray-400 hover:text-white font-bold">✕</button>
+        <h3 class="text-lg font-bold">Google Gemini AI Key</h3>
+        <button onclick="closeModal('apiModal')" class="text-slate-400 hover:text-white font-bold text-xl">✕</button>
       </div>
-      <p class="text-xs text-gray-300 leading-relaxed">
-        Photo scan, broken-voice shloka finder, aur pronunciation score ke liye apni free <b>Google AI Studio Key</b> (<code class="text-emerald-400">AIzaSy...</code>) yahan paste karo. Yeh sirf tumhare phone mein save rehti hai.
-      </p>
-      <input type="password" id="geminiApiKeyInput" placeholder="AIzaSy..." class="w-full bg-bg border border-gray-700 rounded-xl px-3 py-2.5 text-xs text-white focus:outline-none" />
-      <div class="flex gap-2">
-        <button onclick="saveApiKey()" class="flex-1 bg-emerald-500 text-black font-extrabold text-xs py-2.5 rounded-xl">Save Key</button>
-        <button onclick="closeModal('apiModal')" class="bg-gray-800 text-gray-300 font-semibold text-xs px-4 py-2.5 rounded-xl">Close</button>
+      <p class="text-sm text-slate-400">AI Shloka fetch aur Pronunciation check ke liye free key paste karein.</p>
+      <input type="password" id="apiKeyInput" placeholder="AIzaSy..." class="w-full bg-slate-900 border border-slate-700 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-emerald-500" />
+      <div class="flex gap-3">
+        <button onclick="saveApiKey()" class="btn-primary flex-1">Save Key</button>
+        <button onclick="closeModal('apiModal')" class="btn-secondary">Close</button>
       </div>
     </div>
   </div>
 
-  <!-- ==================== 4-TAB BOTTOM NAVIGATION ==================== -->
-  <nav class="fixed bottom-0 inset-x-0 z-40 bg-[#090e1a]/95 backdrop-blur-lg border-t border-gray-800 px-2 py-2">
-    <div class="max-w-2xl mx-auto grid grid-cols-4 gap-1">
-      <button onclick="switchTab('home')" id="nav-home" class="nav-btn flex flex-col items-center justify-center py-1.5 rounded-xl text-emerald-400 bg-emerald-500/15">
-        <span class="text-lg">🏠</span><span class="text-[10px] font-bold mt-0.5">Home</span>
+  <!-- 4-TAB BOTTOM NAV -->
+  <nav class="fixed bottom-0 inset-x-0 z-40 bg-[#0f172a]/95 backdrop-blur-lg border-t border-slate-800 px-3 py-2">
+    <div class="max-w-2xl mx-auto grid grid-cols-4 gap-2">
+      <button onclick="switchTab('home')" id="nav-home" class="flex flex-col items-center py-2 rounded-xl text-emerald-400 bg-slate-800">
+        <span class="text-xl mb-1">🏠</span><span class="text-[10px] font-bold">Home</span>
       </button>
-      <button onclick="switchTab('shlokas')" id="nav-shlokas" class="nav-btn flex flex-col items-center justify-center py-1.5 rounded-xl text-gray-400">
-        <span class="text-lg">📜</span><span class="text-[10px] font-semibold mt-0.5">Shlokas</span>
+      <button onclick="switchTab('vault')" id="nav-vault" class="flex flex-col items-center py-2 rounded-xl text-slate-500 hover:text-slate-300">
+        <span class="text-xl mb-1">🗂️</span><span class="text-[10px] font-bold">Vault</span>
       </button>
-      <button onclick="switchTab('practice')" id="nav-practice" class="nav-btn flex flex-col items-center justify-center py-1.5 rounded-xl text-gray-400">
-        <span class="text-lg">🎙️</span><span class="text-[10px] font-semibold mt-0.5">Practice</span>
+      <button onclick="switchTab('practice')" id="nav-practice" class="flex flex-col items-center py-2 rounded-xl text-slate-500 hover:text-slate-300">
+        <span class="text-xl mb-1">🎙️</span><span class="text-[10px] font-bold">Practice</span>
       </button>
-      <button onclick="switchTab('todo')" id="nav-todo" class="nav-btn flex flex-col items-center justify-center py-1.5 rounded-xl text-gray-400">
-        <span class="text-lg">✅</span><span class="text-[10px] font-semibold mt-0.5">To-Do</span>
+      <button onclick="switchTab('tasks')" id="nav-tasks" class="flex flex-col items-center py-2 rounded-xl text-slate-500 hover:text-slate-300">
+        <span class="text-xl mb-1">✓</span><span class="text-[10px] font-bold">Tasks</span>
       </button>
     </div>
   </nav>
+    <!-- TAB TEMPLATES (Injected via JS) -->
+  <template id="tpl-home">
+    <div class="space-y-5">
+      <!-- Minimal Progress Card -->
+      <div class="clean-card p-5 flex items-center justify-between">
+        <div>
+          <p class="text-sm text-slate-400 font-medium">Today's Discipline</p>
+          <h2 class="text-3xl font-extrabold text-white mt-1" id="homeProgressTxt">0%</h2>
+          <p class="text-xs text-emerald-400 mt-1" id="homeStreak">Streak: 1 Day 🔥</p>
+        </div>
+        <div class="w-16 h-16 rounded-full border-4 border-slate-700 flex items-center justify-center relative">
+          <svg class="absolute inset-0 w-full h-full -rotate-90" viewBox="0 0 100 100">
+            <circle id="homeRing" cx="50" cy="50" r="46" stroke="#10b981" stroke-width="8" fill="none" stroke-dasharray="289" stroke-dashoffset="289" class="transition-all duration-700"></circle>
+          </svg>
+        </div>
+      </div>
+      <!-- Quick Stats -->
+      <div class="grid grid-cols-2 gap-3">
+        <div class="clean-card p-4">
+          <p class="text-[11px] text-slate-400">Total Shlokas Read</p>
+          <p class="text-xl font-bold text-amber-400 mt-1" id="homeTotalRead">0</p>
+        </div>
+        <div class="clean-card p-4">
+          <p class="text-[11px] text-slate-400">Total AI Chants</p>
+          <p class="text-xl font-bold text-indigo-400 mt-1" id="homeTotalChant">0</p>
+        </div>
+      </div>
+    </div>
+  </template>
 
-<script>
-const STORAGE_KEY = 'vaidya_os_v2';
+  <template id="tpl-tasks">
+    <div class="space-y-5">
+      <div class="flex items-center justify-between">
+        <h2 class="text-lg font-bold text-white">Daily Targets</h2>
+        <button onclick="resetTasks()" class="text-xs text-slate-400 underline">Reset Today</button>
+      </div>
+      <!-- Add Task Bar -->
+      <div class="flex gap-2">
+        <input type="text" id="taskInput" placeholder="Add a new task..." class="flex-1 bg-slate-900 border border-slate-700 rounded-xl px-4 py-2.5 text-sm focus:outline-none focus:border-emerald-500" onkeypress="if(event.key === 'Enter') addTask()" />
+        <button onclick="addTask()" class="btn-primary">Add</button>
+      </div>
+      <!-- Task List -->
+      <div id="taskList" class="space-y-2"></div>
+    </div>
+  </template>
+    <template id="tpl-vault">
+    <div class="space-y-4">
+      <!-- Breadcrumb Navigation -->
+      <div id="vaultBreadcrumbs" class="flex items-center gap-2 overflow-x-auto no-scrollbar text-xs font-semibold text-emerald-400 bg-slate-900/50 p-3 rounded-xl border border-slate-800">
+        <!-- Filled by JS -->
+      </div>
+      
+      <!-- Dynamic Content Area (Shows Folders or Shlokas) -->
+      <div id="vaultContent" class="space-y-3"></div>
+    </div>
+  </template>
 
-const MODE_CONFIG = {
-  normal: {
-    desc: "⚡ Normal Day: 90m Academic Saviour + 60m Lifting + 25m Cardio + 60m Content Loop + 7h Sleep.",
-    pillars: [
-      { id: "p1", title: "1. Body & Fuel (Gym + Macros)", partA: "60m Lifting + 25–30m Cardio (Max kcal burn)", partB: "Daily Protein target 100% hit + Calories logged" },
-      { id: "p2", title: "2. All-Rounder Identity", partA: "Class mein active & attentive (Front/Mid row)", partB: "Social bonding, CR/leadership & sharp grooming" },
-      { id: "p3", title: "3. Academic Saviour (90m)", partA: "30m Blank-Page Recall + 25m Clinical Concept + 15m File", partB: "20m Shloka Engine (1-2 new + 5 rolling deck voice check)" },
-      { id: "p4", title: "4. Mental Peace & Life", partA: "7+ Hours Recovery Sleep (Lights out by 12:15 AM)", partB: "Chain se dinner + Movie/Show (No NEET-style stress)" },
-      { id: "p5", title: "5. Financial Freedom Skill", partA: "20m Record + 20m Voiceover/Audit + 20m Edit", partB: "Naya AI/Editing/Graphic trick seekha ya apply kiya" }
-    ]
-  },
-  exam: {
-    desc: "🎯 Exam Mode: Skill paused; Academic Saviour expanded to 2.5h PYQs & Exam Shlokas; Gym 45m.",
-    pillars: [
-      { id: "p1", title: "1. Body Maintenance", partA: "45m Lifting + 10m Cardio (Muscle protect)", partB: "High-protein clean meals + 3L Water" },
-      { id: "p2", title: "2. Exam Calmness", partA: "Zero panic / No comparison with batchmates", partB: "Quick peer discussion only for imp questions" },
-      { id: "p3", title: "3. Exam Turbo (2.5 Hrs)", partA: "2h University PYQs & 10-Mark Answer Flowcharts", partB: "30m Imp Exam Shlokas rapid voice drill" },
-      { id: "p4", title: "4. Brain Recovery", partA: "7 Hours Sleep (No all-nighter brain fog)", partB: "30m Dinner + Light comedy show reset" },
-      { id: "p5", title: "5. Skill Pause (Guilt-Free)", partA: "Content upload paused for exam focus", partB: "Saved 1 raw idea note for post-exam" }
-    ]
-  },
-  file: {
-    desc: "📁 File Mode: Skill slot shifted to Practical Files & Anatomy/Kriya Diagrams.",
-    pillars: [
-      { id: "p1", title: "1. Gym & Fuel", partA: "60m Gym session completed", partB: "Protein & Macros logged" },
-      { id: "p2", title: "2. College Coordination", partA: "Batch/Teacher file instructions coordinated", partB: "Clean uniform & punctual attendance" },
-      { id: "p3", title: "3. File + Shloka Split", partA: "75m Practical File Writing & Neat Diagrams", partB: "15m Shloka Rolling Deck voice revision" },
-      { id: "p4", title: "4. Sleep & Relax", partA: "7 Hours Sleep protected", partB: "Dinner + Music/Show while resting hands" },
-      { id: "p5", title: "5. Micro-Content", partA: "15m Study-with-me / File timelapse clip", partB: "Zero burnout mindset" }
-    ]
-  },
-  trip: {
-    desc: "🏔️ Trip / Sick Mode: Unbreakable 20-Min Floor (1 naya + 5 purane shlokas phone par) + Full rest.",
-    pillars: [
-      { id: "p1", title: "1. Movement & Fuel", partA: "8k+ Steps walking (or bed rest if sick)", partB: "Clean protein-rich food & hydration" },
-      { id: "p2", title: "2. Live Life / Be Present", partA: "100% present on trip / or guilt-free rest", partB: "Zero academic guilt" },
-      { id: "p3", title: "3. 20-Min Unbreakable Floor", partA: "1 Naya Shloka samjha & suna", partB: "5 Purane Shlokas rolling deck mein chant kiye" },
-      { id: "p4", title: "4. Deep Recovery", partA: "8.5+ Hours Sleep & mental recharge", partB: "Nature / Travel / Movie enjoyment" },
-      { id: "p5", title: "5. Raw B-Roll Capture", partA: "Trip ke 3-4 cinematic B-roll clips shoot kiye", partB: "Editing baad mein ghar jakar" }
-    ]
-  }
-};
-  const DEFAULT_SHLOKAS = [
-  // --- 1ST PROF ---
-  {
-    id: "p1_ah_1", prof: "1", subject: "Ashtanga Hridaya",
-    publication: "Chaukhamba Sanskrit Pratishthan (Dr. Brahmanand Tripathi)",
-    sanskrit: "आयुः कामयमानेन धर्मार्थसुखसाधनम्। आयुर्वेदोपदेशेषु विधेयः परमादरः॥",
-    translit: "Āyuḥ kāmayamānena dharmārthasukhasādhanam | Āyurvedopadeśeṣu vidheyaḥ paramādaraḥ ||",
-    breakdown: "आयुः [Āyu-ḥ - Visarga 'ः' = halka 'h'] + कामयमानेन [chahne wale ko] + धर्म-अर्थ-सुख-साधनम् ['म्' halant = half m] | परमादरः [Param + Ādaraḥ = sabse bada aadar]",
-    hindi: "धर्म, अर्थ और सुख के साधन रूपी दीर्घ आयु की इच्छा रखने वाले मनुष्य को आयुर्वेद के उपदेशों का अत्यन्त आदरपूर्वक पालन करना चाहिए।",
-    english: "One who desires a long life—the primary means to Dharma, Artha, and Sukha—must follow the teachings of Ayurveda with utmost respect.",
-    mastered: false, reps: 0
-  },
-  {
-    id: "p1_ah_2", prof: "1", subject: "Ashtanga Hridaya",
-    publication: "Chaukhamba Surbharati (Vagbhata Samhita)",
-    sanskrit: "वायुः पित्तं कफश्चेति त्रयो दोषाः समासतः। विकृताविकृता देहं घ्नन्ति ते वर्तयन्ति च॥",
-    translit: "Vāyuḥ pittaṁ kaphaśceti trayo doṣāḥ samāsataḥ | Vikṛtāvikṛtā dehaṁ ghnanti te vartayanti ca ||",
-    breakdown: "वायुः [Vāyu-ḥ] + पित्तं [Pittaṁ - 'ं' Anuswar = half m/n] + कफश्चेति [Kaphaḥ + ca + iti] + समासतः [sankshep mein] | घ्नन्ति [nasht karte hain] + वर्तयन्ति [chalate hain]",
-    hindi: "संक्षेप में वात, पित्त और कफ ये तीन दोष हैं। ये विकृत होने पर शरीर को नष्ट करते हैं और अविकृत रहने पर शरीर को धारण करते हैं।",
-    english: "In brief, Vata, Pitta, and Kapha are the three Doshas. When vitiated, they destroy the body; when balanced, they sustain it.",
-    mastered: false, reps: 0
-  },
-  {
-    id: "p1_ah_3", prof: "1", subject: "Ashtanga Hridaya",
-    publication: "Chaukhamba Sanskrit Sansthan (Dinacharya Adhyaya)",
-    sanskrit: "ब्राह्मे मुहूर्त उत्तिष्ठेत् स्वस्थो रक्षार्थमायुषः। शरीरचिन्तां निर्वर्त्य कृतशौचविधिस्ततः॥",
-    translit: "Brāhme muhūrta uttiṣṭhet svastho rakṣārthamāyuṣaḥ | Śarīracintāṁ nirvartya kṛtaśaucavidhistataḥ ||",
-    breakdown: "ब्राह्मे [Brāhme] + मुहूर्ते [Muhūrte] + उत्तिष्ठेत् [Uttiṣṭhet - 'त्' halant] + स्वस्थः [Svastha-ḥ] + रक्षार्थम् ['क्ष' k+sh joint]",
-    hindi: "स्वस्थ व्यक्ति को अपनी आयु की रक्षा के लिए प्रातः ब्राह्म मुहूर्त में उठना चाहिए और शरीर की स्थिति का विचार करके शौच विधि करनी चाहिए।",
-    english: "A healthy person should wake up in Brahma Muhurta to protect their lifespan, assess their bodily state, and attend to eliminations.",
-    mastered: false, reps: 0
-  },
-  {
-    id: "p1_cs_1", prof: "1", subject: "Charaka Samhita",
-    publication: "Chaukhamba Bharati Academy (Vidyadhar Shukla & Ravidatta Tripathi)",
-    sanskrit: "हिताहितं सुखं दुःखमायुस्तस्य हिताहितम्। मानं च तच्च यत्रोक्तमायुर्वेदः स उच्यते॥",
-    translit: "Hitāhitaṁ sukhaṁ duḥkhamāyustasya hitāhitam | Mānaṁ ca tacca yatroktamāyurvedaḥ sa ucyate ||",
-    breakdown: "हित-अहितम् + सुखं दुःखम् [Duḥkham - beech mein Visarga] + मानं [praman/span] + यत्र उक्तम् [jahan kaha gaya hai] + आयुर्वेदः [Āyurveda-ḥ]",
-    hindi: "जिस शास्त्र में हितायु, अहितायु, सुखायु और दुःखायु—इन चार प्रकार की आयु के लिए हितकारी व अहितकारी द्रव्यों तथा आयु के प्रमाण का वर्णन हो, उसे आयुर्वेद कहते हैं।",
-    english: "That science is called Ayurveda in which advantageous, disadvantageous, happy, and unhappy states of life, along with wholesome/unwholesome regimens and lifespan, are described.",
-    mastered: false, reps: 0
-  },
-  {
-    id: "p1_pv_1", prof: "1", subject: "Padarth Vigyan",
-    publication: "Chaukhamba Orientalia (Acharya Priyavrat Sharma)",
-    sanskrit: "सर्वदा सर्वभावानां सामान्यं वृद्धिकारणम्। ह्रासहेतुर्विशेषश्च प्रवृत्तिरुभयस्य तु॥",
-    translit: "Sarvadā sarvabhāvānāṁ sāmānyaṁ vṛddhikāraṇam | Hrāsaheturviśeṣaśca pravṛttirubhayasya tu ||",
-    breakdown: "सर्वदा [hamesha] + सामान्यं [similarity] + वृद्धिकारणम् ['वृ' mein 'ृ' = ri matra, badhane wala] | ह्रासहेतुः [kam karne wala] + विशेषः च",
-    hindi: "समान गुण या कर्म वाले पदार्थ हमेशा सभी भावों की वृद्धि का कारण होते हैं और विपरीत गुण वाले (विशेष) ह्रास का कारण होते हैं।",
-    english: "Similarity (Samanya) is always the cause of increase of all bodily elements, while dissimilarity (Vishesha) is the cause of decrease.",
-    mastered: false, reps: 0
-  },
-  {
-    id: "p1_ks_1", prof: "1", subject: "Kriya Sharir",
-    publication: "Chaukhamba Sanskrit Series (Sushruta Sutrasthana 15/41)",
-    sanskrit: "समदोषः समाग्निश्च समधातुमलक्रियः। प्रसन्नात्मेन्द्रियमनाः स्वस्थ इत्यभिधीयते॥",
-    translit: "Samadoṣaḥ samāgniśca samadhātumalakriyaḥ | Prasannātmendriyamanāḥ svastha ityabhidhīyate ||",
-    breakdown: "समदोषः [balanced Doshas] + समाग्निः च [balanced Agni] + समधातुमलक्रियः [7 Dhatu aur 3 Mala] | प्रसन्नात्मेन्द्रियमनाः [happy soul, senses, mind] + स्वस्थः",
-    hindi: "जिसके तीनों दोष, जठराग्नि, सातों धातुएं और मलों की क्रियाएं समान हैं तथा जिसकी आत्मा, इन्द्रियां और मन प्रसन्न हैं, वही 'स्वस्थ' कहलाता है।",
-    english: "One whose Doshas, Agni, Dhatus, and Mala functions are in equilibrium, and whose soul, senses, and mind are cheerful, is called Swastha.",
-    mastered: false, reps: 0
-  },
-  {
-    id: "p1_rs_1", prof: "1", subject: "Rachana Sharir",
-    publication: "Chaukhamba Surbharati (Sushruta Sharirasthana)",
-    sanskrit: "शुक्रशोणितसंयोगे यो भवेद्दोष उत्कटः। प्रकृतिर्जायते तेन तस्या मे लक्षणं शृणु॥",
-    translit: "Śukraśoṇitasaṁyoge yo bhaveddoṣa utkaṭaḥ | Prakṛtirjāyate tena tasyā me lakṣaṇaṁ śṛṇu ||",
-    breakdown: "शुक्र-शोणित-संयोगे [fertilization ke samay] + दोष उत्कटः [dominant Dosha] | प्रकृतिः जायते [Deha Prakriti banti hai] + शृणु ['शृ' = shri]",
-    hindi: "गर्भाधान के समय शुक्र और शोणित के संयोग काल में जो दोष अधिक होता है, उसी के अनुसार मनुष्य की शारीरिक प्रकृति बनती है।",
-    english: "At the union of Shukra (sperm) and Shonita (ovum), whichever Dosha is predominant determines the innate constitution (Prakriti).",
-    mastered: false, reps: 0
-  },
-  {
-    id: "p1_sk_1", prof: "1", subject: "Sanskrit & Itihas",
-    publication: "Samskrita Bharati / NCISM 1st Prof Syllabus",
-    sanskrit: "एकं द्वे त्रीणि चत्वारि, पञ्च षट् सप्त अष्ट नव दश। पठामः वयं संस्कृतम्॥",
-    translit: "Ekaṁ dve trīṇi chatvāri, pañcha ṣaṭ sapta aṣṭa nava daśa | Paṭhāmaḥ vayaṁ saṁskṛtam ||",
-    breakdown: "एकं [1] + द्वे [2] + त्रीणि [3] + चत्वारि [4] + पञ्च [5] + षट् [6 - 'ट्' halant] + सप्त [7] + अष्ट [8] + नव [9] + दश [10]",
-    hindi: "एक, दो, तीन, चार, पाँच, छह, सात, आठ, नौ, दस — हम सब मिलकर संस्कृत पढ़ते हैं।",
-    english: "One, two, three, four, five, six, seven, eight, nine, ten — we all study Sanskrit together.",
-    mastered: false, reps: 0
-  },
-  // --- 2ND PROF ---
-  {
-    id: "p2_dg_1", prof: "2", subject: "Dravyaguna Vigyan",
-    publication: "Chaukhamba Bharati Academy (Acharya Priyavrat Sharma)",
-    sanskrit: "द्रव्यं रसो गुणो वीर्यं विपाकः शक्तिरेव च। पदार्थाः पञ्च तिष्ठन्ति स्वस्वकर्मप्रसिद्धये॥",
-    translit: "Dravyaṁ raso guṇo vīryaṁ vipākaḥ śaktireva ca | Padārthāḥ pañca tiṣṭhanti svasvakarmaprasiddhaye ||",
-    breakdown: "द्रव्यं [herb] + रसः [taste] + गुणः [properties] + वीर्यं [potency] + विपाकः [post-digestive effect] + शक्तिः [Prabhava]",
-    hindi: "द्रव्य में रस, गुण, वीर्य, विपाक और शक्ति (प्रभाव)—ये पाँच पदार्थ अपने-अपने विशिष्ट औषधीय कर्म को सिद्ध करने के लिए स्थित रहते हैं।",
-    english: "Rasa, Guna, Virya, Vipaka, and Shakti (Prabhava) reside in a medicinal substance to execute its pharmacological actions.",
-    mastered: false, reps: 0
-  },
-  {
-    id: "p2_rs_1", prof: "2", subject: "Rasashastra & BK",
-    publication: "Chaukhamba Orientalia (Sharangadhara Samhita)",
-    sanskrit: "स्वरसः कल्कः क्वाथश्च हिमः फाण्टश्च सप्तमः। पञ्चविधकषायकल्पना इत्यभिधीयते॥",
-    translit: "Svarasaḥ kalkaḥ kvāthaśca himaḥ phāṇṭaśca saptamaḥ | Pañcavidhakaṣāyakalpanā ityabhidhīyate ||",
-    breakdown: "स्वरसः [fresh juice] + कल्कः [paste] + क्वाथः [decoction] + हिमः [cold infusion] + फाण्टः [hot infusion]",
-    hindi: "स्वरस, कल्क, क्वाथ, हिम और फाण्ट—ये पाँच मुख्य भैषज्य कल्पनाएं हैं।",
-    english: "Svarasa (juice), Kalka (paste), Kvatha (decoction), Hima (cold infusion), and Phanta (hot infusion) are the five fundamental pharmaceutical preparations.",
-    mastered: false, reps: 0
-  },
-  {
-    id: "p2_rn_1", prof: "2", subject: "Roga Nidan",
-    publication: "Chaukhamba Sanskrit Sansthan (Madhava Nidanam)",
-    sanskrit: "निदानं पूर्वरूपाणि रूपाण्युपशयस्तथा। सम्प्राप्तिश्चेति विज्ञानं रोगाणां पञ्चधा स्मृतम्॥",
-    translit: "Nidānaṁ pūrvarūpāṇi rūpāṇyupaśayastathā | Samprāptiśceti vijñānaṁ rogāṇāṁ pañcadhā smṛtam ||",
-    breakdown: "निदानं [etiology] + पूर्वरूपाणि [prodromal] + रूपाणि [symptoms] + उपशयः [therapeutic test] + सम्प्राप्तिः [pathogenesis]",
-    hindi: "निदान, पूर्वरूप, रूप, उपशय और सम्प्राप्ति—रोग ज्ञान के ये पाँच उपाय (निदान पञ्चक) हैं।",
-    english: "Nidana, Purvarupa, Rupa, Upashaya, and Samprapti constitute the five-fold diagnostic framework (Nidana Panchaka).",
-    mastered: false, reps: 0
-  },
-  {
-    id: "p2_sw_1", prof: "2", subject: "Swasthavritta & Yoga",
-    publication: "Chaukhamba Bharati Academy (Charaka Sutrasthana 11/35)",
-    sanskrit: "त्रय उपस्तम्भा इति—आहारः स्वप्नो ब्रह्मचर्यमिति।",
-    translit: "Traya upastambhā iti—āhāraḥ svapno brahmacaryamiti |",
-    breakdown: "त्रयः उपस्तम्भाः [teen sub-pillars] + आहारः [nutrition] + स्वप्नः [sleep] + ब्रह्मचर्यम् [regulated lifestyle]",
-    hindi: "आहार, निद्रा (स्वप्न) और ब्रह्मचर्य—ये शरीर के तीन मुख्य उपस्तम्भ (पिलर्स) हैं।",
-    english: "Ahara (balanced diet), Swapna (sound sleep), and Brahmacharya (regulated conduct) are the three sub-pillars of life.",
-    mastered: false, reps: 0
-  },
-  {
-    id: "p2_ag_1", prof: "2", subject: "Agadtantra",
-    publication: "Chaukhamba Sanskrit Pratishthan (Sushruta Kalpasthana)",
-    sanskrit: "विषादजननत्वाच्च विषमित्यभिधीयते। तस्यैव तु चिकित्सा यत्तदगदतन्त्रमुच्यते॥",
-    translit: "Viṣādajananatvācca viṣamityabhidhīyate | Tasyaiva tu cikitsā yattadagadatantramucyate ||",
-    breakdown: "विषाद-जननत्वात् [dukh/sankat utpann karne ke karan] + विषम् [poison] + अगदतन्त्रम् [toxicology]",
-    hindi: "जो शरीर और मन में विषाद उत्पन्न करे उसे 'विष' कहते हैं, और उसकी चिकित्सा वाले शास्त्र को 'अगदतन्त्र' कहते हैं।",
-    english: "That which induces distress (Vishada) in the body is Visha (poison), and the branch dealing with its antidotes is Agadatantra.",
-    mastered: false, reps: 0
-  },
-  // --- 3RD / FINAL PROF ---
-  {
-    id: "p3_kc_1", prof: "3", subject: "Kayachikitsa",
-    publication: "Chaukhamba Bharati Academy (Charaka Sutrasthana 9/3)",
-    sanskrit: "भिषग्द्रव्याण्युपस्थाता रोगी पादचतुष्टयम्। गुणवत्कारणं ज्ञेयं विकारव्युपशान्तये॥",
-    translit: "Bhiṣagdravyāṇyupasthātā rogī pādacatuṣṭayam | Guṇavatkāraṇaṁ jñeyaṁ vikāravyupaśāntaye ||",
-    breakdown: "भिषक् [doctor] + द्रव्याणि [medicines] + उपस्थाता [nurse] + रोगी [patient] + पादचतुष्टयम् [4 pillars of treatment]",
-    hindi: "वैद्य, द्रव्य, उपस्थाता (परिचारक) और रोगी—ये चिकित्सा के चार पाद हैं। इनके गुणवान होने पर ही रोग शांत होता है।",
-    english: "The Physician, Medicament, Attendant, and Patient form the four pillars of therapeutics to eradicate disease.",
-    mastered: false, reps: 0
-  },
-  {
-    id: "p3_sh_1", prof: "3", subject: "Shalya Tantra",
-    publication: "Chaukhamba Surbharati (Sushruta Sutrasthana 5/10)",
-    sanskrit: "शौर्यमाशुक्रिया शस्त्रतैक्ष्ण्यमस्वेदवेपथू। असम्मोहश्च वैद्यस्य शस्त्रकर्मणि शस्यते॥",
-    translit: "Śauryamāśukriyā śastrataikṣṇyamasvedavepathū | Asammohaśca vaidyasya śastrakarmani śasyate ||",
-    breakdown: "शौर्यम् [courage] + आशुक्रिया [swiftness] + शस्त्रतैक्ष्ण्यम् [sharp instruments] + अस्वेद-वेपथू [no sweating/tremor] + असम्मोहः [clarity]",
-    hindi: "सर्जरी करते समय वैद्य में साहस, फुर्ती, तीक्ष्ण शस्त्र, पसीना व कंपन का न होना तथा मानसिक एकाग्रता—ये गुण आवश्यक हैं।",
-    english: "Courage, swiftness, sharp instruments, absence of sweating or tremors, and mental clarity are essential qualities of a surgeon.",
-    mastered: false, reps: 0
-  },
-  {
-    id: "p3_sk_1", prof: "3", subject: "Shalakya Tantra",
-    publication: "Chaukhamba Orientalia (Vagbhata Uttaratantra)",
-    sanskrit: "सर्वेन्द्रियाणां नयनं प्रधानम्। तस्मात् सदा तस्य रक्षणे यत्नमातिष्ठेत्॥",
-    translit: "Sarvendriyāṇāṁ nayanaṁ pradhānam | Tasmāt sadā tasya rakṣaṇe yatnamātiṣṭhet ||",
-    breakdown: "सर्वेन्द्रियाणां [sabhi indriyon mein] + नयनं [eye] + प्रधानम् [mukhya] | रक्षणे यत्नम् [suraksha ka prayas]",
-    hindi: "सभी इन्द्रियों में नेत्र सबसे प्रधान है, इसलिए मनुष्य को सदैव अपने नेत्रों की रक्षा का विशेष प्रयत्न करना चाहिए।",
-    english: "Among all sense organs, the eye is supreme; therefore, one must always strive to protect vision.",
-    mastered: false, reps: 0
-  },
-  {
-    id: "p3_ps_1", prof: "3", subject: "Prasuti & Stri Roga",
-    publication: "Chaukhamba Sanskrit Sansthan (Charaka Sharirasthana 8/22)",
-    sanskrit: "यथा तैलपूर्णं पात्रमसंक्षोभयता धारयितव्यं, तथा गर्भिणी परिचरितव्या॥",
-    translit: "Yathā tailapūrṇaṁ pātramasaṁkṣobhayatā dhārayitavyaṁ, tathā garbhiṇī paricaritavyā ||",
-    breakdown: "तैलपूर्णं पात्रम् [tel se bhara bartan] + असंक्षोभयता [bina chhalkaye] + गर्भिणी परिचरितव्या [pregnant woman care]",
-    hindi: "जिस प्रकार ऊपर तक तेल से भरे हुए पात्र को बिना छलकाए संभालकर ले जाया जाता है, उसी प्रकार गर्भिणी स्त्री की देखभाल करनी चाहिए।",
-    english: "Just as a vessel filled to the brim with oil is carried without spilling a drop, a pregnant woman must be cared for with extreme gentleness.",
-    mastered: false, reps: 0
-  },
-  {
-    id: "p3_kb_1", prof: "3", subject: "Kaumarabhritya",
-    publication: "Chaukhamba Bharati Academy (Kashyapa Samhita Lehadhyaya)",
-    sanskrit: "सुवर्णप्राशनं ह्येतन्मेधाग्निबलवर्धनम्। आयुष्यं मङ्गलं पुण्यं वृष्यं वर्ण्यं ग्रहापहम्॥",
-    translit: "Suvarṇaprāśanaṁ hyetanmedhāgnibalavardhanam | Āyuṣyaṁ maṅgalaṁ puṇyaṁ vṛṣyaṁ varṇyaṁ grahāpaham ||",
-    breakdown: "सुवर्णप्राशनम् [Swarnaprashana] + मेधा-अग्नि-बल-वर्धनम् [Medha, Agni, aur Bala badhane wala]",
-    hindi: "सुवर्णप्राशन बालकों की बुद्धि, जठराग्नि और रोग-प्रतिरोधक बल को बढ़ाने वाला, आयुष्य और मंगलकारी होता है।",
-    english: "Swarnaprashana enhances intellect (Medha), digestive fire (Agni), and immunity (Bala) in children.",
-    mastered: false, reps: 0
-  },
-  {
-    id: "p3_pk_1", prof: "3", subject: "Panchakarma",
-    publication: "Chaukhamba Sanskrit Pratishthan (Ashtanga Hridaya Sutrasthana 14)",
-    sanskrit: "दोषाः कदाचित् कुप्यन्ति जिता लङ्घनपाचनैः। ये तु संशोधनैः शुद्धा न तेषां पुनरुद्भवः॥",
-    translit: "Doṣāḥ kadācit kupyanti jitā laṅghanapācanaiḥ | Ye tu saṁśodhanaiḥ śuddhā na teṣāṁ punarudbhavaḥ ||",
-    breakdown: "लङ्घन-पाचनैः [fasting & herbs se shant] | संशोधनैः शुद्धाः [Panchakarma detox se shuddh] + न पुनरुद्भवः [dobara nahi badhte]",
-    hindi: "लङ्घन और पाचन से शांत किए गए दोष पुनः कुपित हो सकते हैं, परन्तु पंचकर्म द्वारा शरीर से बाहर निकाले गए दोषों का पुनः उद्भव नहीं होता।",
-    english: "Doshas pacified by palliative therapy may recur, whereas Doshas eliminated through Panchakarma purification do not recur.",
-    mastered: false, reps: 0
-  }
-];
-  let state = {
-  shlokas: [], mode: 'normal', todayDate: new Date().toISOString().split('T')[0],
-  pillarChecks: {}, customTasks: [], practiceLogs: [], streak: 1, apiKey: '',
-  currentProfFilter: 'all', shlokaView: 'list', fcIndex: 0, featuredIds: []
+  <!-- Edit/Add Shloka Modal -->
+  <div id="editShlokaModal" class="hidden fixed inset-0 z-50 bg-black/90 backdrop-blur-sm flex items-center justify-center p-4">
+    <div class="clean-card w-full max-w-lg max-h-[85vh] overflow-y-auto p-5 space-y-4">
+      <div class="flex items-center justify-between border-b border-slate-700 pb-3">
+        <h3 class="text-lg font-bold text-white">✏️ Edit Shloka</h3>
+        <button onclick="closeModal('editShlokaModal')" class="text-slate-400 hover:text-white font-bold text-xl">✕</button>
+      </div>
+      <input type="hidden" id="editId" />
+      <input type="text" id="editRef" placeholder="Page / Reference No." class="w-full bg-slate-900 border border-slate-700 rounded-xl p-3 text-sm text-white" />
+      <textarea id="editSan" rows="2" placeholder="Sanskrit Shloka..." class="w-full bg-slate-900 border border-slate-700 rounded-xl p-3 text-sm text-white font-devanagari"></textarea>
+      <textarea id="editBreak" rows="2" placeholder="Sandhi Breakdown..." class="w-full bg-slate-900 border border-slate-700 rounded-xl p-3 text-sm text-white"></textarea>
+      <textarea id="editHin" rows="2" placeholder="Hindi Meaning..." class="w-full bg-slate-900 border border-slate-700 rounded-xl p-3 text-sm text-white font-devanagari"></textarea>
+      <textarea id="editEng" rows="2" placeholder="English Meaning..." class="w-full bg-slate-900 border border-slate-700 rounded-xl p-3 text-sm text-white"></textarea>
+      <button onclick="saveShloka()" class="w-full btn-primary py-3">Save Changes</button>
+    </div>
+  </div>
+    <template id="tpl-practice">
+    <div class="space-y-5">
+      <div class="flex items-center justify-between bg-slate-800 p-2 rounded-xl">
+        <select id="pracShlokaSelect" onchange="loadPracShloka()" class="w-full bg-transparent text-sm text-emerald-400 font-bold focus:outline-none truncate px-2"></select>
+      </div>
+
+      <!-- Shloka Display -->
+      <div class="clean-card p-5 space-y-4 border-l-4 border-l-emerald-500">
+        <p id="pracSan" class="font-devanagari text-lg font-bold text-amber-300 leading-relaxed"></p>
+        <p id="pracBreak" class="text-xs text-slate-300"></p>
+        <div class="flex gap-2 pt-2 border-t border-slate-700">
+          <button onclick="speakSanskrit()" class="bg-slate-700 hover:bg-slate-600 text-xs px-3 py-1.5 rounded-lg font-semibold">🔊 Listen</button>
+          <button onclick="showMeaningAlert()" class="bg-slate-700 hover:bg-slate-600 text-xs px-3 py-1.5 rounded-lg font-semibold">📖 Meaning</button>
+        </div>
+      </div>
+
+      <!-- Advanced Recorder Lab -->
+      <div class="clean-card p-5 text-center space-y-4">
+        <p id="recStatus" class="text-sm text-slate-400 font-medium">Tap to chant. Read clearly.</p>
+        
+        <!-- Primary Action -->
+        <button id="btnRecord" onclick="toggleRecord()" class="w-16 h-16 mx-auto rounded-full bg-red-500 text-white flex items-center justify-center text-2xl shadow-[0_0_15px_rgba(239,68,68,0.4)] transition-all">🎙️</button>
+        
+        <!-- Post-Record Actions (Hidden initially) -->
+        <div id="postRecActions" class="hidden space-y-3">
+          <audio id="audioPlayer" controls class="w-full h-10 rounded-lg outline-none"></audio>
+          <div class="grid grid-cols-2 gap-2">
+            <button onclick="retryRecord()" class="btn-secondary text-xs">↺ Retry</button>
+            <button id="btnCheckAi" onclick="checkWithAI()" class="btn-primary text-xs flex items-center justify-center gap-1">✨ Evaluate AI</button>
+          </div>
+          <button onclick="nextShloka()" class="w-full bg-slate-800 border border-slate-600 text-slate-300 text-xs font-bold py-2.5 rounded-xl mt-2">Next Shloka →</button>
+        </div>
+      </div>
+
+      <!-- AI Feedback Box -->
+      <div id="aiFeedback" class="hidden clean-card p-4 border border-emerald-500/50 space-y-2">
+        <div class="flex justify-between items-center">
+          <span class="text-xs font-bold text-emerald-400">Pronunciation Score</span>
+          <span id="aiScore" class="bg-emerald-500 text-slate-900 text-xs font-extrabold px-2 py-0.5 rounded">0%</span>
+        </div>
+        <p id="aiComment" class="text-xs text-slate-300 leading-relaxed"></p>
+      </div>
+    </div>
+    </template>
+    <script>
+// CORE STATE
+let state = {
+  apiKey: localStorage.getItem('vaidya_api_key') || '',
+  tasks: JSON.parse(localStorage.getItem('vaidya_tasks')) || [
+    { id: 1, text: "Gym: 60m Lift + 25m Cardio", done: false },
+    { id: 2, text: "Academic: Read 2 New Shlokas", done: false },
+    { id: 3, text: "Content: 20m Shoot / Edit", done: false },
+    { id: 4, text: "Sleep: Lights out by 12:15 AM", done: false }
+  ],
+  shlokas: JSON.parse(localStorage.getItem('vaidya_shlokas')) || [],
+  vaultPath: { prof: null, subject: null, chapter: null }
 };
 
+// SYLLABUS HIERARCHY
+const SYLLABUS = {
+  "1st Prof": {
+    "Kriya Sharir (Physiology)": ["Ch 1: Dosha-Dhatu-Mala", "Ch 2: Prakriti & Agni", "Ch 3: Aharapaka"],
+    "Rachana Sharir (Anatomy)": ["Ch 1: Shariropakramaniya", "Ch 2: Garbha Sharir", "Ch 3: Marma Sharir"],
+    "Padartha Vijnanam": ["Ch 1: Darshana & Dravya", "Ch 2: Guna & Karma", "Ch 3: Pramana"],
+    "Sanskrit & Samhita": ["Ch 1: Vyakarana", "Ch 2: Ashtanga Sutrasthana 1-15"]
+  },
+  "2nd Prof": {
+    "Dravyaguna Vigyan": ["Ch 1: Rasa Panchaka", "Ch 2: Important Herbs"],
+    "Roga Nidan": ["Ch 1: Nidana Panchaka", "Ch 2: Srotodushti"]
+  }
+};
+
+// INITIALIZATION
 function initApp() {
-  const saved = localStorage.getItem(STORAGE_KEY);
-  const today = new Date().toISOString().split('T')[0];
-  if (saved) {
-    state = { ...state, ...JSON.parse(saved) };
-    if (state.todayDate !== today) {
-      state.todayDate = today;
-      state.pillarChecks = {};
-      state.streak = (state.streak || 1) + 1;
-      pickFeaturedShlokas();
-    }
-  } else {
-    state.shlokas = [...DEFAULT_SHLOKAS];
-    pickFeaturedShlokas();
-  }
-  if (!state.shlokas.length) state.shlokas = [...DEFAULT_SHLOKAS];
-  if (!state.featuredIds.length) pickFeaturedShlokas();
-
-  document.getElementById('globalModeSelect').value = state.mode;
-  document.getElementById('geminiApiKeyInput').value = state.apiKey || '';
-  populateSubjectDropdown();
-  populatePracticeDropdown();
-  renderAll();
-}
-
-function saveState() { localStorage.setItem(STORAGE_KEY, JSON.stringify(state)); }
-
-function pickFeaturedShlokas() {
-  const unmastered = state.shlokas.filter(s => !s.mastered);
-  const pool = unmastered.length >= 2 ? unmastered : state.shlokas;
-  state.featuredIds = [...pool].sort(() => 0.5 - Math.random()).slice(0, 2).map(s => s.id);
-}
-
-function refreshFeaturedShlokas() { pickFeaturedShlokas(); saveState(); renderHome(); }
-
-function switchTab(tabName) {
-  ['home', 'shlokas', 'practice', 'todo'].forEach(t => {
-    document.getElementById(`tab-${t}`).classList.add('hidden');
-    const nav = document.getElementById(`nav-${t}`);
-    nav.classList.remove('text-emerald-400', 'bg-emerald-500/15');
-    nav.classList.add('text-gray-400');
-  });
-  document.getElementById(`tab-${tabName}`).classList.remove('hidden');
-  const active = document.getElementById(`nav-${tabName}`);
-  active.classList.add('text-emerald-400', 'bg-emerald-500/15');
-  active.classList.remove('text-gray-400');
-  if (tabName === 'shlokas') renderShlokas();
-  if (tabName === 'practice') loadPracticeShloka();
-  if (tabName === 'todo') renderTodos();
-  if (tabName === 'home') renderHome();
+  document.getElementById('apiKeyInput').value = state.apiKey;
+  switchTab('home');
 }
 
 function openModal(id) { document.getElementById(id).classList.remove('hidden'); }
 function closeModal(id) { document.getElementById(id).classList.add('hidden'); }
-
 function saveApiKey() {
-  state.apiKey = document.getElementById('geminiApiKeyInput').value.trim();
-  saveState(); closeModal('apiModal');
-  alert('Gemini AI Key saved! Photo scan, Voice-to-Shloka & Pronunciation Check ready.');
+  state.apiKey = document.getElementById('apiKeyInput').value.trim();
+  localStorage.setItem('vaidya_api_key', state.apiKey);
+  closeModal('apiModal');
 }
+function saveData() { localStorage.setItem('vaidya_shlokas', JSON.stringify(state.shlokas)); localStorage.setItem('vaidya_tasks', JSON.stringify(state.tasks)); }
 
-function changeMode(newMode) { state.mode = newMode; saveState(); renderHome(); renderTodos(); }
-
-// 3-Language Voice Engine
-function speakText(text, langCode = 'sa', rate = 1.0) {
-  if (!('speechSynthesis' in window)) return;
-  window.speechSynthesis.cancel();
-  const utter = new SpeechSynthesisUtterance(text);
-  utter.rate = rate;
-  utter.lang = langCode === 'en' ? 'en-IN' : 'hi-IN';
-  window.speechSynthesis.speak(utter);
-}
-
-function speakShlokaById(id, lang, rate = 1.0) {
-  const s = state.shlokas.find(item => item.id === id);
-  if (!s) return;
-  speakText(lang === 'sa' ? s.sanskrit : lang === 'hi' ? s.hindi : s.english, lang, rate);
-}
-
-// Home Dashboard Renderer
-function renderHome() {
-  document.getElementById('streakCount').textContent = state.streak;
-  const config = MODE_CONFIG[state.mode];
-  let doneChecks = 0, completedPillars = 0;
-
-  config.pillars.forEach(p => {
-    const a = !!state.pillarChecks[`${p.id}_a`], b = !!state.pillarChecks[`${p.id}_b`];
-    if (a) doneChecks++; if (b) doneChecks++; if (a && b) completedPillars++;
+// TAB NAVIGATION
+function switchTab(tabId) {
+  document.querySelectorAll('nav button').forEach(b => {
+    b.classList.remove('text-emerald-400', 'bg-slate-800');
+    b.classList.add('text-slate-500');
   });
+  const activeBtn = document.getElementById('nav-' + tabId);
+  activeBtn.classList.add('text-emerald-400', 'bg-slate-800');
+  activeBtn.classList.remove('text-slate-500');
 
-  const pct = Math.round((doneChecks / 10) * 100);
-  document.getElementById('homeDisciplinePct').textContent = `${pct}%`;
-  document.getElementById('homePillarsDone').textContent = `${completedPillars}/5 Pillars Completed Today`;
-  document.getElementById('homeProgressRing').style.strokeDashoffset = 251.2 - (251.2 * pct) / 100;
+  const main = document.getElementById('app-main');
+  const tpl = document.getElementById('tpl-' + tabId).innerHTML;
+  main.innerHTML = tpl;
 
-  const masteredCount = state.shlokas.filter(s => s.mastered).length;
-  document.getElementById('homeMasteredCount').textContent = masteredCount;
-  document.getElementById('homeTotalShlokas').textContent = `/ ${state.shlokas.length}`;
-  const rollingActive = Math.min(20, state.shlokas.filter(s => !s.mastered).length);
-  document.getElementById('rollingDeckBar').style.width = `${Math.max(15, (rollingActive / 20) * 100)}%`;
+  if (tabId === 'home') renderHome();
+  if (tabId === 'tasks') renderTasks();
+  if (tabId === 'vault') renderVault();
+  if (tabId === 'practice') initPractice();
+}
 
-  if (state.practiceLogs.length > 0) {
-    const avg = Math.round(state.practiceLogs.reduce((acc, l) => acc + l.score, 0) / state.practiceLogs.length);
-    document.getElementById('homeAvgAccuracy').textContent = `${avg}%`;
-    document.getElementById('homePracticeReps').textContent = `(${state.practiceLogs.length})`;
+// HOME & TASKS LOGIC
+function renderHome() {
+  const done = state.tasks.filter(t => t.done).length;
+  const total = state.tasks.length || 1;
+  const pct = Math.round((done / total) * 100);
+  document.getElementById('homeProgressTxt').textContent = pct + '%';
+  document.getElementById('homeRing').style.strokeDashoffset = 289 - (289 * pct) / 100;
+  
+  let totalRead = 0, totalChants = 0;
+  state.shlokas.forEach(s => { totalRead += (s.reads||0); totalChants += (s.chants||0); });
+  document.getElementById('homeTotalRead').textContent = totalRead;
+  document.getElementById('homeTotalChant').textContent = totalChants;
+}
+
+function renderTasks() {
+  const list = document.getElementById('taskList');
+  list.innerHTML = state.tasks.map(t => `
+    <div class="clean-card p-3.5 flex items-center justify-between">
+      <div class="flex items-center gap-3 flex-1 cursor-pointer" onclick="toggleTask(${t.id})">
+        <div class="w-5 h-5 rounded border-2 flex items-center justify-center ${t.done ? 'bg-emerald-500 border-emerald-500 text-slate-900' : 'border-slate-600'} text-xs font-bold">${t.done ? '✓' : ''}</div>
+        <span class="text-sm ${t.done ? 'text-slate-500 line-through' : 'text-slate-200'}">${t.text}</span>
+      </div>
+      <button onclick="delTask(${t.id})" class="text-slate-600 hover:text-red-400 px-2">✕</button>
+    </div>`).join('');
+}
+function addTask() {
+  const v = document.getElementById('taskInput').value.trim();
+  if(!v) return;
+  state.tasks.push({ id: Date.now(), text: v, done: false });
+  saveData(); switchTab('tasks');
+}
+function toggleTask(id) { const t = state.tasks.find(i=>i.id===id); if(t){ t.done = !t.done; saveData(); renderTasks(); } }
+function delTask(id) { state.tasks = state.tasks.filter(i=>i.id!==id); saveData(); renderTasks(); }
+function resetTasks() { state.tasks.forEach(t=>t.done=false); saveData(); renderTasks(); }
+
+// VAULT DRILL-DOWN LOGIC
+function renderVault() {
+  const bc = document.getElementById('vaultBreadcrumbs');
+  const cnt = document.getElementById('vaultContent');
+  const p = state.vaultPath;
+
+  // Breadcrumb HTML
+  let html = `<button onclick="goVault(null, null, null)">🏠 Home</button>`;
+  if(p.prof) html += ` <span>›</span> <button onclick="goVault('${p.prof}', null, null)">${p.prof}</button>`;
+  if(p.subject) html += ` <span>›</span> <button onclick="goVault('${p.prof}', '${p.subject}', null)">${p.subject}</button>`;
+  if(p.chapter) html += ` <span>›</span> <span class="text-white">${p.chapter}</span>`;
+  bc.innerHTML = html;
+
+  // Level 1: Years
+  if(!p.prof) {
+    cnt.innerHTML = Object.keys(SYLLABUS).map(y => `
+      <div onclick="goVault('${y}', null, null)" class="clean-card p-4 flex items-center justify-between cursor-pointer hover:bg-slate-800 transition">
+        <span class="font-bold text-slate-200">📁 ${y}</span> <span class="text-slate-500">→</span>
+      </div>`).join('');
+    return;
   }
-
-  const featContainer = document.getElementById('featuredShlokasContainer');
-  featContainer.innerHTML = '';
-  state.featuredIds.forEach(fid => {
-    const s = state.shlokas.find(item => item.id === fid);
-    if (!s) return;
-    featContainer.innerHTML += `
-      <div class="glass-card rounded-2xl p-4 space-y-2.5">
-        <div class="flex items-center justify-between">
-          <span class="text-[10px] font-bold bg-amber-500/20 text-amber-300 px-2.5 py-0.5 rounded-full">Prof ${s.prof} • ${s.subject}</span>
-          <span class="text-[10px] text-gray-500 truncate max-w-[150px]">${s.publication}</span>
-        </div>
-        <p class="font-devanagari text-sm sm:text-base font-bold text-amber-200 leading-relaxed">${s.sanskrit}</p>
-        <p class="text-[11px] text-emerald-300 bg-black/35 p-2.5 rounded-xl">${s.breakdown}</p>
-        <p class="font-devanagari text-xs text-gray-200"><b class="text-amber-400">हिंदी:</b> ${s.hindi}</p>
-        <p class="text-xs text-gray-400"><b class="text-indigo-400">EN:</b> ${s.english}</p>
-        <div class="flex flex-wrap gap-1.5 pt-1">
-          <button onclick="speakShlokaById('${s.id}', 'sa', 1)" class="bg-amber-500/20 text-amber-300 text-[11px] font-bold px-2.5 py-1 rounded-xl">🔊 संस्कृत</button>
-          <button onclick="speakShlokaById('${s.id}', 'sa', 0.65)" class="bg-gray-800 text-gray-300 text-[11px] px-2 py-1 rounded-xl">🐢 Slow</button>
-          <button onclick="speakShlokaById('${s.id}', 'hi', 1)" class="bg-emerald-500/20 text-emerald-300 text-[11px] font-bold px-2.5 py-1 rounded-xl">🔊 हिंदी</button>
-          <button onclick="speakShlokaById('${s.id}', 'en', 1)" class="bg-indigo-500/20 text-indigo-300 text-[11px] font-bold px-2.5 py-1 rounded-xl">🔊 English</button>
+  // Level 2: Subjects
+  if(!p.subject) {
+    cnt.innerHTML = Object.keys(SYLLABUS[p.prof]).map(s => `
+      <div onclick="goVault('${p.prof}', '${s}', null)" class="clean-card p-4 flex items-center justify-between cursor-pointer hover:bg-slate-800 transition">
+        <span class="font-semibold text-slate-200">📘 ${s}</span> <span class="text-slate-500">→</span>
+      </div>`).join('');
+    return;
+  }
+  // Level 3: Chapters
+  if(!p.chapter) {
+    cnt.innerHTML = SYLLABUS[p.prof][p.subject].map(c => {
+      const sh = state.shlokas.filter(x => x.prof===p.prof && x.subject===p.subject && x.chapter===c);
+      let readC = 0, chantC = 0;
+      sh.forEach(x => { if(x.reads>=2) readC++; if(x.chants>=2) chantC++; });
+      return `
+      <div onclick="goVault('${p.prof}', '${p.subject}', '${c}')" class="clean-card p-4 cursor-pointer hover:bg-slate-800 transition">
+        <h4 class="font-bold text-slate-200">📑 ${c}</h4>
+        <div class="flex gap-4 mt-2 text-[10px] text-slate-400">
+          <span>Total: ${sh.length}</span>
+          <span class="${readC>0?'text-emerald-400':''}">Read (2+): ${readC}</span>
+          <span class="${chantC>0?'text-indigo-400':''}">Chants (2+): ${chantC}</span>
         </div>
       </div>`;
-  });
-
-  const sumContainer = document.getElementById('homePillarsSummary');
-  sumContainer.innerHTML = config.pillars.map(p => {
-    const a = !!state.pillarChecks[`${p.id}_a`], b = !!state.pillarChecks[`${p.id}_b`];
-    const badge = (a && b) ? '<span class="text-emerald-400 font-bold">DONE ✓</span>' : (a || b) ? '<span class="text-amber-400 font-bold">1/2</span>' : '<span class="text-gray-500">PENDING</span>';
-    return `<div class="flex items-center justify-between text-xs bg-bg/70 px-3 py-2 rounded-xl"><span class="text-gray-200 font-medium">${p.title}</span>${badge}</div>`;
-  }).join('');
-}
-
-// Vault & Flashcards
-function populateSubjectDropdown() {
-  const sel = document.getElementById('subjectFilter');
-  const subjects = [...new Set(state.shlokas.map(s => s.subject))];
-  sel.innerHTML = '<option value="all">All BAMS Subjects (3 Profs)</option>' + subjects.map(sub => `<option value="${sub}">${sub}</option>`).join('');
-}
-
-function filterProf(prof) {
-  state.currentProfFilter = prof;
-  document.querySelectorAll('.prof-chip').forEach(btn => btn.className = 'prof-chip px-3 py-1.5 rounded-xl text-xs font-semibold bg-card text-gray-400 border border-gray-800 whitespace-nowrap');
-  event.target.className = 'prof-chip px-3 py-1.5 rounded-xl text-xs font-bold bg-emerald-500/20 text-emerald-300 border border-emerald-500/40 whitespace-nowrap';
-  state.fcIndex = 0; renderShlokas();
-}
-
-function getFilteredShlokas() {
-  const sub = document.getElementById('subjectFilter').value;
-  const q = document.getElementById('shlokaSearch').value.toLowerCase().trim();
-  return state.shlokas.filter(s => (state.currentProfFilter === 'all' || s.prof === state.currentProfFilter) &&
-    (sub === 'all' || s.subject === sub) &&
-    (!q || s.sanskrit.toLowerCase().includes(q) || s.hindi.toLowerCase().includes(q) || s.english.toLowerCase().includes(q) || s.subject.toLowerCase().includes(q) || s.publication.toLowerCase().includes(q)));
-}
-
-function setShlokaView(mode) {
-  state.shlokaView = mode;
-  document.getElementById('viewListBtn').className = mode === 'list' ? 'px-3 py-1.5 rounded-lg text-xs font-bold bg-emerald-600 text-white' : 'px-3 py-1.5 rounded-lg text-xs font-bold text-gray-400';
-  document.getElementById('viewFlashBtn').className = mode === 'flashcard' ? 'px-3 py-1.5 rounded-lg text-xs font-bold bg-emerald-600 text-white' : 'px-3 py-1.5 rounded-lg text-xs font-bold text-gray-400';
-  renderShlokas();
-}
-
-function renderShlokas() {
-  const list = getFilteredShlokas();
-  const listView = document.getElementById('shlokaListView');
-  const flashView = document.getElementById('shlokaFlashcardView');
-  if (state.shlokaView === 'list') {
-    listView.classList.remove('hidden'); flashView.classList.add('hidden');
-    listView.innerHTML = list.length ? list.map(s => `
-      <div class="glass-card rounded-2xl p-4 space-y-2.5">
-        <div class="flex items-center justify-between">
-          <span class="text-[10px] font-bold bg-indigo-500/20 text-indigo-300 px-2.5 py-0.5 rounded-full">Prof ${s.prof} • ${s.subject}</span>
-          <button onclick="toggleMastered('${s.id}')" class="text-[11px] font-bold px-2.5 py-0.5 rounded-full ${s.mastered ? 'bg-emerald-500/20 text-emerald-300' : 'bg-gray-800 text-gray-400'}">${s.mastered ? '✓ Mastered' : '🔄 In Deck'}</button>
-        </div>
-        <p class="text-[10px] text-gray-500">📖 ${s.publication}</p>
-        <p class="font-devanagari text-sm sm:text-base font-bold text-amber-200 leading-relaxed">${s.sanskrit}</p>
-        <div class="bg-black/35 p-2.5 rounded-xl text-[11px] text-emerald-300">${s.breakdown}</div>
-        <p class="font-devanagari text-xs text-gray-200"><b class="text-amber-400">हिंदी:</b> ${s.hindi}</p>
-        <p class="text-xs text-gray-300"><b class="text-indigo-400">English:</b> ${s.english}</p>
-        <div class="flex flex-wrap items-center gap-1.5 pt-1 border-t border-gray-800">
-          <button onclick="speakShlokaById('${s.id}', 'sa', 1)" class="bg-amber-500/20 text-amber-300 text-[11px] font-bold px-2.5 py-1 rounded-xl">🔊 संस्कृत</button>
-          <button onclick="speakShlokaById('${s.id}', 'sa', 0.65)" class="bg-gray-800 text-gray-300 text-[11px] px-2 py-1 rounded-xl">🐢 Slow</button>
-          <button onclick="speakShlokaById('${s.id}', 'hi', 1)" class="bg-emerald-500/20 text-emerald-300 text-[11px] font-bold px-2.5 py-1 rounded-xl">🔊 हिंदी</button>
-          <button onclick="speakShlokaById('${s.id}', 'en', 1)" class="bg-indigo-500/20 text-indigo-300 text-[11px] font-bold px-2.5 py-1 rounded-xl">🔊 English</button>
-          <button onclick="goToPractice('${s.id}')" class="ml-auto text-[11px] font-bold text-emerald-400">🎙️ Chant →</button>
-        </div>
-      </div>`).join('') : '<p class="text-xs text-gray-400 text-center py-8">Koi shloka nahi mila.</p>';
-  } else {
-    listView.classList.add('hidden'); flashView.classList.remove('hidden'); renderFlashcard(list);
+    }).join('');
+    return;
   }
-}
-
-function renderFlashcard(list) {
-  if (!list.length) return;
-  if (state.fcIndex >= list.length) state.fcIndex = 0;
-  const s = list[state.fcIndex];
-  document.getElementById('flashcardInner').classList.remove('rotate-y-180');
-  document.getElementById('flashCounter').textContent = `Card ${state.fcIndex + 1} of ${list.length}`;
-  document.getElementById('fcBadge').textContent = `Prof ${s.prof} • ${s.subject}`;
-  document.getElementById('fcMasteredTag').textContent = s.mastered ? '✅ Mastered' : '🔄 In Deck';
-  document.getElementById('fcSanskrit').textContent = s.sanskrit;
-  document.getElementById('fcTranslit').textContent = s.translit || '';
-  document.getElementById('fcBreakdown').textContent = s.breakdown;
-  document.getElementById('fcPub').textContent = s.publication;
-  document.getElementById('fcHindi').textContent = s.hindi;
-  document.getElementById('fcEnglish').textContent = s.english;
-  document.getElementById('fcMasterBtn').textContent = s.mastered ? '↺ Back to Deck' : '✓ Mastered';
-}
-
-function flipFlashcard() { document.getElementById('flashcardInner').classList.toggle('rotate-y-180'); }
-function nextFlashcard() { const l = getFilteredShlokas(); state.fcIndex = (state.fcIndex + 1) % l.length; renderFlashcard(l); }
-function prevFlashcard() { const l = getFilteredShlokas(); state.fcIndex = (state.fcIndex - 1 + l.length) % l.length; renderFlashcard(l); }
-function speakCurrentFlashcard(lang, rate) { const l = getFilteredShlokas(); if (l[state.fcIndex]) speakShlokaById(l[state.fcIndex].id, lang, rate); }
-function toggleMasteredCurrent() { const l = getFilteredShlokas(); if (l[state.fcIndex]) { toggleMastered(l[state.fcIndex].id); renderFlashcard(l); } }
-function toggleMastered(id) { const s = state.shlokas.find(i => i.id === id); if (s) { s.mastered = !s.mastered; saveState(); renderShlokas(); renderHome(); } }
-
-// Zero-Typing Photo & Voice AI Adder
-function startVoiceDictation() {
-  const SR = window.SpeechRecognition || window.webkitSpeechRecognition;
-  if (!SR) { alert('Direct mic support nahi hai—box mein toota-phoota likh kar "AI Fill All 3" dabao!'); return; }
-  const rec = new SR(); rec.lang = 'hi-IN';
-  const btn = document.getElementById('dictateBtn'); btn.textContent = '🔴 Sun raha hoon...';
-  rec.onresult = (e) => { document.getElementById('addSanskrit').value = e.results[0][0].transcript; btn.textContent = '🎙️ Tap & Speak'; aiAutoCompleteFromText(); };
-  rec.onerror = () => { btn.textContent = '🎙️ Tap & Speak'; };
-  rec.start();
-}
-
-async function callGeminiJSON(parts) {
-  const res = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${state.apiKey}`, {
-    method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ contents: [{ parts }] })
-  });
-  const data = await res.json();
-  return JSON.parse(data.candidates[0].content.parts[0].text.replace(/```json|```/g, '').trim());
-}
-
-async function aiAutoCompleteFromText() {
-  const raw = document.getElementById('addSanskrit').value.trim();
-  if (!raw) return alert('Pehle kuch bolo ya likho!');
-  if (!state.apiKey) return openModal('apiModal');
-  const st = document.getElementById('aiAddStatus'); st.classList.remove('hidden');
-  try {
-    const d = await callGeminiJSON([{ text: `BAMS Sanskrit expert: Identify exact shloka from broken input: "${raw}". Return ONLY JSON: {"prof":"1","subject":"...","publication":"...","sanskrit":"Devanagari","translit":"IAST","breakdown":"Hinglish sandhi/visarga/halant breakdown","hindi":"Hindi meaning","english":"English clinical meaning"}` }]);
-    fillAddForm(d);
-  } catch (e) { alert('AI decode fail—API key check karo.'); } finally { st.classList.add('hidden'); }
-}
-
-function processImageToShloka(event) {
-  const file = event.target.files[0];
-  if (!file) return;
-  if (!state.apiKey) return openModal('apiModal');
-  const st = document.getElementById('aiAddStatus'); st.classList.remove('hidden');
-  const reader = new FileReader();
-  reader.onload = async () => {
-    try {
-      const d = await callGeminiJSON([
-        { text: `Extract main Sanskrit BAMS shloka from image. Return ONLY JSON: {"prof":"1","subject":"...","publication":"...","sanskrit":"Devanagari","translit":"IAST","breakdown":"Hinglish sandhi/visarga/halant breakdown","hindi":"Hindi meaning","english":"English clinical meaning"}` },
-        { inline_data: { mime_type: file.type, data: reader.result.split(',')[1] } }
-      ]);
-      fillAddForm(d);
-    } catch (e) { alert('Photo scan fail—clear photo lo ya key check karo.'); } finally { st.classList.add('hidden'); }
-  };
-  reader.readAsDataURL(file);
-}
-
-function fillAddForm(d) {
-  document.getElementById('addProf').value = d.prof || '1';
-  document.getElementById('addSubject').value = d.subject || 'Samhita';
-  document.getElementById('addPub').value = d.publication || 'Chaukhamba';
-  document.getElementById('addSanskrit').value = d.sanskrit || '';
-  document.getElementById('addBreakdown').value = d.breakdown || '';
-  document.getElementById('addHindi').value = d.hindi || '';
-  document.getElementById('addEnglish').value = d.english || '';
-  window._tempTranslit = d.translit || '';
-}
-
-function saveNewShloka() {
-  const sanskrit = document.getElementById('addSanskrit').value.trim();
-  if (!sanskrit) return alert('Sanskrit shloka zaroori hai!');
-  state.shlokas.unshift({
-    id: 'c_' + Date.now(), prof: document.getElementById('addProf').value,
-    subject: document.getElementById('addSubject').value.trim() || 'Samhita',
-    publication: document.getElementById('addPub').value.trim() || 'Class Notes',
-    sanskrit, translit: window._tempTranslit || '',
-    breakdown: document.getElementById('addBreakdown').value.trim() || sanskrit,
-    hindi: document.getElementById('addHindi').value.trim() || 'हिंदी अर्थ',
-    english: document.getElementById('addEnglish').value.trim() || 'English meaning',
-    mastered: false, reps: 0
-  });
-  saveState(); populateSubjectDropdown(); populatePracticeDropdown(); closeModal('addShlokaModal'); renderAll();
-}
-
-// Practice & AI Pronunciation Evaluator
-let mediaRecorder = null, audioChunks = [], recordedBase64 = null, recordedMime = 'audio/webm', isRecording = false;
-
-function populatePracticeDropdown() {
-  document.getElementById('practiceShlokaSelect').innerHTML = state.shlokas.map(s => `<option value="${s.id}">P${s.prof} ${s.subject}: ${s.sanskrit.slice(0, 18)}...</option>`).join('');
-}
-
-function goToPractice(id) { switchTab('practice'); document.getElementById('practiceShlokaSelect').value = id; loadPracticeShloka(); }
-
-function loadPracticeShloka() {
-  const s = state.shlokas.find(i => i.id === document.getElementById('practiceShlokaSelect').value) || state.shlokas[0];
-  if (!s) return;
-  document.getElementById('pracSanskrit').textContent = s.sanskrit;
-  document.getElementById('pracBreakdown').textContent = s.breakdown;
-  document.getElementById('pracHindi').textContent = s.hindi;
-  document.getElementById('pracEnglish').textContent = s.english;
-  document.getElementById('audioPlaybackBox').classList.add('hidden');
-  document.getElementById('aiFeedbackBox').classList.add('hidden');
-}
-function speakPractice(lang, rate) { speakShlokaById(document.getElementById('practiceShlokaSelect').value, lang, rate); }
-
-async function toggleRecording() {
-  const btn = document.getElementById('recordBtn'), st = document.getElementById('recStatusText');
-  if (!isRecording) {
-    try {
-      const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
-      mediaRecorder = new MediaRecorder(stream); audioChunks = [];
-      mediaRecorder.ondataavailable = e => { if (e.data.size > 0) audioChunks.push(e.data); };
-      mediaRecorder.onstop = () => {
-        const blob = new Blob(audioChunks, { type: mediaRecorder.mimeType });
-        recordedMime = mediaRecorder.mimeType;
-        document.getElementById('userAudioPlayer').src = URL.createObjectURL(blob);
-        document.getElementById('audioPlaybackBox').classList.remove('hidden');
-        const r = new FileReader(); r.onloadend = () => { recordedBase64 = r.result.split(',')[1]; }; r.readAsDataURL(blob);
-      };
-      mediaRecorder.start(); isRecording = true; btn.classList.add('recording-pulse'); btn.textContent = '⏹️';
-      st.textContent = '🔴 Recording chal rahi hai... Shloka bolo!';
-    } catch (e) { alert('Browser settings mein Mic permission allow karo.'); }
-  } else {
-    mediaRecorder.stop(); isRecording = false; btn.classList.remove('recording-pulse'); btn.textContent = '🎙️';
-    st.textContent = '✅ Audio ready! Gemini AI se check karwao.';
+  
+  // Level 4: Shlokas List
+  const shlokas = state.shlokas.filter(x => x.prof===p.prof && x.subject===p.subject && x.chapter===p.chapter);
+  if(!shlokas.length) {
+    cnt.innerHTML = `
+      <div class="text-center py-10 space-y-4">
+        <p class="text-sm text-slate-400">No shlokas in this chapter yet.</p>
+        <button onclick="aiFetchChapter()" id="btnAiFetch" class="btn-primary flex items-center justify-center mx-auto gap-2">
+          ✨ Fetch Full Chapter via AI
+        </button>
+      </div>`;
+    return;
   }
-}
 
-async function evaluatePronunciationWithAI() {
-  if (!recordedBase64) return;
-  if (!state.apiKey) return openModal('apiModal');
-  const s = state.shlokas.find(i => i.id === document.getElementById('practiceShlokaSelect').value);
-  const btn = document.getElementById('evalAiBtn'); btn.textContent = '⏳ Gemini AI sun kar check kar raha hai...';
-  try {
-    const parsed = await callGeminiJSON([
-      { text: `Evaluate this BAMS student chanting: "${s.sanskrit}". Check Visarga (ः), Halant (्), Anuswar (ं), clarity in direct Hinglish. Return ONLY JSON: {"score": 88, "feedback": "crisp bullet points"}` },
-      { inline_data: { mime_type: recordedMime, data: recordedBase64 } }
-    ]);
-    document.getElementById('aiScoreBadge').textContent = `${parsed.score}%`;
-    document.getElementById('aiFeedbackText').textContent = parsed.feedback;
-    document.getElementById('aiFeedbackBox').classList.remove('hidden');
-    state.practiceLogs.unshift({ shloka: s.sanskrit.slice(0, 24) + '...', score: parsed.score, date: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }) });
-    saveState(); renderPracticeHistory(); renderHome();
-  } catch (e) { alert('AI check fail hua—API key check karo.'); } finally { btn.textContent = '✨ Check Pronunciation with Gemini AI'; }
-}
-
-function renderPracticeHistory() {
-  if (!state.practiceLogs.length) return;
-  document.getElementById('practiceHistoryList').innerHTML = state.practiceLogs.map(l => `
-    <div class="flex items-center justify-between bg-bg/80 px-3 py-2 rounded-xl">
-      <span class="font-devanagari text-gray-200">${l.shloka}</span>
-      <span class="font-bold ${l.score >= 80 ? 'text-emerald-400' : 'text-amber-400'}">${l.score}% • ${l.date}</span>
+  cnt.innerHTML = shlokas.map(s => `
+    <div class="clean-card p-4 space-y-3">
+      <div class="flex justify-between items-start">
+        <span class="text-[10px] text-emerald-400 font-bold bg-emerald-500/10 px-2 py-0.5 rounded">Ref: ${s.ref || 'Std Book'}</span>
+        <div class="flex gap-2">
+          <button onclick="editShloka('${s.id}')" class="text-xs text-amber-400">✏️</button>
+          <button onclick="delShloka('${s.id}')" class="text-xs text-red-400">🗑️</button>
+        </div>
+      </div>
+      <p class="font-devanagari text-lg font-bold text-amber-200 leading-relaxed">${s.sanskrit}</p>
+      <div class="bg-slate-900/50 p-2 rounded text-xs text-slate-300"><b>Breakdown:</b> ${s.breakdown}</div>
+      <p class="font-devanagari text-sm text-slate-200"><b>हिं:</b> ${s.hindi}</p>
+      <p class="text-sm text-slate-400"><b>EN:</b> ${s.english}</p>
+      <div class="flex justify-between text-[10px] text-slate-500 pt-2 border-t border-slate-700">
+        <span>Reads: ${s.reads||0}</span> <span>Chants: ${s.chants||0}</span>
+      </div>
     </div>`).join('');
 }
 
-// 5 Pillars Bare Minimum To-Do
-function renderTodos() {
-  const cfg = MODE_CONFIG[state.mode];
-  document.getElementById('modeGuidanceText').textContent = cfg.desc;
-  document.getElementById('pillarsContainer').innerHTML = cfg.pillars.map(p => {
-    const a = !!state.pillarChecks[`${p.id}_a`], b = !!state.pillarChecks[`${p.id}_b`];
-    return `
-      <div class="bg-bg/80 border ${a && b ? 'border-emerald-500/50' : 'border-gray-800'} rounded-2xl p-3.5 space-y-2">
-        <div class="flex items-center justify-between">
-          <h3 class="text-xs font-extrabold text-white">${p.title}</h3>
-          <span class="text-[10px] font-bold px-2 py-0.5 rounded-full ${a && b ? 'bg-emerald-500/20 text-emerald-300' : 'bg-gray-800 text-gray-400'}">${(a?1:0)+(b?1:0)}/2</span>
-        </div>
-        <div onclick="togglePillarCheck('${p.id}_a')" class="flex items-center justify-between gap-2 bg-card p-2.5 rounded-xl cursor-pointer">
-          <span class="text-xs ${a ? 'line-through text-gray-500' : 'text-gray-200'}"><b class="text-amber-400">A:</b> ${p.partA}</span>
-          <span class="px-2.5 py-1 rounded-lg text-[10px] font-extrabold ${a ? 'bg-emerald-500 text-black' : 'bg-gray-800 text-gray-400'}">${a ? 'YES' : 'NO'}</span>
-        </div>
-        <div onclick="togglePillarCheck('${p.id}_b')" class="flex items-center justify-between gap-2 bg-card p-2.5 rounded-xl cursor-pointer">
-          <span class="text-xs ${b ? 'line-through text-gray-500' : 'text-gray-200'}"><b class="text-indigo-400">B:</b> ${p.partB}</span>
-          <span class="px-2.5 py-1 rounded-lg text-[10px] font-extrabold ${b ? 'bg-emerald-500 text-black' : 'bg-gray-800 text-gray-400'}">${b ? 'YES' : 'NO'}</span>
-        </div>
-      </div>`;
-  }).join('');
-  renderCustomTasks();
+function goVault(pr, su, ch) { state.vaultPath = { prof: pr, subject: su, chapter: ch }; renderVault(); }
+
+function editShloka(id) {
+  const s = state.shlokas.find(i=>i.id===id);
+  if(!s) return;
+  document.getElementById('editId').value = s.id;
+  document.getElementById('editRef').value = s.ref || '';
+  document.getElementById('editSan').value = s.sanskrit;
+  document.getElementById('editBreak').value = s.breakdown;
+  document.getElementById('editHin').value = s.hindi;
+  document.getElementById('editEng').value = s.english;
+  openModal('editShlokaModal');
+}
+function saveShloka() {
+  const id = document.getElementById('editId').value;
+  const s = state.shlokas.find(i=>i.id===id);
+  s.ref = document.getElementById('editRef').value;
+  s.sanskrit = document.getElementById('editSan').value;
+  s.breakdown = document.getElementById('editBreak').value;
+  s.hindi = document.getElementById('editHin').value;
+  s.english = document.getElementById('editEng').value;
+  saveData(); closeModal('editShlokaModal'); renderVault();
+}
+function delShloka(id) { if(confirm('Delete?')){ state.shlokas = state.shlokas.filter(i=>i.id!==id); saveData(); renderVault(); } }
+      // AI CHAPTER FETCH LOGIC
+async function aiFetchChapter() {
+  if(!state.apiKey) return openModal('apiModal');
+  const btn = document.getElementById('btnAiFetch');
+  btn.textContent = '⏳ Fetching Chapter Data...';
+  const p = state.vaultPath;
+  const prompt = `You are a BAMS professor. Provide 5 most important exam shlokas for Prof "${p.prof}", Subject "${p.subject}", Chapter "${p.chapter}".
+Return ONLY a JSON array: [{"ref":"Page/Ref no as per standard book","sanskrit":"Devanagari","breakdown":"Hinglish Sandhi split","hindi":"Hindi meaning","english":"English meaning"}]`;
+  
+  try {
+    const res = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${state.apiKey}`, {
+      method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ contents: [{ parts: [{ text: prompt }] }] })
+    });
+    const data = await res.json();
+    const text = data.candidates[0].content.parts[0].text.replace(/```json|```/g, '').trim();
+    const arr = JSON.parse(text);
+    arr.forEach((a, i) => {
+      state.shlokas.push({
+        id: 'ai_' + Date.now() + i, prof: p.prof, subject: p.subject, chapter: p.chapter,
+        ref: a.ref, sanskrit: a.sanskrit, breakdown: a.breakdown, hindi: a.hindi, english: a.english,
+        reads: 0, chants: 0
+      });
+    });
+    saveData(); renderVault();
+  } catch(e) { alert('Fetch failed. Check API key or Internet.'); btn.textContent = '✨ Fetch Full Chapter via AI'; }
 }
 
-function togglePillarCheck(k) { state.pillarChecks[k] = !state.pillarChecks[k]; saveState(); renderTodos(); renderHome(); }
-function resetTodayTodos() { state.pillarChecks = {}; saveState(); renderTodos(); renderHome(); }
-function addCustomTask() {
-  const inp = document.getElementById('newTaskInput'), t = inp.value.trim();
-  if (!t) return;
-  state.customTasks.unshift({ id: Date.now(), text: t, done: false }); inp.value = ''; saveState(); renderCustomTasks();
-}
-function toggleCustomTask(id) { const t = state.customTasks.find(i => i.id === id); if (t) { t.done = !t.done; saveState(); renderCustomTasks(); } }
-function deleteCustomTask(id) { state.customTasks = state.customTasks.filter(i => i.id !== id); saveState(); renderCustomTasks(); }
-function renderCustomTasks() {
-  document.getElementById('customTasksList').innerHTML = state.customTasks.length ? state.customTasks.map(t => `
-    <div class="flex items-center justify-between bg-bg/80 px-3 py-2.5 rounded-xl text-xs">
-      <div onclick="toggleCustomTask(${t.id})" class="flex items-center gap-2 cursor-pointer flex-1">
-        <span class="w-4 h-4 rounded flex items-center justify-center font-bold ${t.done ? 'bg-emerald-500 text-black' : 'border border-gray-600'}">${t.done ? '✓' : ''}</span>
-        <span class="${t.done ? 'line-through text-gray-500' : 'text-gray-200'}">${t.text}</span>
-      </div>
-      <button onclick="deleteCustomTask(${t.id})" class="text-gray-500 hover:text-red-400 ml-2">✕</button>
-    </div>`).join('') : '<p class="text-xs text-gray-500">Koi extra task nahi hai.</p>';
+// PRACTICE LAB LOGIC
+let pracList = [], pracIdx = 0;
+let mediaRec = null, audioChunks = [], recBase64 = null, recMime = '';
+
+function initPractice() {
+  pracList = state.shlokas;
+  const sel = document.getElementById('pracShlokaSelect');
+  if(!pracList.length) { sel.innerHTML = '<option>Vault is empty. Fetch shlokas first.</option>'; return; }
+  
+  sel.innerHTML = pracList.map((s,i) => `<option value="${i}">${s.chapter}: ${s.sanskrit.substring(0,15)}...</option>`).join('');
+  pracIdx = 0; sel.value = 0; loadPracShloka();
 }
 
-function renderAll() { renderHome(); renderShlokas(); loadPracticeShloka(); renderPracticeHistory(); renderTodos(); }
+function loadPracShloka() {
+  pracIdx = parseInt(document.getElementById('pracShlokaSelect').value);
+  const s = pracList[pracIdx];
+  if(!s) return;
+  document.getElementById('pracSan').textContent = s.sanskrit;
+  document.getElementById('pracBreak').textContent = s.breakdown;
+  s.reads = (s.reads || 0) + 1; saveData();
+  resetRecorderUI();
+}
+
+function nextShloka() {
+  if(pracIdx < pracList.length - 1) pracIdx++; else pracIdx = 0;
+  document.getElementById('pracShlokaSelect').value = pracIdx;
+  loadPracShloka();
+}
+
+function showMeaningAlert() {
+  const s = pracList[pracIdx];
+  alert(`HINDI:\n${s.hindi}\n\nENGLISH:\n${s.english}`);
+}
+
+function speakSanskrit() {
+  if(!('speechSynthesis' in window)) return alert('TTS not supported.');
+  const s = pracList[pracIdx];
+  const utter = new SpeechSynthesisUtterance(s.sanskrit);
+  utter.lang = 'hi-IN'; utter.rate = 0.8; utter.pitch = 0.95;
+  window.speechSynthesis.speak(utter);
+}
+
+// RECORDER LOGIC (Retry, AI Check)
+async function toggleRecord() {
+  if(mediaRec && mediaRec.state === 'recording') {
+    mediaRec.stop();
+    document.getElementById('btnRecord').classList.remove('animate-pulse', 'bg-rose-600');
+    document.getElementById('recStatus').textContent = 'Recording stopped. Play or Check AI.';
+    document.getElementById('postRecActions').classList.remove('hidden');
+    document.getElementById('btnRecord').classList.add('hidden');
+    return;
+  }
+  try {
+    const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+    mediaRec = new MediaRecorder(stream); audioChunks = [];
+    mediaRec.ondataavailable = e => { if(e.data.size > 0) audioChunks.push(e.data); };
+    mediaRec.onstop = () => {
+      const blob = new Blob(audioChunks, { type: mediaRec.mimeType });
+      recMime = mediaRec.mimeType;
+      document.getElementById('audioPlayer').src = URL.createObjectURL(blob);
+      const r = new FileReader(); r.onloadend = () => { recBase64 = r.result.split(',')[1]; }; r.readAsDataURL(blob);
+    };
+    mediaRec.start();
+    document.getElementById('btnRecord').classList.add('animate-pulse', 'bg-rose-600');
+    document.getElementById('recStatus').textContent = '🔴 Listening... Tap to stop.';
+  } catch(e) { alert('Mic permission required.'); }
+}
+
+function retryRecord() { resetRecorderUI(); }
+
+function resetRecorderUI() {
+  if(mediaRec && mediaRec.state === 'recording') mediaRec.stop();
+  document.getElementById('btnRecord').classList.remove('hidden', 'animate-pulse', 'bg-rose-600');
+  document.getElementById('postRecActions').classList.add('hidden');
+  document.getElementById('aiFeedback').classList.add('hidden');
+  document.getElementById('recStatus').textContent = 'Tap to chant. Read clearly.';
+  recBase64 = null;
+}
+
+async function checkWithAI() {
+  if(!recBase64) return;
+  if(!state.apiKey) return openModal('apiModal');
+  const s = pracList[pracIdx];
+  const btn = document.getElementById('btnCheckAi'); btn.textContent = '⏳ Evaluating...';
+  
+  try {
+    const res = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${state.apiKey}`, {
+      method: 'POST', headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ contents: [{ parts: [
+        { text: `Grade Sanskrit chant against: "${s.sanskrit}". Focus on Visarga and Halant. Return JSON: {"score": 85, "comment": "short feedback"}` },
+        { inline_data: { mime_type: recMime, data: recBase64 } }
+      ]}]})
+    });
+    const d = await res.json();
+    const p = JSON.parse(d.candidates[0].content.parts[0].text.replace(/```json|```/g, '').trim());
+    document.getElementById('aiScore').textContent = p.score + '%';
+    document.getElementById('aiComment').textContent = p.comment;
+    document.getElementById('aiFeedback').classList.remove('hidden');
+    
+    s.chants = (s.chants || 0) + 1; saveData(); // Increment chant count
+  } catch(e) { alert('AI Check failed.'); } finally { btn.textContent = '✨ Evaluate AI'; }
+}
+
+// START
 initApp();
 </script>
 </body>
 </html>
-<!-- ==================== VAIDYAOS V4.0 NCISM SYLLABUS & SOFT VOICE UPGRADE ==================== -->
-<style>
-  body { font-size: 16px !important; line-height: 1.65 !important; }
-  .font-devanagari { font-size: 1.2rem !important; line-height: 1.9 !important; }
-  .glass-card {
-    background: linear-gradient(160deg, #141e33 0%, #0b111e 100%) !important;
-    border: 1.5px solid rgba(255, 255, 255, 0.12) !important;
-    box-shadow: 0 12px 28px -6px rgba(0, 0, 0, 0.55) !important;
-  }
-  select, input, textarea { font-size: 14px !important; }
-</style>
-
-<script>
-// ==================== 1. NCISM OFFICIAL SYLLABUS TREE (YEAR -> SUBJECT -> CHAPTER -> TOPIC) ====================
-const NCISM_TREE = {
-  "1": {
-    "Padartha Vijnanam (AyUG-PV)": {
-      "Paper I - Part A (Basic Principles & Dravya)": [
-        "1.1 Ayurveda Nirupana (Lakshana of Ayu & Siddhanta)",
-        "1.2 Padartha & Darshana Nirupana (6 Padartha & 9 Darshana)",
-        "1.3 Dravya Vijnaneeyam (Panchamahabhuta, Kala, Dik, Atma, Manas)"
-      ],
-      "Paper I - Part B (Guna, Karma, Samanya-Vishesha)": [
-        "1.4 Guna Vijnaneeyam (41 Gunas: Gurvadi, Paradi, Adhyatma)",
-        "1.5 Karma, Samanya & Vishesha Vijnaneeyam",
-        "1.6 Samavaya & Abhava Vijnaneeyam"
-      ],
-      "Paper II - Part A (Pramana & Karya-Karana)": [
-        "2.1 Pariksha & Aptopadesha Pramana",
-        "2.2 Pratyaksha & Anumana Pramana",
-        "2.3 Yukti, Upamana & Karya-Karana Siddhanta"
-      ]
-    },
-    "Samskritam & Itihas (AyUG-SN & AI)": {
-      "Paper I - Sanskrit Vyakarana": [
-        "1.1 Varna, Uccharana Sthana & Sangya Prakaranam",
-        "1.2 Sandhi Prakaranam (Svara, Vyanjana, Visarga)",
-        "1.3 Samasa, Karaka, Shabdarupa & Dhaturupa"
-      ],
-      "Paper II - Part A (Samhita Anvaya & Nirukti)": [
-        "2.1 Nirukti & Paryaya Padani (Ayu, Dosha, Dhatu, Mala)",
-        "2.2 Paribhasha Padani (Ama, Shatkriyakala, Pathya-Apathya)",
-        "2.3 Ashtanga Hridaya Sutrasthana (Anvayalekhanam)",
-        "2.4 Vaidyakiya Subhashita Sahityam (Ch 1-20)"
-      ],
-      "Paper II - Part B (Ayurved Itihas)": [
-        "2.5 Samhita, Sangraha Kala & Modern Acharyas"
-      ]
-    },
-    "Kriya Sharira (AyUG-KS)": {
-      "Paper I - Part A (Dosha, Prakriti, Agni, Ahara)": [
-        "1.1 Sharir & Basic Principles (Dosha-Dhatu-Mala Mulam)",
-        "1.2 Tridosha & Biological Rhythms (Ritu-Day-Night-Age)",
-        "1.3 Vata Dosha & 5 Subtypes (Prana-Udana-Samana-Vyana-Apana)",
-        "1.4 Pitta & Kapha Dosha (5 Subtypes Each)",
-        "1.5 Dosha Vriddhi-Kshaya & Shatkriyakala",
-        "1.6 Prakriti (Deha & Manasa Prakriti)",
-        "1.7 Ahara, Agni & Aharapaka (Avasthapaka & Koshtha)"
-      ],
-      "Paper II - Part A (Sapta Dhatu, Ojas, Mala)": [
-        "2.1 Dhatuposhana Nyaya, Rasa & Rakta Dhatu",
-        "2.2 Mamsa, Meda, Asthi, Majja & Shukra Dhatu",
-        "2.3 Ashraya-Ashrayi Bhava, Ojas & Vyadhikshamatva",
-        "2.4 Upadhatu, Trimala, Indriya, Manas & Nidra"
-      ]
-    },
-    "Rachana Sharira (AyUG-RS)": {
-      "Paper I - Part A (Ayurvedic Anatomy)": [
-        "1.1 Shariropakramaniya & Paribhasha Sharira",
-        "1.2 Garbha Sharira (Shukra-Artava & Masanumasika Vriddhi)",
-        "1.3 Asthi, Sandhi, Snayu & Peshi Sharira"
-      ],
-      "Paper II - Part A (Srotas, Kala, Marma)": [
-        "2.1 Pramana, Koshtha & Ashaya Sharira",
-        "2.2 Sira, Dhamani & Srotas Sharira",
-        "2.3 Kalaa, Indriya & Twacha Sharira",
-        "2.4 Marma Sharira (107 Marmas & Trimarma)"
-      ]
-    },
-    "Samhita Adhyayan (Ashtanga & Charaka)": {
-      "Ashtanga Hridaya Sutrasthana (Ch 1-15)": [
-        "Ch 1: Ayushkamiya Adhyaya",
-        "Ch 2: Dinacharya Adhyaya",
-        "Ch 3: Ritucharya Adhyaya",
-        "Ch 4: Roganutpadaniya Adhyaya",
-        "Ch 11-14: Doshadi, Doshabhediya & Upakramaniya"
-      ],
-      "Charaka Samhita Sutrasthana (Ch 1-12)": [
-        "Ch 1: Dirghanjivitiya Adhyaya",
-        "Ch 5-6: Matrashitiya & Tasyashitiya"
-      ]
-    }
-  },
-  "2": {
-    "Dravyaguna Vigyan (AyUG-DG)": {
-      "Paper I - Padartha & Rasa Panchaka": ["Rasa, Guna, Virya, Vipaka & Prabhava", "Mishraka Gana & Karma"],
-      "Paper II - Medicinal Plants": ["Shodhana & Nighantu Shlokas"]
-    },
-    "Rasashastra & Bhaishajya Kalpana": {
-      "Paper I & II": ["Panchavidha Kashaya Kalpana", "Parada & Maharasa Shodhana"]
-    },
-    "Roga Nidan & Vikriti Vigyan": {
-      "Paper I & II": ["Nidana Panchaka", "Srotodushti & Vyadhi Samprapti"]
-    },
-    "Swasthavritta & Yoga": {
-      "Paper I & II": ["Trayopastambha & Dinacharya", "Ashtanga Yoga & Naturopathy"]
-    },
-    "Agadtantra & Vidhi Vaidyaka": {
-      "Paper I": ["Visha Lakshana & Chikitsa"]
-    }
-  },
-  "3": {
-    "Kayachikitsa": {
-      "Paper I & II": ["Chikitsa Chatushpada", "Jwara, Raktapitta & Prameha Chikitsa"]
-    },
-    "Shalya Tantra": {
-      "Paper I & II": ["Shalya & Vaidya Guna", "Vrana & Ashtavidha Shastrakarma"]
-    },
-    "Shalakya Tantra": {
-      "Paper I & II": ["Netra, Karna, Nasa & Mukha Roga"]
-    },
-    "Prasuti Tantra & Stri Roga": {
-      "Paper I & II": ["Garbhini Paricharya", "Sutika & Yonivyapad"]
-    },
-    "Kaumarabhritya": {
-      "Paper I": ["Navajata Shishu & Swarnaprashana"]
-    },
-    "Panchakarma": {
-      "Paper I": ["Shodhana vs Shamana", "Vamana, Virechana & Basti"]
-    }
-  }
-};
-
-// ==================== 2. NCISM TOPIC-TAGGED MASTER SHLOKA BANK ====================
-const NCISM_SHLOKAS_BANK = [
-  {
-    id: "nc_pv_1", prof: "1", subject: "Padartha Vijnanam (AyUG-PV)",
-    chapter: "Paper I - Part A (Basic Principles & Dravya)",
-    topic: "1.1 Ayurveda Nirupana (Lakshana of Ayu & Siddhanta)",
-    publication: "Chaukhamba (Charaka Sutrasthana 1/42)",
-    sanskrit: "शरीरेन्द्रियसत्त्वात्मसंयोगो धारि जीवितम्। नित्यगश्चानुबन्धश्च पर्यायैरायुरुच्यते॥",
-    translit: "Śarīrendriyasattvātmasaṁyogo dhāri jīvitam | Nityagaścānubandhaśca paryāyairāyurucyate ||",
-    breakdown: "शरीर-इन्द्रिय-सत्त्व-आत्म-संयोगः [Body, Senses, Mind aur Soul ka union] + धारि [sharir ko dharan karne wala] + जीवितम् + नित्यगः + अनुबन्धः = Ayu ke 4 paryay",
-    hindi: "शरीर, इन्द्रिय, मन (सत्त्व) और आत्मा के संयोग को 'आयु' कहते हैं। धारि, जीवित, नित्यग और अनुबन्ध—ये आयु के चार पर्यायवाची नाम हैं।",
-    english: "Ayu (life) is the continuous union of Body (Sharira), Senses (Indriya), Mind (Sattva), and Soul (Atma). Its four synonyms are Dhari, Jivita, Nityaga, and Anubandha.",
-    mastered: false, reps: 0
-  },
-  {
-    id: "nc_pv_2", prof: "1", subject: "Padartha Vijnanam (AyUG-PV)",
-    chapter: "Paper II - Part A (Pramana & Karya-Karana)",
-    topic: "2.1 Pariksha & Aptopadesha Pramana",
-    publication: "Chaukhamba (Charaka Sutrasthana 11/17)",
-    sanskrit: "द्विविधमेव खलु सर्वं सच्चासच्च; तस्य चतुर्विधा परीक्षा—आप्तोपदेशः, प्रत्यक्षम्, अनुमानं, युक्तिश्चेति॥",
-    translit: "Dvividhaṁeva khalu sarvaṁ saccāsacca; tasya caturvidhā parīkṣā—āptopadeśaḥ, pratyakṣam, anumānaṁ, yuktiśceti ||",
-    breakdown: "सत् च असत् च [Satya aur Asatya] + चतुर्विधा परीक्षा [4 diagnostic methods] = आप्तोपदेशः [Authoritative text], प्रत्यक्षम् [Direct perception], अनुमानम् [Inference], युक्तिः [Clinical reasoning]",
-    hindi: "संसार में सब कुछ दो प्रकार का है—सत् (सत्य) और असत् (असत्य)। उसकी परीक्षा के चार प्रमाण हैं—आप्तोपदेश, प्रत्यक्ष, अनुमान और युक्ति।",
-    english: "Everything in existence is twofold: Sat (true/real) and Asat (untrue/unreal). Its examination is fourfold: Aptopadesha (scriptural authority), Pratyaksha (direct observation), Anumana (inference), and Yukti (rational logic).",
-    mastered: false, reps: 0
-  },
-  {
-    id: "nc_sn_1", prof: "1", subject: "Samskritam & Itihas (AyUG-SN & AI)",
-    chapter: "Paper II - Part A (Samhita Anvaya & Nirukti)",
-    topic: "2.4 Vaidyakiya Subhashita Sahityam (Ch 1-20)",
-    publication: "Chaukhamba (Dr. B.G. Ghanekar)",
-    sanskrit: "वैद्यराज नमस्तुभ्यं यमराजसहोदर। यमस्तु हरति प्राणान् वैद्यः प्राणान् धनानि च॥",
-    translit: "Vaidyarāja namastubhyaṁ yamarājasahodara | Yamastu harati prāṇān vaidyaḥ prāṇān dhanāni ca ||",
-    breakdown: "वैद्यराज [O King of Doctors] + यमराज-सहोदर [Yamaraj ke sage bhai] + यमः तु हरति प्राणान् [Yam sirf pran leta hai] + वैद्यः प्राणान् धनानि च [Vaidya pran aur paisa dono!]",
-    hindi: "हे यमराज के सगे भाई वैद्यराज, तुम्हें नमस्कार है! यमराज तो केवल प्राण हरते हैं, परन्तु (कुवैद्य/लालची) वैद्य प्राण और धन दोनों हर लेता है।",
-    english: "O King of Physicians, brother of Yamaraja, salutations to you! Yama takes away only life, whereas an unskilled/greedy physician takes away both life and wealth.",
-    mastered: false, reps: 0
-  },
-  {
-    id: "nc_ks_1", prof: "1", subject: "Kriya Sharira (AyUG-KS)",
-    chapter: "Paper I - Part A (Dosha, Prakriti, Agni, Ahara)",
-    topic: "1.1 Sharir & Basic Principles (Dosha-Dhatu-Mala Mulam)",
-    publication: "Sushruta Samhita Sutrasthana 15/3",
-    sanskrit: "दोषधातुमलमूलं हि शरीरम्। तस्मादेतेषां सदा प्रकृत्यानुवर्तनं कर्तव्यम्॥",
-    translit: "Doṣadhātumalamūlaṁ hi śarīram | Tasmādeteṣāṁ sadā prakṛtyānuvartanaṁ kartavyam ||",
-    breakdown: "दोष [Vata-Pitta-Kapha] + धातु [7 Tissues] + मल [Purisha-Mutra-Sveda] + मूलम् हि शरीरम् [sharir ki jad/foundation hain]",
-    hindi: "दोष, धातु और मल ही इस शरीर के मूल (आधार) हैं, इसलिए इनका सदैव प्राकृत (संतुलित) अवस्था में पालन करना चाहिए।",
-    english: "Doshas, Dhatus, and Malas are the very roots (structural & functional foundation) of the human body; therefore, maintaining their equilibrium is essential.",
-    mastered: false, reps: 0
-  },
-  {
-    id: "nc_ks_2", prof: "1", subject: "Kriya Sharira (AyUG-KS)",
-    chapter: "Paper I - Part A (Dosha, Prakriti, Agni, Ahara)",
-    topic: "1.3 Vata Dosha & 5 Subtypes (Prana-Udana-Samana-Vyana-Apana)",
-    publication: "Ashtanga Hridaya Sutrasthana 1/11",
-    sanskrit: "तत्र रूक्षो लघुः शीतः खरः सूक्ष्मश्चलोऽनिलः।",
-    translit: "Tatra rūkṣo laghuḥ śītaḥ kharaḥ sūkṣmaścalo'nilaḥ |",
-    breakdown: "रूक्षः [Dry] + लघुः [Light] + शीतः [Cold] + खरः [Rough] + सूक्ष्मः [Subtle/Minute] + चलः [Mobile] + अनिलः [Vata Dosha ke 6 Gunas]",
-    hindi: "उन तीनों दोषों में वायु (वात) के छह गुण होते हैं—रूक्ष (सूखा), लघु (हल्का), शीत (ठंडा), खर (खुरदरा), सूक्ष्म और चल (गतिशील)।",
-    english: "Among the Doshas, Vata possesses six primary attributes: Ruksha (dry), Laghu (light), Shita (cold), Khara (rough), Sukshma (subtle), and Chala (mobile).",
-    mastered: false, reps: 0
-  },
-  {
-    id: "nc_ks_3", prof: "1", subject: "Kriya Sharira (AyUG-KS)",
-    chapter: "Paper I - Part A (Dosha, Prakriti, Agni, Ahara)",
-    topic: "1.5 Dosha Vriddhi-Kshaya & Shatkriyakala",
-    publication: "Sushruta Sutrasthana 21/36",
-    sanskrit: "सञ्चयं च प्रकोपं च प्रसरं स्थानसंश्रयम्। व्यक्तिं भेदं च यो वेत्ति दोषाणां स भवेद्भिषक्॥",
-    translit: "Sañcayaṁ ca prakopaṁ ca prasaraṁ sthānasaṁśrayam | Vyaktiṁ bhedaṁ ca yo vetti doṣāṇāṁ sa bhavedbhiṣak ||",
-    breakdown: "सञ्चय [Accumulation] + प्रकोप [Aggravation] + प्रसर [Spread] + स्थानसंश्रय [Localization] + व्यक्ति [Manifestation] + भेद [Complication] = 6 Shatkriyakala",
-    hindi: "जो वैद्य दोषों के संचय, प्रकोप, प्रसर, स्थानसंश्रय, व्यक्ति और भेद—इन छह क्रियाकालों को जानता है, वही सच्चा चिकित्सक कहलाने योग्य है।",
-    english: "Only that physician who understands the six stages of disease pathogenesis (Shatkriyakala)—Sanchaya, Prakopa, Prasara, Sthanasamshraya, Vyakti, and Bheda—truly deserves to be called a doctor.",
-    mastered: false, reps: 0
-  },
-  {
-    id: "nc_rs_1", prof: "1", subject: "Rachana Sharira (AyUG-RS)",
-    chapter: "Paper I - Part A (Ayurvedic Anatomy)",
-    topic: "1.1 Shariropakramaniya & Paribhasha Sharira",
-    publication: "Sushruta Sharirasthana 4/3",
-    sanskrit: "तत्र षडङ्गं शरीरम्—शाखाश्चतस्रो, मध्यं पञ्चमं, षष्ठं शिर इति॥",
-    translit: "Tatra ṣaḍaṅgaṁ śarīram—śākhāścatastro, madhyaṁ pañcamaṁ, ṣaṣṭhaṁ śira iti ||",
-    breakdown: "षडङ्गं शरीरम् [6 anatomical regions] = शाखाः चतस्रः [4 Limbs: 2 arms + 2 legs] + मध्यं पञ्चमम् [5th Trunk/Antaradhi] + षष्ठं शिरः [6th Head & Neck]",
-    hindi: "शरीर के छह मुख्य अंग (षडंग) होते हैं—चार शाखाएं (दो हाथ और दो पैर), पाँचवाँ मध्य भाग (धड़) और छठा शिर (सिर एवं ग्रीवा)।",
-    english: "The human body is divided into six primary anatomical regions (Shadanga): the four extremities (two upper and two lower limbs), the fifth trunk (Madhya), and the sixth head-neck region (Shiras).",
-    mastered: false, reps: 0
-  },
-  {
-    id: "nc_rs_2", prof: "1", subject: "Rachana Sharira (AyUG-RS)",
-    chapter: "Paper II - Part A (Srotas, Kala, Marma)",
-    topic: "2.4 Marma Sharira (107 Marmas & Trimarma)",
-    publication: "Sushruta Sharirasthana 6/3",
-    sanskrit: "सप्तोत्तरं मर्मशतम्। तानि मर्माणि पञ्चात्मकानि भवन्ति—मांसमर्माणि, सिरामर्माणि, स्नायुमर्माणि, अस्थिमर्माणि, सन्धिमर्माणि चेति॥",
-    translit: "Saptottaraṁ marmaśatam | Tāni marmāṇi pañcātmakāni bhavanti—māṁsamarmāṇi, sirāmarmāṇi, snāyumarmāṇi, asthimarmāṇi, sandhimarmāṇi ceti ||",
-    breakdown: "सप्तोत्तरं मर्मशतम् [100 + 7 = 107 Marmas] | 5 Rachana types = मांस [11], सिरा [41], स्नायु [27], अस्थि [8], सन्धि [20]",
-    hindi: "शरीर में कुल १०७ मर्म स्थान होते हैं। रचना के अनुसार ये पाँच प्रकार के हैं—मांस मर्म, सिरा मर्म, स्नायु मर्म, अस्थि मर्म और संधि मर्म।",
-    english: "There are 107 vital points (Marmas) in the body, classified structurally into five types: Mamsa (muscular), Sira (vascular), Snayu (ligamentous), Asthi (osseous), and Sandhi (articular) Marmas.",
-    mastered: false, reps: 0
-  }
-];
-    </script>
-    <!-- SOFT VOICE STUDIO BAR (FLOATING PILL ABOVE BOTTOM NAV) -->
-<div id="softVoiceBar" class="fixed bottom-[64px] inset-x-0 z-30 px-3 pointer-events-none">
-  <div class="max-w-2xl mx-auto pointer-events-auto bg-[#0e1628]/95 backdrop-blur-md border border-emerald-500/30 rounded-2xl px-3 py-2 flex items-center justify-between gap-2 shadow-2xl">
-    <div class="flex items-center gap-1.5">
-      <span class="text-sm">🌸</span>
-      <select id="voiceSpeedMode" onchange="updateSoftVoiceSettings()" class="bg-bg border border-gray-700 text-xs font-bold text-emerald-300 rounded-lg px-2 py-1">
-        <option value="soft">Soft Chant (0.82x)</option>
-        <option value="slow">Syllable Slow (0.62x)</option>
-        <option value="normal">Normal (1.0x)</option>
-      </select>
-    </div>
-    <select id="voiceProfileSelect" onchange="savePreferredVoice()" class="bg-bg border border-gray-700 text-xs text-gray-200 rounded-lg px-2 py-1 max-w-[135px] truncate">
-      <option value="">Auto Soft Voice</option>
-    </select>
-    <div class="flex items-center gap-1.5">
-      <button id="loopChantBtn" onclick="toggleChantLoop()" class="bg-gray-800 text-gray-300 text-xs font-bold px-2.5 py-1 rounded-lg border border-gray-700" title="Repeat Shloka">🔁 Off</button>
-      <button onclick="stopSpeaking()" class="bg-red-500/20 text-red-300 text-xs font-bold px-2 py-1 rounded-lg">⏹️</button>
-    </div>
-  </div>
-</div>
-
-<!-- UNIVERSAL EDIT / ADD SHLOKA MODAL (WITH NCISM 4-LEVEL TAGS) -->
-<div id="ncismShlokaModal" class="hidden fixed inset-0 z-50 bg-black/85 backdrop-blur-sm flex items-end sm:items-center justify-center p-3">
-  <div class="bg-card border border-gray-700 rounded-3xl w-full max-w-lg max-h-[90vh] overflow-y-auto p-5 space-y-3">
-    <div class="flex items-center justify-between border-b border-gray-800 pb-2.5">
-      <h3 class="text-base font-extrabold text-white" id="ncModalTitle">✏️ Edit / Add NCISM Shloka</h3>
-      <button onclick="closeModal('ncismShlokaModal')" class="text-gray-400 hover:text-white text-lg font-bold">✕</button>
-    </div>
-    <input type="hidden" id="ncEditId" />
-
-    <!-- Photo & Voice Quick Fill (Visible when adding new) -->
-    <div id="ncQuickAiBox" class="grid grid-cols-2 gap-2">
-      <label class="bg-amber-500/20 border border-amber-500/40 text-amber-300 text-xs font-bold py-2.5 px-3 rounded-xl text-center cursor-pointer">
-        📷 Scan Photo
-        <input type="file" accept="image/*" capture="environment" onchange="ncScanPhoto(event)" class="hidden" />
-      </label>
-      <button type="button" onclick="ncVoiceFill()" id="ncVoiceBtn" class="bg-emerald-500/20 border border-emerald-500/40 text-emerald-300 text-xs font-bold py-2.5 px-3 rounded-xl">
-        🎙️ Bol Kar Bharo
-      </button>
-    </div>
-    <div id="ncAiStatus" class="hidden text-xs text-amber-300 font-bold animate-pulse">⏳ AI shloka aur NCISM topic set kar raha hai...</div>
-
-    <div class="grid grid-cols-2 gap-2">
-      <div>
-        <label class="text-[11px] text-gray-400">1. Prof Year</label>
-        <select id="ncProf" onchange="syncModalDropdowns()" class="w-full bg-bg border border-gray-700 rounded-xl p-2 text-white">
-          <option value="1">1st Prof (NCISM)</option>
-          <option value="2">2nd Prof</option>
-          <option value="3">3rd / Final Prof</option>
-        </select>
-      </div>
-      <div>
-        <label class="text-[11px] text-gray-400">2. Subject</label>
-        <input type="text" id="ncSubject" list="ncSubjectList" placeholder="Subject..." class="w-full bg-bg border border-gray-700 rounded-xl p-2 text-white" />
-        <datalist id="ncSubjectList"></datalist>
-      </div>
-    </div>
-
-    <div class="grid grid-cols-2 gap-2">
-      <div>
-        <label class="text-[11px] text-gray-400">3. Paper / Chapter</label>
-        <input type="text" id="ncChapter" placeholder="e.g., Paper I - Part A" class="w-full bg-bg border border-gray-700 rounded-xl p-2 text-white" />
-      </div>
-      <div>
-        <label class="text-[11px] text-gray-400">4. Sub-Subject / Topic</label>
-        <input type="text" id="ncTopic" placeholder="e.g., 1.3 Vata Dosha" class="w-full bg-bg border border-gray-700 rounded-xl p-2 text-white" />
-      </div>
-    </div>
-
-    <input type="text" id="ncPub" placeholder="Book / Commentary (e.g., Chaukhamba / Brahmanand Tripathi)" class="w-full bg-bg border border-gray-700 rounded-xl p-2 text-white" />
-    <textarea id="ncSanskrit" rows="2" placeholder="संस्कृत श्लोक (Devanagari)..." class="w-full bg-bg border border-gray-700 rounded-xl p-2.5 text-white font-devanagari"></textarea>
-    <textarea id="ncBreakdown" rows="2" placeholder="Sandhi, Visarga (ः), Halant (्) & Matra Breakdown..." class="w-full bg-bg border border-gray-700 rounded-xl p-2 text-white"></textarea>
-    <textarea id="ncHindi" rows="2" placeholder="हिंदी भावार्थ (Hindi Meaning)..." class="w-full bg-bg border border-gray-700 rounded-xl p-2 text-white font-devanagari"></textarea>
-    <textarea id="ncEnglish" rows="2" placeholder="English Clinical & Exam Meaning..." class="w-full bg-bg border border-gray-700 rounded-xl p-2 text-white"></textarea>
-
-    <div class="flex gap-2">
-      <button type="button" onclick="ncAiCompleteCurrent()" class="bg-indigo-600 text-white font-bold text-xs px-3.5 py-3 rounded-xl">✨ AI Auto-Fill</button>
-      <button type="button" onclick="saveNcismShloka()" class="flex-1 bg-emerald-500 text-black font-extrabold py-3 rounded-xl text-sm">💾 Save Shloka</button>
-    </div>
-  </div>
-</div>
-
-<!-- AI LOAD FULL NCISM TOPIC MODAL -->
-<div id="aiTopicModal" class="hidden fixed inset-0 z-50 bg-black/85 backdrop-blur-sm flex items-center justify-center p-4">
-  <div class="bg-card border border-amber-500/40 rounded-3xl w-full max-w-md p-5 space-y-3.5">
-    <div class="flex items-center justify-between">
-      <h3 class="text-base font-extrabold text-amber-300">📚 AI NCISM Topic Shloka Loader</h3>
-      <button onclick="closeModal('aiTopicModal')" class="text-gray-400 hover:text-white font-bold">✕</button>
-    </div>
-    <p class="text-xs text-gray-300">NCISM syllabus ka Year, Subject, Chapter aur Topic select karo—AI us topic ke <b>saare standard shlokas</b> (Sanskrit + Matra Breakdown + Hindi + English) Vault mein bhar dega!</p>
-    <select id="loadProf" onchange="populateLoadModalSubjects()" class="w-full bg-bg border border-gray-700 rounded-xl p-2.5 text-white">
-      <option value="1">1st Prof (NCISM Syllabus)</option>
-      <option value="2">2nd Prof</option>
-      <option value="3">3rd / Final Prof</option>
-    </select>
-    <select id="loadSubject" onchange="populateLoadModalChapters()" class="w-full bg-bg border border-gray-700 rounded-xl p-2.5 text-white"></select>
-    <select id="loadChapter" onchange="populateLoadModalTopics()" class="w-full bg-bg border border-gray-700 rounded-xl p-2.5 text-white"></select>
-    <input type="text" id="loadTopicInput" list="loadTopicList" placeholder="Select or type Topic..." class="w-full bg-bg border border-gray-700 rounded-xl p-2.5 text-white" />
-    <datalist id="loadTopicList"></datalist>
-    <div id="aiTopicStatus" class="hidden text-xs text-emerald-400 font-bold animate-pulse">⏳ AI NCISM syllabus ke saare shlokas nikal raha hai...</div>
-    <button onclick="executeAiTopicLoad()" class="w-full bg-gradient-to-r from-amber-500 to-orange-500 text-black font-extrabold py-3 rounded-xl text-sm shadow-lg">✨ Load All Shlokas of This Topic</button>
-  </div>
-</div>
-<script>
-// ==================== 3. SOFT & CALM VOICE ENGINE ====================
-let voiceSettings = { mode: 'soft', voiceURI: '', loop: false };
-let lastSpokenArgs = null;
-
-function loadAvailableVoices() {
-  if (!('speechSynthesis' in window)) return;
-  const voices = window.speechSynthesis.getVoices();
-  if (!voices.length) return;
-
-  const sel = document.getElementById('voiceProfileSelect');
-  // Prioritize soft Indian / Hindi / Female / Natural voices
-  const sorted = [...voices].sort((a, b) => {
-    const score = v => {
-      let s = 0;
-      if (v.lang.includes('hi') || v.lang.includes('sa') || v.lang.includes('IN')) s += 10;
-      if (/google|swara|lekha|natural|female|heera|kalpana/i.test(v.name)) s += 5;
-      return s;
-    };
-    return score(b) - score(a);
-  });
-
-  sel.innerHTML = '<option value="">🌸 Auto Soft Voice</option>' +
-    sorted.slice(0, 12).map(v => `<option value="${v.voiceURI}">${v.name.replace('Microsoft ', '').replace('Google ', '')} (${v.lang})</option>`).join('');
-
-  if (voiceSettings.voiceURI) sel.value = voiceSettings.voiceURI;
-}
-
-if ('speechSynthesis' in window) {
-  window.speechSynthesis.onvoiceschanged = loadAvailableVoices;
-  setTimeout(loadAvailableVoices, 400);
-}
-
-function updateSoftVoiceSettings() {
-  voiceSettings.mode = document.getElementById('voiceSpeedMode').value;
-}
-function savePreferredVoice() {
-  voiceSettings.voiceURI = document.getElementById('voiceProfileSelect').value;
-}
-function toggleChantLoop() {
-  voiceSettings.loop = !voiceSettings.loop;
-  const btn = document.getElementById('loopChantBtn');
-  btn.textContent = voiceSettings.loop ? '🔁 Loop ON' : '🔁 Off';
-  btn.className = voiceSettings.loop
-    ? 'bg-emerald-500/25 text-emerald-300 text-xs font-bold px-2.5 py-1 rounded-lg border border-emerald-500/40'
-    : 'bg-gray-800 text-gray-300 text-xs font-bold px-2.5 py-1 rounded-lg border border-gray-700';
-}
-function stopSpeaking() {
-  voiceSettings.loop = false;
-  document.getElementById('loopChantBtn').textContent = '🔁 Off';
-  if ('speechSynthesis' in window) window.speechSynthesis.cancel();
-}
-
-// Override global speakText with Soft, Calm Chanting Engine
-speakText = function(text, langCode = 'sa', customRate = null) {
-  if (!('speechSynthesis' in window)) return;
-  window.speechSynthesis.cancel();
-  lastSpokenArgs = { text, langCode, customRate };
-
-  const utter = new SpeechSynthesisUtterance(text);
-  const voices = window.speechSynthesis.getVoices();
-
-  // Pick user-selected voice or best soft Hindi/Indian voice
-  let chosen = voices.find(v => v.voiceURI === voiceSettings.voiceURI);
-  if (!chosen) {
-    if (langCode === 'en') {
-      chosen = voices.find(v => /en-IN|en-GB/i.test(v.lang) && /female|google|heera|natural/i.test(v.name)) || voices.find(v => v.lang.includes('en'));
-    } else {
-      chosen = voices.find(v => /hi-IN|sa-IN/i.test(v.lang) && /google|swara|lekha|kalpana|female/i.test(v.name)) || voices.find(v => v.lang.includes('hi'));
-    }
-  }
-  if (chosen) utter.voice = chosen;
-  utter.lang = langCode === 'en' ? 'en-IN' : 'hi-IN';
-
-  // Soft & soothing rate + pitch tuning
-  if (customRate && customRate < 0.75) {
-    utter.rate = 0.62;
-    utter.pitch = 0.96;
-  } else if (voiceSettings.mode === 'slow') {
-    utter.rate = 0.62;
-    utter.pitch = 0.96;
-  } else if (voiceSettings.mode === 'normal') {
-    utter.rate = 0.98;
-    utter.pitch = 0.98;
-  } else {
-    // Default 'soft' chanting mode: unhurried, gentle, warm pitch
-    utter.rate = 0.82;
-    utter.pitch = 0.95;
-  }
-
-  utter.onend = () => {
-    if (voiceSettings.loop && lastSpokenArgs) {
-      setTimeout(() => {
-        if (voiceSettings.loop) speakText(lastSpokenArgs.text, lastSpokenArgs.langCode, lastSpokenArgs.customRate);
-      }, 900);
-    }
-  };
-  window.speechSynthesis.speak(utter);
-};
-
-// ==================== 4. MERGE NCISM SHLOKAS & BUILD 4-LEVEL CASCADING FILTERS ====================
-(function initNcismUpgrade() {
-  const existingIds = new Set(state.shlokas.map(s => s.id));
-  NCISM_SHLOKAS_BANK.forEach(item => { if (!existingIds.has(item.id)) state.shlokas.push(item); });
-
-  // Normalize older shlokas so every shloka has chapter & topic
-  state.shlokas.forEach(s => {
-    if (!s.chapter) s.chapter = "Paper I - Core Sutras";
-    if (!s.topic) s.topic = s.chapter;
-    if (s.subject === "Ashtanga Hridaya" || s.subject === "Charaka Samhita") s.subject = "Samhita Adhyayan (Ashtanga & Charaka)";
-    if (s.subject === "Padarth Vigyan") s.subject = "Padartha Vijnanam (AyUG-PV)";
-    if (s.subject === "Sanskrit & Itihas") s.subject = "Samskritam & Itihas (AyUG-SN & AI)";
-    if (s.subject === "Kriya Sharir") s.subject = "Kriya Sharira (AyUG-KS)";
-    if (s.subject === "Rachana Sharir") s.subject = "Rachana Sharira (AyUG-RS)";
-  });
-
-  // Wire "+ Add Shloka" button to new NCISM Modal & add "AI Load Topic" button
-  const shlokaTop = document.querySelector('#tab-shlokas > div:first-child');
-  if (shlokaTop) {
-    shlokaTop.innerHTML = `
-      <div class="flex bg-card border border-gray-800 rounded-xl p-1">
-        <button id="viewListBtn" onclick="setShlokaView('list')" class="px-3 py-1.5 rounded-lg text-xs font-bold bg-emerald-600 text-white">📚 Vault</button>
-        <button id="viewFlashBtn" onclick="setShlokaView('flashcard')" class="px-3 py-1.5 rounded-lg text-xs font-bold text-gray-400">🗂️ Cards</button>
-      </div>
-      <div class="flex items-center gap-1.5">
-        <button onclick="openAiTopicModal()" class="bg-indigo-600/30 border border-indigo-500/50 text-indigo-200 font-bold text-xs px-2.5 py-2 rounded-xl">✨ AI Topic</button>
-        <button onclick="openAddNcismModal()" class="bg-gradient-to-r from-amber-500 to-orange-500 text-black font-extrabold text-xs px-3 py-2 rounded-xl shadow-lg">+ Add</button>
-      </div>`;
-  }
-
-  // Replace filter area with 4-Level NCISM Hierarchy (Year -> Subject -> Chapter -> Topic)
-  const filterContainer = document.querySelector('#tab-shlokas > div:nth-child(2)');
-  if (filterContainer) {
-    filterContainer.innerHTML = `
-      <div class="flex gap-1.5 overflow-x-auto no-scrollbar pb-1">
-        <button onclick="setNcProf('all', this)" class="nc-prof-btn px-3 py-1.5 rounded-xl text-xs font-bold bg-emerald-500/20 text-emerald-300 border border-emerald-500/40 whitespace-nowrap">All Years</button>
-        <button onclick="setNcProf('1', this)" class="nc-prof-btn px-3 py-1.5 rounded-xl text-xs font-semibold bg-card text-gray-400 border border-gray-800 whitespace-nowrap">1st Prof (NCISM)</button>
-        <button onclick="setNcProf('2', this)" class="nc-prof-btn px-3 py-1.5 rounded-xl text-xs font-semibold bg-card text-gray-400 border border-gray-800 whitespace-nowrap">2nd Prof</button>
-        <button onclick="setNcProf('3', this)" class="nc-prof-btn px-3 py-1.5 rounded-xl text-xs font-semibold bg-card text-gray-400 border border-gray-800 whitespace-nowrap">3rd / Final</button>
-      </div>
-      <div class="grid grid-cols-1 sm:grid-cols-2 gap-2">
-        <select id="ncFilterSubject" onchange="onNcSubjectChange()" class="w-full bg-card border border-gray-800 text-xs text-gray-100 rounded-xl p-2.5"></select>
-        <select id="ncFilterChapter" onchange="onNcChapterChange()" class="w-full bg-card border border-gray-800 text-xs text-amber-300 rounded-xl p-2.5"></select>
-      </div>
-      <div class="grid grid-cols-1 sm:grid-cols-2 gap-2">
-        <select id="ncFilterTopic" onchange="renderShlokas()" class="w-full bg-card border border-gray-800 text-xs text-emerald-300 rounded-xl p-2.5"></select>
-        <input type="text" id="shlokaSearch" oninput="renderShlokas()" placeholder="🔍 Search shloka, word, book..." class="w-full bg-card border border-gray-800 text-xs text-white rounded-xl p-2.5" />
-      </div>`;
-  }
-
-  saveState();
-  rebuildNcismFilters();
-  renderAll();
-})();
-
-function setNcProf(prof, btnEl) {
-  state.currentProfFilter = prof;
-  document.querySelectorAll('.nc-prof-btn').forEach(b => b.className = 'nc-prof-btn px-3 py-1.5 rounded-xl text-xs font-semibold bg-card text-gray-400 border border-gray-800 whitespace-nowrap');
-  if (btnEl) btnEl.className = 'nc-prof-btn px-3 py-1.5 rounded-xl text-xs font-bold bg-emerald-500/20 text-emerald-300 border border-emerald-500/40 whitespace-nowrap';
-  state.fcIndex = 0;
-  rebuildNcismFilters();
-  renderShlokas();
-}
-
-function rebuildNcismFilters() {
-  const subSel = document.getElementById('ncFilterSubject');
-  if (!subSel) return;
-  const prof = state.currentProfFilter;
-  let treeSubs = [];
-  if (prof === 'all') {
-    Object.values(NCISM_TREE).forEach(pObj => treeSubs.push(...Object.keys(pObj)));
-  } else if (NCISM_TREE[prof]) {
-    treeSubs = Object.keys(NCISM_TREE[prof]);
-  }
-  const customSubs = state.shlokas.filter(s => prof === 'all' || s.prof === prof).map(s => s.subject);
-  const allSubs = [...new Set([...treeSubs, ...customSubs])];
-  subSel.innerHTML = '<option value="all">📘 All NCISM Subjects</option>' + allSubs.map(s => `<option value="${s}">${s}</option>`).join('');
-  onNcSubjectChange();
-}
-
-function onNcSubjectChange() {
-  const chapSel = document.getElementById('ncFilterChapter');
-  const sub = document.getElementById('ncFilterSubject').value;
-  const prof = state.currentProfFilter;
-  let chapters = [];
-
-  Object.entries(NCISM_TREE).forEach(([pKey, pObj]) => {
-    if (prof !== 'all' && pKey !== prof) return;
-    Object.entries(pObj).forEach(([sKey, cObj]) => {
-      if (sub !== 'all' && sKey !== sub) return;
-      chapters.push(...Object.keys(cObj));
-    });
-  });
-
-  const savedChaps = state.shlokas.filter(s => (prof === 'all' || s.prof === prof) && (sub === 'all' || s.subject === sub)).map(s => s.chapter);
-  const allChaps = [...new Set([...chapters, ...savedChaps])];
-  chapSel.innerHTML = '<option value="all">📑 All Papers / Chapters</option>' + allChaps.map(c => `<option value="${c}">${c}</option>`).join('');
-  onNcChapterChange();
-}
-
-function onNcChapterChange() {
-  const topSel = document.getElementById('ncFilterTopic');
-  const prof = state.currentProfFilter;
-  const sub = document.getElementById('ncFilterSubject').value;
-  const chap = document.getElementById('ncFilterChapter').value;
-  let topics = [];
-
-  Object.entries(NCISM_TREE).forEach(([pKey, pObj]) => {
-    if (prof !== 'all' && pKey !== prof) return;
-    Object.entries(pObj).forEach(([sKey, cObj]) => {
-      if (sub !== 'all' && sKey !== sub) return;
-      Object.entries(cObj).forEach(([cKey, tArr]) => {
-        if (chap !== 'all' && cKey !== chap) return;
-        topics.push(...tArr);
-      });
-    });
-  });
-
-  const savedTopics = state.shlokas.filter(s => (prof === 'all' || s.prof === prof) && (sub === 'all' || s.subject === sub) && (chap === 'all' || s.chapter === chap)).map(s => s.topic);
-  const allTopics = [...new Set([...topics, ...savedTopics])];
-  topSel.innerHTML = '<option value="all">🎯 All Sub-Subjects / Topics</option>' + allTopics.map(t => `<option value="${t}">${t}</option>`).join('');
-  state.fcIndex = 0;
-  renderShlokas();
-}
-
-getFilteredShlokas = function() {
-  const prof = state.currentProfFilter;
-  const sub = document.getElementById('ncFilterSubject') ? document.getElementById('ncFilterSubject').value : 'all';
-  const chap = document.getElementById('ncFilterChapter') ? document.getElementById('ncFilterChapter').value : 'all';
-  const top = document.getElementById('ncFilterTopic') ? document.getElementById('ncFilterTopic').value : 'all';
-  const q = document.getElementById('shlokaSearch') ? document.getElementById('shlokaSearch').value.toLowerCase().trim() : '';
-
-  return state.shlokas.filter(s =>
-    (prof === 'all' || s.prof === prof) &&
-    (sub === 'all' || s.subject === sub) &&
-    (chap === 'all' || s.chapter === chap) &&
-    (top === 'all' || s.topic === top) &&
-    (!q || s.sanskrit.toLowerCase().includes(q) || s.hindi.toLowerCase().includes(q) || s.english.toLowerCase().includes(q) || (s.topic || '').toLowerCase().includes(q))
-  );
-};
-
-// ==================== 5. RENDER CARDS, FLASHCARDS & FULL EDIT/ADD/DELETE ====================
-renderShlokas = function() {
-  const list = getFilteredShlokas();
-  const listView = document.getElementById('shlokaListView');
-  const flashView = document.getElementById('shlokaFlashcardView');
-
-  if (state.shlokaView === 'list') {
-    listView.classList.remove('hidden'); flashView.classList.add('hidden');
-    if (!list.length) {
-      listView.innerHTML = `
-        <div class="glass-card rounded-3xl p-6 text-center space-y-3">
-          <p class="text-sm text-gray-300">Is NCISM Topic mein abhi shlokas load nahi hue hain.</p>
-          <div class="flex justify-center gap-2">
-            <button onclick="openAiTopicModal()" class="bg-amber-500 text-black font-extrabold text-xs px-4 py-2.5 rounded-xl">✨ AI Se Topic Shlokas Load Karo</button>
-            <button onclick="openAddNcismModal()" class="bg-gray-800 text-white font-bold text-xs px-4 py-2.5 rounded-xl">+ Khud Add Karo</button>
-          </div>
-        </div>`;
-      return;
-    }
-
-    listView.innerHTML = list.map(s => `
-      <div class="glass-card rounded-3xl p-4 sm:p-5 space-y-3">
-        <div class="flex items-center justify-between gap-2 flex-wrap">
-          <span class="text-xs font-extrabold bg-indigo-500/25 text-indigo-200 px-3 py-1 rounded-full">Prof ${s.prof} • ${s.subject}</span>
-          <div class="flex items-center gap-1.5">
-            <button onclick="openEditNcismModal('${s.id}')" class="bg-gray-800 hover:bg-gray-700 text-amber-300 text-xs font-bold px-2.5 py-1 rounded-lg">✏️ Edit</button>
-            <button onclick="deleteNcShloka('${s.id}')" class="bg-gray-800 hover:bg-red-900/50 text-red-400 text-xs font-bold px-2.5 py-1 rounded-lg">🗑️</button>
-            <button onclick="toggleMastered('${s.id}')" class="text-xs font-bold px-2.5 py-1 rounded-lg ${s.mastered ? 'bg-emerald-500/25 text-emerald-300' : 'bg-gray-800 text-gray-300'}">${s.mastered ? '✓ Mastered' : '🔄 Deck'}</button>
-          </div>
-        </div>
-        <div class="text-xs space-y-0.5">
-          <p class="text-amber-400 font-bold">📑 ${s.chapter}</p>
-          <p class="text-emerald-400 font-semibold">🎯 ${s.topic} <span class="text-gray-500 font-normal">• ${s.publication}</span></p>
-        </div>
-        <p class="font-devanagari text-lg sm:text-xl font-bold text-amber-200 leading-loose bg-black/30 p-3.5 rounded-2xl border border-amber-500/20">${s.sanskrit}</p>
-        <div class="bg-emerald-950/35 border border-emerald-500/20 p-3 rounded-2xl text-xs sm:text-sm text-emerald-200 leading-relaxed"><b class="text-emerald-400">🔍 Sandhi & Matra:</b> ${s.breakdown}</div>
-        <p class="font-devanagari text-sm sm:text-base text-gray-100 leading-relaxed"><b class="text-amber-400">हिंदी:</b> ${s.hindi}</p>
-        <p class="text-sm text-gray-300 leading-relaxed"><b class="text-indigo-400">English:</b> ${s.english}</p>
-        <div class="flex flex-wrap items-center gap-2 pt-2 border-t border-gray-800">
-          <button onclick="speakShlokaById('${s.id}', 'sa', null)" class="bg-amber-500/25 text-amber-200 text-xs font-bold px-3 py-2 rounded-xl">🌸 Soft संस्कृत</button>
-          <button onclick="speakShlokaById('${s.id}', 'sa', 0.62)" class="bg-gray-800 text-gray-200 text-xs font-semibold px-3 py-2 rounded-xl">🐢 Slow</button>
-          <button onclick="speakShlokaById('${s.id}', 'hi', null)" class="bg-emerald-500/25 text-emerald-200 text-xs font-bold px-3 py-2 rounded-xl">🔊 हिंदी</button>
-          <button onclick="speakShlokaById('${s.id}', 'en', null)" class="bg-indigo-500/25 text-indigo-200 text-xs font-bold px-3 py-2 rounded-xl">🔊 English</button>
-          <button onclick="goToPractice('${s.id}')" class="ml-auto bg-emerald-500 text-black text-xs font-extrabold px-3.5 py-2 rounded-xl">🎙️ Chant</button>
-        </div>
-      </div>`).join('');
-  } else {
-    listView.classList.add('hidden'); flashView.classList.remove('hidden'); renderFlashcard(list);
-  }
-};
-
-function openAddNcismModal() {
-  document.getElementById('ncModalTitle').textContent = '+ Add New NCISM Shloka';
-  document.getElementById('ncEditId').value = '';
-  document.getElementById('ncQuickAiBox').classList.remove('hidden');
-  document.getElementById('ncProf').value = state.currentProfFilter === 'all' ? '1' : state.currentProfFilter;
-  const sub = document.getElementById('ncFilterSubject')?.value;
-  const chap = document.getElementById('ncFilterChapter')?.value;
-  const top = document.getElementById('ncFilterTopic')?.value;
-  document.getElementById('ncSubject').value = (sub && sub !== 'all') ? sub : 'Samhita Adhyayan (Ashtanga & Charaka)';
-  document.getElementById('ncChapter').value = (chap && chap !== 'all') ? chap : 'Ashtanga Hridaya Sutrasthana (Ch 1-15)';
-  document.getElementById('ncTopic').value = (top && top !== 'all') ? top : 'Ch 1: Ayushkamiya Adhyaya';
-  document.getElementById('ncPub').value = 'Chaukhamba Sanskrit Sansthan';
-  ['ncSanskrit', 'ncBreakdown', 'ncHindi', 'ncEnglish'].forEach(id => document.getElementById(id).value = '');
-  syncModalDropdowns();
-  openModal('ncismShlokaModal');
-}
-
-function openEditNcismModal(id) {
-  const s = state.shlokas.find(i => i.id === id);
-  if (!s) return;
-  document.getElementById('ncModalTitle').textContent = '✏️ Edit Shloka & NCISM Topic';
-  document.getElementById('ncEditId').value = s.id;
-  document.getElementById('ncQuickAiBox').classList.add('hidden');
-  document.getElementById('ncProf').value = s.prof;
-  document.getElementById('ncSubject').value = s.subject;
-  document.getElementById('ncChapter').value = s.chapter || '';
-  document.getElementById('ncTopic').value = s.topic || '';
-  document.getElementById('ncPub').value = s.publication || '';
-  document.getElementById('ncSanskrit').value = s.sanskrit;
-  document.getElementById('ncBreakdown').value = s.breakdown;
-  document.getElementById('ncHindi').value = s.hindi;
-  document.getElementById('ncEnglish').value = s.english;
-  openModal('ncismShlokaModal');
-}
-
-function syncModalDropdowns() {
-  const prof = document.getElementById('ncProf').value;
-  const dl = document.getElementById('ncSubjectList');
-  if (dl && NCISM_TREE[prof]) {
-    dl.innerHTML = Object.keys(NCISM_TREE[prof]).map(s => `<option value="${s}">`).join('');
-  }
-}
-
-function saveNcismShloka() {
-  const id = document.getElementById('ncEditId').value;
-  const sanskrit = document.getElementById('ncSanskrit').value.trim();
-  if (!sanskrit) return alert('Sanskrit shloka likhna zaroori hai!');
-
-  const payload = {
-    prof: document.getElementById('ncProf').value,
-    subject: document.getElementById('ncSubject').value.trim() || 'Samhita Adhyayan (Ashtanga & Charaka)',
-    chapter: document.getElementById('ncChapter').value.trim() || 'Paper I - Core',
-    topic: document.getElementById('ncTopic').value.trim() || 'General Topic',
-    publication: document.getElementById('ncPub').value.trim() || 'Chaukhamba Standard Text',
-    sanskrit,
-    breakdown: document.getElementById('ncBreakdown').value.trim() || sanskrit,
-    hindi: document.getElementById('ncHindi').value.trim() || 'हिंदी भावार्थ',
-    english: document.getElementById('ncEnglish').value.trim() || 'English meaning'
-  };
-if (d.publication) document.getElementById('ncPub').value = d.publication;
-  } catch (e) { alert('AI decode fail—API key check karo.'); } finally { st.classList.add('hidden'); }
-}
-
-function ncScanPhoto(ev) {
-  const file = ev.target.files[0]; if (!file) return;
-  if (!state.apiKey) return openModal('apiModal');
-  const st = document.getElementById('ncAiStatus'); st.classList.remove('hidden');
-  const r = new FileReader();
-  r.onload = async () => {
-    try {
-      const d = await callGeminiJSON([
-        { text: `Extract main Sanskrit BAMS shloka from image. Return ONLY JSON: {"sanskrit":"exact Devanagari","breakdown":"Hinglish sandhi/visarga/halant/matra breakdown","hindi":"Hindi meaning","english":"English meaning","publication":"book name"}` },
-        { inline_data: { mime_type: file.type, data: r.result.split(',')[1] } }
-      ]);
-      document.getElementById('ncSanskrit').value = d.sanskrit || '';
-      document.getElementById('ncBreakdown').value = d.breakdown || '';
-      document.getElementById('ncHindi').value = d.hindi || '';
-      document.getElementById('ncEnglish').value = d.english || '';
-      if (d.publication) document.getElementById('ncPub').value = d.publication;
-    } catch (e) { alert('Photo scan fail—clear photo lo.'); } finally { st.classList.add('hidden'); }
-  };
-  r.readAsDataURL(file);
-}
-
-// ==================== 6. AI FULL NCISM TOPIC SHLOKA LOADER ====================
-function openAiTopicModal() {
-  populateLoadModalSubjects();
-  openModal('aiTopicModal');
-}
-function populateLoadModalSubjects() {
-  const prof = document.getElementById('loadProf').value;
-  const subSel = document.getElementById('loadSubject');
-  subSel.innerHTML = Object.keys(NCISM_TREE[prof] || {}).map(s => `<option value="${s}">${s}</option>`).join('');
-  populateLoadModalChapters();
-}
-function populateLoadModalChapters() {
-  const prof = document.getElementById('loadProf').value;
-  const sub = document.getElementById('loadSubject').value;
-  const chapSel = document.getElementById('loadChapter');
-  chapSel.innerHTML = Object.keys((NCISM_TREE[prof] && NCISM_TREE[prof][sub]) || {}).map(c => `<option value="${c}">${c}</option>`).join('');
-  populateLoadModalTopics();
-}
-function populateLoadModalTopics() {
-  const prof = document.getElementById('loadProf').value;
-  const sub = document.getElementById('loadSubject').value;
-  const chap = document.getElementById('loadChapter').value;
-  const topics = (NCISM_TREE[prof]?.[sub]?.[chap]) || [];
-  document.getElementById('loadTopicList').innerHTML = topics.map(t => `<option value="${t}">`).join('');
-  document.getElementById('loadTopicInput').value = topics[0] || '';
-}
-
-async function executeAiTopicLoad() {
-  if (!state.apiKey) return openModal('apiModal');
-  const prof = document.getElementById('loadProf').value;
-  const subject = document.getElementById('loadSubject').value;
-  const chapter = document.getElementById('loadChapter').value;
-  const topic = document.getElementById('loadTopicInput').value.trim();
-  if (!topic) return alert('Topic select ya type karo!');
-
-  const st = document.getElementById('aiTopicStatus'); st.classList.remove('hidden');
-  try {
-    const prompt = `You are a senior BAMS NCISM examiner. Provide 8 to 10 essential exam & clinical Sanskrit shlokas for Prof ${prof}, Subject "${subject}", Chapter "${chapter}", Topic "${topic}" from standard BAMS textbooks (Chaukhamba / Brihattrayee / Laghutrayee).
-Return ONLY a valid JSON array of objects:
-[{"sanskrit":"exact Devanagari","breakdown":"Hinglish sandhi, visarga (ः), halant (्), matra breakdown","hindi":"accurate Hindi meaning","english":"accurate English clinical meaning","publication":"exact Samhita & chapter reference"}]`;
-    const arr = await callGeminiJSON([{ text: prompt }]);
-    arr.forEach((item, idx) => {
-      state.shlokas.unshift({
-        id: 'nct_' + Date.now() + '_' + idx,
-        prof, subject, chapter, topic,
-        publication: item.publication || 'NCISM Standard Text',
-        sanskrit: item.sanskrit, translit: '',
-        breakdown: item.breakdown, hindi: item.hindi, english: item.english,
-        mastered: false, reps: 0
-      });
-    });
-    saveState(); rebuildNcismFilters(); populatePracticeDropdown(); closeModal('aiTopicModal'); renderAll();
-    alert(`✅ ${arr.length} NCISM shlokas "${topic}" ke liye load ho gaye!`);
-  } catch (e) {
-    alert('AI Topic load fail—API key ya network check karo.');
-  } finally {
-    st.classList.add('hidden');
-  }
-}
-</script>
